@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
 <style>
-  body {
+  body::before {
+  content: "🧬 🧫 🔬 🧪 🧫 🧬 🔬";
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(-20deg);
+}
+
+body::after {
+  content: "🔬 🧬 🧪 🧫";
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
@@ -50,17 +68,22 @@
 </style>
   <head>
 <meta charset="UTF-8">
-<title>Week 02</title>
+<title>Week 01</title>
 </head>
 
-<body style="font-family: Arial, sans-serif; max-width:900px; margin:auto; padding:20px;">
+<body>
 
-<h1>Week 02: Safety/ Begin Bug Project</h1>
+<div class="week-container">
+
+<div class="week-header">
+  <div class="lab-icon">🧫🧪</div>
+  <h1>Week 02: Safety/ Begin Bug Project</h1>
+</div>
 
 <hr>
 
 <h2>Overview</h2>
-<p>Introduce soiland favorite bug projects, introduce databases and complete research journal finding lab.</p>
+<p>Introduce soil and favorite bug projects, introduce databases and complete research journal finding lab.</p>
 
 <hr>
 
@@ -97,6 +120,7 @@
 <hr>
 
 <p><a href="../">← Back to Lab Hub</a></p>
-
+</div>
+</body>
 </body>
 </html>
