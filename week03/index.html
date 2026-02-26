@@ -1,16 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
+<style>
+  body::before {
+  content: "🧬 🧫 🔬 🧪 🧫 🧬 🔬";
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(-20deg);
+}
+
+body::after {
+  content: "🔬 🧬 🧪 🧫";
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+    background-attachment: fixed;
+  }
+
+  .week-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .week-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .week-header h1 {
+    font-size: 2.5em;
+    color: #00695c;
+    margin-bottom: 10px;
+  }
+
+  .week-header p {
+    font-size: 1.2em;
+    color: #555;
+  }
+
+  .lab-icon {
+    font-size: 3rem;
+  }
+
+  a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+  <head>
 <meta charset="UTF-8">
 <title>Week 03</title>
 </head>
 
-<body style="font-family: Arial, sans-serif; max-width:900px; margin:auto; padding:20px;">
+<body>
 
-<h1>Week 03: Microscopy</h1>
+<div class="week-container">
+
+<div class="week-header">
+  <div class="lab-icon">🧫🧪</div>
+  <h1>Week 03 – Microscopy</h1>
+</div>
 
 <hr>
-
 <h2>Overview</h2>
 <p>Transfer techniques/ Rainbow Lab, ,Bright field microscopy, virtual microscopy, Review gram stain slides.</p>
 
@@ -51,6 +121,7 @@
 <hr>
 
 <p><a href="../">← Back to Lab Hub</a></p>
-
+</div>
+</body>
 </body>
 </html>
