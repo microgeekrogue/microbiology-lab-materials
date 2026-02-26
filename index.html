@@ -1,126 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Microbiology Lab Hub</title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔬 Microbiology Lab Hub 🦠</title>
 
 <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        background-color: #f4f6f9;
-        line-height: 1.6;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600;700&display=swap');
 
-    header {
-        background-color: #004b87;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
+:root {
+    --crystal-violet: #8b5cf6;
+    --methylene-blue: #3b82f6;
+    --gram-green: #10b981;
+    --agar-yellow: #fbbf24;
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-bg: rgba(255, 255, 255, 0.96);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
 
-    .container {
-        max-width: 1100px;
-        margin: auto;
-        padding: 20px;
-        background-color: white;
-    }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    h1, h2, h3 {
-        color: #004b87;
-    }
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color:#333;
+    line-height:1.6;
+}
 
-    .section {
-        margin-bottom: 40px;
-    }
+/* Floating microbes */
+.microbe {
+    position: fixed;
+    pointer-events:none;
+    opacity:0.12;
+    animation: float 20s infinite ease-in-out;
+    z-index:0;
+}
 
-    .definition-box {
-        background-color: #e8f1fa;
-        border-left: 6px solid #004b87;
-        padding: 15px;
-        margin: 15px 0;
-    }
+.microbe:nth-child(1){ top:10%; left:5%; font-size:3rem;}
+.microbe:nth-child(2){ top:60%; right:10%; font-size:2.5rem;}
+.microbe:nth-child(3){ bottom:20%; left:20%; font-size:3rem;}
 
-    .learning-objectives {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        padding: 15px;
-    }
+@keyframes float {
+    0%,100% { transform:translateY(0);}
+    50% { transform:translateY(20px);}
+}
 
-    footer {
-        background-color: #004b87;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        font-size: 0.9em;
-    }
+/* Header */
+header {
+    background: rgba(255,255,255,0.98);
+    padding:2rem;
+    text-align:center;
+    box-shadow:var(--shadow);
+    border-bottom:5px solid var(--crystal-violet);
+}
+
+h1 {
+    font-family:'Caveat', cursive;
+    font-size:3.5rem;
+    color:var(--crystal-violet);
+}
+
+.subtitle {
+    font-weight:600;
+    color:#666;
+    margin-top:0.5rem;
+}
+
+/* Banner */
+.banner {
+    max-width:1100px;
+    margin:2rem auto;
+    text-align:center;
+}
+
+.banner img {
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+/* Container */
+.container {
+    max-width:1100px;
+    margin:2rem auto;
+    padding:1rem;
+}
+
+/* Highlight box */
+.highlight {
+    background:#e0e7ff;
+    padding:20px;
+    border-radius:15px;
+    margin:2rem 0;
+    font-weight:600;
+    color:#4338ca;
+}
+
+/* Week grid */
+.week-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+    gap:1rem;
+    margin-top:2rem;
+}
+
+.week-link {
+    background: linear-gradient(135deg, var(--crystal-violet), var(--methylene-blue));
+    color:white;
+    text-decoration:none;
+    padding:1rem;
+    text-align:center;
+    border-radius:20px;
+    font-weight:700;
+    transition: all 0.3s ease;
+    box-shadow:var(--shadow);
+}
+
+.week-link:hover {
+    transform:translateY(-5px) scale(1.05);
+}
+
+/* Footer */
+footer {
+    text-align:center;
+    padding:2rem;
+    background: rgba(255,255,255,0.9);
+    margin-top:3rem;
+    font-size:0.9rem;
+    color:#666;
+}
+
+@media(max-width:768px){
+    h1 { font-size:2.5rem;}
+}
 </style>
+</head>
+
+<body>
+
+<div class="microbe">🦠</div>
+<div class="microbe">🔬</div>
+<div class="microbe">🧫</div>
+
+<header>
+    <h1>🔬 Microbiology Lab Hub 🦠</h1>
+    <p class="subtitle">Exploring microorganisms through hands-on lab discovery</p>
+</header>
+
+<div class="banner">
+    <img src="images/header-image.jpg" alt="Microbiology Lab Banner">
+</div>
+
+<div class="container">
+
+    <div class="highlight">
+        🔬 Current Focus:
+        <ul style="list-style:none; padding-top:10px;">
+            <li>Gram Stain & Morphology</li>
+            <li>Selective & Differential Media</li>
+            <li>Biochemical Testing</li>
+        </ul>
+    </div>
+
+    <h2 style="font-family:'Caveat', cursive; font-size:2.5rem; color:var(--gram-green); text-align:center;">
+        Select Your Lab Week
+    </h2>
+
+    <div class="week-grid">
+        <a class="week-link" href="week01/">Week 1</a>
+        <a class="week-link" href="week02/">Week 2</a>
+        <a class="week-link" href="week03/">Week 3</a>
+        <a class="week-link" href="week04/">Week 4</a>
+        <a class="week-link" href="week05/">Week 5</a>
+        <a class="week-link" href="week06/">Week 6</a>
+        <a class="week-link" href="week07/">Week 7</a>
+        <a class="week-link" href="week08/">Week 8</a>
+        <a class="week-link" href="week09/">Week 9</a>
+        <a class="week-link" href="week10/">Week 10</a>
+        <a class="week-link" href="week11/">Week 11</a>
+        <a class="week-link" href="week12/">Week 12</a>
+        <a class="week-link" href="week13/">Week 13</a>
+        <a class="week-link" href="week14/">Week 14</a>
+        <a class="week-link" href="week15/">Week 15</a>
+        <a class="week-link" href="week16/">Week 16</a>
+    </div>
 
 </div>
 
-<!-- ===== IMAGE BANNER ===== -->
-<div style="max-width:1000px; margin:40px auto; text-align:center;">
+<footer>
+    🦠 Created for Microbiology Instruction | Megan Kundinger  
+    <br>
+    Stay curious. Stay sterile. 🔬
+</footer>
 
-<img src="images/header-image.jpg"
-style="width:100%; max-height:350px; object-fit:cover; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
-
-<p style="margin-top:15px; font-size:18px; color:#444;">
-Exploring microorganisms through hands-on lab discovery.
-</p>
-
-<!-- ===== HIGHLIGHT BOX ===== -->
-<div style="
-background:#e0e7ff;
-padding:20px;
-border-radius:15px;
-margin-top:30px;
-font-weight:bold;
-color:#4338ca;
-">
-
-🔬 Current Focus:
-<ul style="list-style:none; padding:0; margin:10px 0 0 0;">
-<li>Gram Stain & Morphology</li>
-<li>Selective Media</li>
-<li>Biochemical Testing</li>
-</ul>
-
-</div>
-
-</div>
-
-<hr style="max-width:1000px;">
-
-<div style="max-width:1000px; margin:auto; padding:20px;">
-
-<h1>🦠 Microbiology Lab Hub</h1>
-<p>Click a week below to open materials.</p>
-
-<hr>
-
-<ul>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week01/">Week 1</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week02/">Week 2</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week03/">Week 3</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week04/">Week 4</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week05/">Week 5</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week06/">Week 6</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week07/">Week 7</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week08/">Week 8</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week09/">Week 9</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week10/">Week 10</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week11/">Week 11</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week12/">Week 12</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week13/">Week 13</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week14/">Week 14</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week15/">Week 15</a></li>
-<li><a href="https://microgeekrogue.github.io/microbiology-lab-materials/week16/">Week 16</a></li>
-</ul>
-
-<hr>
-
-<p><em>All protocols and materials are inside each week.</em></p>
-</div>
 </body>
 </html>
