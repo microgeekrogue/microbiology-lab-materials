@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
 <style>
-  body {
+  body::before {
+  content: "🧬 🧫 🔬 🧪 🧫 🧬 🔬";
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(-20deg);
+}
+
+body::after {
+  content: "🔬 🧬 🧪 🧫";
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  font-size: 4rem;
+  opacity: 0.05;
+  transform: rotate(15deg);
+}body {
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
@@ -53,8 +71,15 @@
 <title>Week 01</title>
 </head>
 
-<body style="font-family: Arial, sans-serif; max-width:900px; margin:auto; padding:20px;">
+<body>
 
+<div class="week-container">
+
+<div class="week-header">
+  <div class="lab-icon">🧫🧪</div>
+  <h1>Week 01 – Aseptic Technique</h1>
+  <p>Precision • Process • Professionalism</p>
+</div>
 <h1>Week 01: Introduction</h1>
 
 <hr>
@@ -103,6 +128,7 @@
 <hr>
 
 <p><a href="../">← Back to Lab Hub</a></p>
-
+</div>
+</body>
 </body>
 </html>
