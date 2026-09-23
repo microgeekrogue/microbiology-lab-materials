@@ -1,1 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🧪 Microbiology Interactives 🔬</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+    --crystal-violet: #8b5cf6;
+    --methylene-blue: #3b82f6;
+    --gram-green: #10b981;
+    --agar-yellow: #fbbf24;
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-bg: rgba(255, 255, 255, 0.96);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Floating microbes */
+
+.microbe {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.12;
+    animation: float 20s infinite ease-in-out;
+    z-index: 0;
+}
+
+.microbe:nth-child(1) {
+    top: 10%;
+    left: 5%;
+    font-size: 3rem;
+}
+
+.microbe:nth-child(2) {
+    top: 60%;
+    right: 10%;
+    font-size: 2.5rem;
+}
+
+.microbe:nth-child(3) {
+    bottom: 20%;
+    left: 20%;
+    font-size: 3rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+/* Header */
+
+header {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border-bottom: 5px solid var(--crystal-violet);
+}
+
+h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 3.5rem;
+    color: var(--crystal-violet);
+}
+
+.subtitle {
+    font-weight: 600;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Main container */
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Back button */
+
+.back-button {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--crystal-violet);
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-3px);
+    background: white;
+}
+
+/* Intro box */
+
+.intro {
+    background: rgba(255, 255, 255, 0.96);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.intro h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    color: var(--gram-green);
+    margin-bottom: 0.5rem;
+}
+
+.intro p {
+    color: #555;
+    max-width: 750px;
+    margin: auto;
+}
+
+/* Interactive grid */
+
+.interactive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Interactive cards */
+
+.interactive-card {
+    display: block;
+    background: var(--card-bg);
+    color: #333;
+    text-decoration: none;
+    padding: 2rem 1.5rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border-top: 6px solid var(--crystal-violet);
+    transition: all 0.3s ease;
+}
+
+.interactive-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+}
+
+.interactive-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.interactive-card h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--crystal-violet);
+    margin-bottom: 0.5rem;
+}
+
+.interactive-card p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Different card colors */
+
+.card-blue {
+    border-top-color: var(--methylene-blue);
+}
+
+.card-blue h3 {
+    color: var(--methylene-blue);
+}
+
+.card-green {
+    border-top-color: var(--gram-green);
+}
+
+.card-green h3 {
+    color: var(--gram-green);
+}
+
+.card-yellow {
+    border-top-color: var(--agar-yellow);
+}
+
+.card-yellow h3 {
+    color: #d97706;
+}
+
+/* Coming soon */
+
+.coming-soon {
+    background: rgba(255, 255, 255, 0.75);
+    border: 2px dashed rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 2rem;
+    color: white;
+}
+
+.coming-soon h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Footer */
+
+footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Mobile */
+
+@media(max-width: 768px) {
+
+    h1 {
+        font-size: 2.7rem;
+    }
+
+    .container {
+        padding: 0.75rem;
+    }
+
+    .interactive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro {
+        padding: 1.5rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating microbes -->
+
+<div class="microbe">🦠</div>
+<div class="microbe">🔬</div>
+<div class="microbe">🧫</div>
+
+
+<!-- Header -->
+
+<header>
+
+    <h1>🧪 Microbiology Interactives 🔬</h1>
+
+    <p class="subtitle">
+        Explore, practice, and test your microbiology skills
+    </p>
+
+</header>
+
+
+<!-- Main Content -->
+
+<div class="container">
+
+    <!-- Back to main Lab Hub -->
+
+    <a class="back-button" href="../">
+        ← Back to Microbiology Lab Hub
+    </a>
+
+
+    <!-- Introduction -->
+
+    <div class="intro">
+
+        <h2>🦠 Interactive Learning Lab</h2>
+
+        <p>
+            Welcome to the interactive side of microbiology!
+            Choose an activity below to practice laboratory techniques,
+            identify microorganisms, interpret results, and explore
+            microbiology concepts.
+        </p>
+
+    </div>
+
+
+    <!-- Interactive Activities -->
+
+    <div class="interactive-grid">
+
+
+        <!-- Gram Stain -->
+
+        <a class="interactive-card" href="gram-stain/">
+
+            <div class="interactive-icon">🧫</div>
+
+            <h3>Gram Stain</h3>
+
+            <p>
+                Practice identifying Gram-positive and Gram-negative
+                bacteria based on staining characteristics and cell morphology.
+            </p>
+
+        </a>
+
+
+        <!-- Streak Plate -->
+
+        <a class="interactive-card card-blue" href="streak-plate/">
+
+            <div class="interactive-icon">🧪</div>
+
+            <h3>Streak Plate</h3>
+
+            <p>
+                Practice the streak plate technique and explore how
+                bacteria become isolated colonies.
+            </p>
+
+        </a>
+
+
+        <!-- Biochemical Tests -->
+
+        <a class="interactive-card card-green" href="biochemical-tests/">
+
+            <div class="interactive-icon">🔬</div>
+
+            <h3>Biochemical Tests</h3>
+
+            <p>
+                Interpret biochemical test results and use them to
+                narrow down bacterial identification.
+            </p>
+
+        </a>
+
+
+        <!-- Unknown Bacteria -->
+
+        <a class="interactive-card card-yellow" href="unknown-bacteria/">
+
+            <div class="interactive-icon">🦠</div>
+
+            <h3>Unknown Bacteria</h3>
+
+            <p>
+                Work through laboratory clues and test results
+                to identify an unknown microorganism.
+            </p>
+
+        </a>
+
+
+    </div>
+
+
+    <!-- Future Activities -->
+
+    <div class="coming-soon">
+
+        <h3>🧬 More Interactives Coming Soon!</h3>
+
+        <p>
+            New activities can be added here as your microbiology
+            lab collection grows.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+
+<footer>
+
+    🦠 Created for Microbiology Instruction | Megan Kundinger
+    <br>
+    Stay curious. Stay sterile. 🔬
+
+</footer>
+
+</body>
+</html>
 
