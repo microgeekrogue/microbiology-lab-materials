@@ -3,1068 +3,720 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>🔐 Microbiology Escape Room</title>
-
+<title>Microbiology Lab Safety Escape Room</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600;700&display=swap');
-
-:root {
-    --purple: #8b5cf6;
-    --blue: #3b82f6;
-    --green: #10b981;
-    --yellow: #fbbf24;
-    --red: #ef4444;
-    --dark: #1f2937;
-    --light: #f8fafc;
-    --shadow: 0 8px 30px rgba(0,0,0,0.12);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    color: #333;
-}
-
-/* Floating microbes */
-
-.microbe {
-    position: fixed;
-    pointer-events: none;
-    opacity: 0.12;
-    z-index: 0;
-    animation: float 18s infinite ease-in-out;
-}
-
-.microbe.one {
-    top: 10%;
-    left: 5%;
-    font-size: 3rem;
-}
-
-.microbe.two {
-    top: 60%;
-    right: 8%;
-    font-size: 2.5rem;
-}
-
-.microbe.three {
-    bottom: 15%;
-    left: 15%;
-    font-size: 3rem;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+        color: #ecf0f1;
+        line-height: 1.6;
     }
 
-    50% {
-        transform: translateY(20px);
+    .wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #1f2933;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        border: 2px solid #3a4556;
     }
-}
-
-/* Header */
-
-header {
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.98);
-    padding: 1.5rem;
-    text-align: center;
-    border-bottom: 5px solid var(--purple);
-    box-shadow: var(--shadow);
-}
-
-h1 {
-    font-family: 'Caveat', cursive;
-    font-size: 3.2rem;
-    color: var(--purple);
-}
-
-.subtitle {
-    color: #666;
-    font-weight: 600;
-}
-
-/* Main container */
-
-.container {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
-/* Back button */
-
-.back-button {
-    display: inline-block;
-    background: white;
-    color: var(--purple);
-    text-decoration: none;
-    padding: 0.7rem 1.2rem;
-    border-radius: 30px;
-    font-weight: 700;
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-}
-
-.back-button:hover {
-    transform: translateY(-2px);
-}
-
-/* Mission briefing */
-
-.mission {
-    background: rgba(255,255,255,0.97);
-    padding: 2rem;
-    border-radius: 25px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.mission h2 {
-    font-family: 'Caveat', cursive;
-    color: var(--purple);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.mission p {
-    max-width: 750px;
-    margin: auto;
-}
-
-/* Game status */
-
-.status-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.status-card {
-    background: rgba(255,255,255,0.96);
-    padding: 1rem;
-    border-radius: 18px;
-    box-shadow: var(--shadow);
-    text-align: center;
-}
-
-.status-label {
-    font-size: 0.8rem;
-    color: #777;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.timer {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--red);
-}
-
-.progress {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--green);
-}
-
-/* Challenge */
-
-.challenge {
-    background: rgba(255,255,255,0.97);
-    border-radius: 25px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-}
-
-.challenge-number {
-    display: inline-block;
-    background: var(--purple);
-    color: white;
-    padding: 0.4rem 0.9rem;
-    border-radius: 20px;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.challenge h2 {
-    font-family: 'Caveat', cursive;
-    font-size: 2.3rem;
-    color: var(--blue);
-    margin-bottom: 0.75rem;
-}
-
-.clue {
-    background: #eef2ff;
-    border-left: 5px solid var(--purple);
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem 0;
-}
-
-.question {
-    font-weight: 700;
-    margin: 1rem 0;
-}
-
-/* Answer choices */
-
-.choices {
-    display: grid;
-    gap: 0.75rem;
-    margin-top: 1rem;
-}
-
-.choice {
-    background: #f8fafc;
-    border: 2px solid #d1d5db;
-    padding: 1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 1rem;
-    text-align: left;
-    transition: all 0.2s ease;
-}
-
-.choice:hover {
-    border-color: var(--purple);
-    background: #f5f3ff;
-}
-
-.choice.selected {
-    border-color: var(--purple);
-    background: #ede9fe;
-}
-
-.choice.correct {
-    border-color: var(--green);
-    background: #d1fae5;
-}
-
-.choice.incorrect {
-    border-color: var(--red);
-    background: #fee2e2;
-}
-
-/* Text answer */
-
-.answer-area {
-    margin-top: 1rem;
-}
-
-.answer-area input {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #d1d5db;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 1rem;
-}
-
-.answer-area input:focus {
-    outline: none;
-    border-color: var(--purple);
-}
-
-/* Buttons */
-
-button {
-    font-family: inherit;
-}
-
-.check-button,
-.next-button,
-.restart-button {
-    border: none;
-    border-radius: 25px;
-    padding: 0.8rem 1.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: all 0.2s ease;
-}
-
-.check-button {
-    background: var(--purple);
-    color: white;
-}
-
-.next-button {
-    background: var(--green);
-    color: white;
-}
-
-.restart-button {
-    background: var(--blue);
-    color: white;
-}
-
-.check-button:hover,
-.next-button:hover,
-.restart-button:hover {
-    transform: translateY(-2px);
-}
-
-/* Feedback */
-
-.feedback {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
-    font-weight: 700;
-    display: none;
-}
-
-.feedback.correct {
-    display: block;
-    background: #d1fae5;
-    color: #065f46;
-}
-
-.feedback.incorrect {
-    display: block;
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-/* Hidden */
-
-.hidden {
-    display: none;
-}
-
-/* Success screen */
-
-.success {
-    background: rgba(255,255,255,0.98);
-    border-radius: 30px;
-    padding: 3rem 2rem;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.success-icon {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-}
-
-.success h2 {
-    font-family: 'Caveat', cursive;
-    color: var(--green);
-    font-size: 3.5rem;
-}
-
-.success p {
-    margin: 1rem auto;
-    max-width: 650px;
-}
-
-/* Failure screen */
-
-.failure {
-    background: rgba(255,255,255,0.98);
-    border-radius: 30px;
-    padding: 3rem 2rem;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.failure h2 {
-    font-family: 'Caveat', cursive;
-    color: var(--red);
-    font-size: 3.2rem;
-}
-
-/* Footer */
-
-footer {
-    position: relative;
-    z-index: 1;
-    background: rgba(255,255,255,0.9);
-    text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
-    color: #666;
-}
-
-/* Mobile */
-
-@media(max-width: 700px) {
 
     h1 {
-        font-size: 2.5rem;
+        text-align: center;
+        color: #1abc9c;
+        text-shadow: 0 0 10px rgba(26,188,156,0.5);
+        margin-bottom: 10px;
     }
 
-    .status-bar {
-        grid-template-columns: 1fr;
+    h2 {
+        color: #f1c40f;
+        border-bottom: 2px solid #f1c40f;
+        padding-bottom: 8px;
+        margin-top: 20px;
     }
 
-    .challenge {
-        padding: 1.5rem;
+    h3 {
+        color: #1abc9c;
+        margin-top: 15px;
     }
-}
+
+    .intro {
+        text-align: center;
+        background: rgba(26,188,156,0.1);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #1abc9c;
+        margin-bottom: 20px;
+    }
+
+    .progress {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #94a3b8;
+        margin: 15px 0;
+        padding: 10px;
+        background: rgba(15,23,42,0.6);
+        border-radius: 8px;
+    }
+
+    .room {
+        display: none;
+        background: rgba(15,23,42,0.8);
+        border-radius: 10px;
+        padding: 20px;
+margin: 20px 0;
+        border: 1px solid #3a4556;
+    }
+
+    .room.active {
+        display: block;
+        animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        background: rgba(26,188,156,0.2);
+        border: 1px solid #1abc9c;
+        color: #a5f3fc;
+        margin-bottom: 10px;
+    }
+
+    .story {
+        background: rgba(241,196,15,0.1);
+        border-left: 4px solid #f1c40f;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+    }
+
+    .story strong {
+        color: #f1c40f;
+    }
+
+    .puzzle-card {
+        background: rgba(30,41,59,0.9);
+        border: 2px solid #475569;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px 0;
+    }
+
+    .question {
+        font-weight: bold;
+        margin: 15px 0 10px 0;
+        color: #cbd5e1;
+    }
+
+    .options label {
+        display: block;
+        margin: 8px 0;
+        padding: 8px;
+        background: rgba(15,23,42,0.6);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .options label:hover {
+        background: rgba(37,99,235,0.3);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid #475569;
+        background: #0f172a;
+        color: #ecf0f1;
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        background: #2563eb;
+        color: white;
+        margin: 10px 10px 10px 0;
+        transition: all 0.3s;
+    }
+
+    .btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+    }
+
+    .btn-secondary {
+        background: transparent;
+        border: 2px solid #64748b;
+        color: #cbd5e1;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(100,116,139,0.2);
+        border-color: #94a3b8;
+    }
+
+    .btn-next {
+        background: #10b981;
+    }
+
+    .btn-next:hover {
+        background: #059669;
+        box-shadow: 0 4px 12px rgba(16,185,129,0.4);
+    }
+
+    .btn:disabled {
+        background: #374151;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    .btn:disabled:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 12px;
+  border-radius: 8px;
+        font-weight: bold;
+        min-height: 20px;
+    }
+
+    .feedback.correct {
+        background: rgba(74,222,128,0.2);
+        border: 2px solid #4ade80;
+        color: #4ade80;
+    }
+
+    .feedback.incorrect {
+        background: rgba(251,113,133,0.2);
+        border: 2px solid #fb7185;
+        color: #fb7185;
+    }
+
+    .lock-code {
+        font-family: "Courier New", monospace;
+        background: rgba(15,23,42,0.9);
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 2px dashed #64748b;
+        display: inline-block;
+        color: #f1c40f;
+        font-weight: bold;
+    }
+
+    .success-banner {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+        border-radius: 12px;
+        border: 3px solid #34d399;
+        margin: 30px 0;
+    }
+
+    .success-banner h2 {
+        color: #6ee7b7;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .success-banner p {
+        color: #a7f3d0;
+        font-size: 1.1rem;
+    }
+
+    .image-placeholder {
+        background: rgba(15,23,42,0.7);
+        border: 2px dashed #475569;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        color: #94a3b8;
+        margin: 15px 0;
+        font-style: italic;
+    }
+
+    ul, ol {
+        padding-left: 25px;
+    }
+
+    li {
+        margin: 8px 0;
+    }
+
+    .highlight {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    .grid-inputs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+    }
+
+    .grid-inputs label {
+        display: block;
+        font-weight: bold;
+        color: #cbd5e1;
+        margin-bottom: 5px;
+    }
+
+    .locked-message {
+        background: rgba(231,76,60,0.1);
+        border: 2px solid #e74c3c;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 15px 0;
+        color: #fca5a5;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 10px;
+        }
+        
+        .wrapper {
+            padding: 15px;
+        }
+        
+        .grid-inputs {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 </head>
-
 <body>
 
-<div class="microbe one">🦠</div>
-<div class="microbe two">🔬</div>
-<div class="microbe three">🧫</div>
-
-
-<header>
-
-    <h1>🔐 Microbiology Escape Room 🦠</h1>
-
-    <p class="subtitle">
-        Solve the clues. Crack the codes. Escape the lab!
-    </p>
-
-</header>
-
-
-<div class="container">
-
-    <a class="back-button" href="../">
-        ← Back to Interactives
+<div style="max-width:900px; margin:0 auto 15px auto;">
+    <a href="../"
+       style="
+       display:inline-block;
+       background:#1abc9c;
+       color:white;
+       text-decoration:none;
+       padding:10px 18px;
+       border-radius:25px;
+       font-weight:bold;
+       ">
+       ← Back to Interactives
     </a>
-
-
-    <!-- Mission briefing -->
-
-    <div class="mission">
-
-        <h2>🚨 The Lab Lockdown</h2>
-
-        <p>
-            Something has gone terribly wrong in the microbiology lab!
-            The laboratory doors have locked and the security system
-            has activated.
-        </p>
-
-        <br>
-
-        <p>
-            You have <strong>20 minutes</strong> to solve the microbiology
-            challenges, collect the clues, and escape the lab.
-        </p>
-
-        <br>
-
-        <strong>
-            🔬 Your microbiology knowledge is your only way out!
-        </strong>
-
-    </div>
-
-
-    <!-- Status -->
-
-    <div class="status-bar">
-
-        <div class="status-card">
-
-            <div class="status-label">
-                Time Remaining
-            </div>
-
-            <div class="timer" id="timer">
-                20:00
-            </div>
-
-        </div>
-
-
-        <div class="status-card">
-
-            <div class="status-label">
-                Challenges Solved
-            </div>
-
-            <div class="progress" id="progress">
-                0 / 4
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- GAME AREA -->
-
-    <div id="gameArea">
-
-
-        <!-- Challenge 1 -->
-
-        <div class="challenge" id="challenge1">
-
-            <span class="challenge-number">
-                🔬 Challenge 1
-            </span>
-
-            <h2>The Mystery Stain</h2>
-
-            <div class="clue">
-
-                A bacterial sample has been Gram stained.
-
-                <br><br>
-
-                Under the microscope, the cells appear
-                <strong>purple</strong>.
-
-            </div>
-
-            <p class="question">
-                What does this result indicate?
-            </p>
-
-            <div class="choices">
-
-                <button class="choice"
-                    data-answer="wrong">
-                    The bacteria are Gram-negative
-                </button>
-
-                <button class="choice"
-                    data-answer="correct">
-                    The bacteria are Gram-positive
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    The bacteria are acid-fast
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    The bacteria cannot be stained
-                </button>
-
-            </div>
-
-            <div class="feedback" id="feedback1"></div>
-
-            <button class="check-button" onclick="checkChoice(1)">
-                🔍 Check Answer
-            </button>
-
-        </div>
-
-
-        <!-- Challenge 2 -->
-
-        <div class="challenge hidden" id="challenge2">
-
-            <span class="challenge-number">
-                🧫 Challenge 2
-            </span>
-
-            <h2>The Culture Clue</h2>
-
-            <div class="clue">
-
-                You streak a bacterial sample onto an agar plate.
-
-                After incubation, you observe several
-                <strong>separate colonies</strong>.
-
-            </div>
-
-            <p class="question">
-                What is the primary purpose of the streak plate technique?
-            </p>
-
-            <div class="choices">
-
-                <button class="choice"
-                    data-answer="wrong">
-                    To increase the temperature of the culture
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    To add nutrients to the bacteria
-                </button>
-
-                <button class="choice"
-                    data-answer="correct">
-                    To isolate individual colonies
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    To kill the bacteria
-                </button>
-
-            </div>
-
-            <div class="feedback" id="feedback2"></div>
-
-            <button class="check-button" onclick="checkChoice(2)">
-                🔍 Check Answer
-            </button>
-
-        </div>
-
-
-        <!-- Challenge 3 -->
-
-        <div class="challenge hidden" id="challenge3">
-
-            <span class="challenge-number">
-                🧪 Challenge 3
-            </span>
-
-            <h2>The Biochemical Code</h2>
-
-            <div class="clue">
-
-                Your unknown organism produces bubbles
-                immediately after hydrogen peroxide is added.
-
-                <br><br>
-
-                You need to identify the enzyme responsible.
-
-            </div>
-
-            <p class="question">
-                Which enzyme is being detected?
-            </p>
-
-            <div class="choices">
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Coagulase
-                </button>
-
-                <button class="choice"
-                    data-answer="correct">
-                    Catalase
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Amylase
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Oxidase
-                </button>
-
-            </div>
-
-            <div class="feedback" id="feedback3"></div>
-
-            <button class="check-button" onclick="checkChoice(3)">
-                🔍 Check Answer
-            </button>
-
-        </div>
-
-
-        <!-- Challenge 4 -->
-
-        <div class="challenge hidden" id="challenge4">
-
-            <span class="challenge-number">
-                🦠 Final Challenge
-            </span>
-
-            <h2>Identify the Unknown</h2>
-
-            <div class="clue">
-
-                Your mystery organism is:
-
-                <br><br>
-
-                • Gram-positive
-
-                <br>
-
-                • Cocci
-
-                <br>
-
-                • Catalase positive
-
-                <br>
-
-                • Grows in clusters
-
-            </div>
-
-            <p class="question">
-                Which organism best matches these characteristics?
-            </p>
-
-            <div class="choices">
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Escherichia coli
-                </button>
-
-                <button class="choice"
-                    data-answer="correct">
-                    Staphylococcus
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Streptococcus
-                </button>
-
-                <button class="choice"
-                    data-answer="wrong">
-                    Bacillus
-                </button>
-
-            </div>
-
-            <div class="feedback" id="feedback4"></div>
-
-            <button class="check-button" onclick="checkChoice(4)">
-                🔍 Check Answer
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Success -->
-
-    <div class="success hidden" id="successScreen">
-
-        <div class="success-icon">
-            🎉🔓🦠
-        </div>
-
-        <h2>YOU ESCAPED!</h2>
-
-        <p>
-            Excellent work, microbiologist!
-        </p>
-
-        <p>
-            You successfully solved all four laboratory challenges
-            and escaped the microbiology lab.
-        </p>
-
-        <p>
-            <strong>
-                🔬 Your microbiology skills saved the day!
-            </strong>
-        </p>
-
-        <button class="restart-button" onclick="restartGame()">
-            🔄 Play Again
-        </button>
-
-    </div>
-
-
-    <!-- Time expired -->
-
-    <div class="failure hidden" id="failureScreen">
-
-        <div class="success-icon">
-            ⏰🧫
-        </div>
-
-        <h2>TIME'S UP!</h2>
-
-        <p>
-            The laboratory doors remain locked.
-        </p>
-
-        <p>
-            Review the clues and try the escape room again!
-        </p>
-
-        <button class="restart-button" onclick="restartGame()">
-            🔄 Try Again
-        </button>
-
-    </div>
-
 </div>
 
+<div class="wrapper">
 
-<footer>
+    <h1>🔬 Microbiology Lab Safety: Digital Escape Room</h1>
+    
+    <div class="intro">
+        <p><strong>Welcome to the Microbiology Lab Safety Challenge!</strong></p>
+        <p>Move through each "room" of the microbiology lab, solve the safety puzzles, and unlock the final exit. You must complete each room before moving to the next!</p>
+    </div>
 
-    🦠 Created for Microbiology Instruction | Megan Kundinger
-    <br>
-    Stay curious. Stay sterile. 🔬
+    <div class="progress" id="progress">Room 1 of 5</div>
 
-</footer>
+    <!-- ROOM 1: PPE BASICS -->
+    <div class="room active" id="room1">
+        <h2>🚪 Room 1: PPE Checkpoint</h2>
+        <span class="badge">Lab Entry</span>
+        
+        <div class="story">
+            <strong>Scenario:</strong> You are about to enter the microbiology lab to work with BSL-2 organisms. Choose the correct PPE combination needed before crossing the tape line at the lab door.
+        </div>
 
+            <div class>
+      <img src=https://talisenconstructioncorp.com/wp-content/uploads/2022/07/C_16_395-2-1024x683.jpg" alt="Microbiology Lab BSL2" width="550" height="350">
+                </div>Microbiology Lab.<br>
+
+        <div class="puzzle-card">
+            <h3>🔐 Puzzle: PPE Combination Lock</h3>
+            <p class="question">Select <strong>all</strong> PPE items that are required before handling open cultures in a BSL‑2 teaching lab:</p>
+            
+            <div class="options">
+                <label><input type="checkbox" id="ppe1" value="labcoat"> Lab coat that stays in lab</label>
+                <label><input type="checkbox" id="ppe2" value="gloves"> Disposable gloves</label>
+                <label><input type="checkbox" id="ppe3" value="sandals"> Open‑toed sandals</label>
+                <label><input type="checkbox" id="ppe4" value="goggles"> Eye / face protection as needed</label>
+                <label><input type="checkbox" id="ppe5" value="shorts"> Shorts</label>
+                <label><input type="checkbox" id="ppe6" value="closedshoes"> Closed‑toe, closed‑heel shoes</label>
+            </div>
+            
+            <p class="question">When you believe your PPE selection is correct, count the number of items needed and enter that digit as your code. Enter that code below to open the next door:</p>
+            <input type="text" id="code1" placeholder="Enter 1‑digit code (hint: count correct PPE items)">
+            
+            <div>
+                <button class="btn" onclick="checkRoom1()">Check Answer</button>
+                <button class="btn-secondary" onclick="resetRoom1()">Reset Selections</button>
+            </div>
+            
+            <div class="feedback" id="feedback1"></div>
+        </div>
+    </div>
+
+    <!-- ROOM 2: CHEMICAL SPILLS -->
+    <div class="room" id="room2">
+        <h2>⚠️ Room 2: Chemical Spill</h2>
+        <span class="badge">Hazard Response</span>
+        
+        <div class="story">
+            <strong>Scenario:</strong> During plate pouring, a flask of disinfectant and a tube containing culture are knocked over, creating a mixed liquid spill on the bench near an open flame. Put the response steps in the correct order.
+        </div>
+
+        <div class>
+          <img src="https://th.bing.com/th/id/R.85ddc0d099fe1ff909d20cdbcd5c8bc9?rik=JzYqx%2boXSrqxwA&pid=ImgRaw&r=0" alt="Biological Spill on Lab Bench" width="550" height="350">
+                </div> Biological Spill on Lab Bench.<br>
+
+        <div class="puzzle-card">
+            <h3>🔐 Puzzle: Spill Response Sequence</h3>
+            <p class="question">You have four key actions, labeled A–D. The correct order of operations creates the next lock code:</p>
+            
+            <ul>
+                <li><strong>A</strong> – Apply appropriate disinfectant around and over the spill, working from the outer edge inward.</li>
+                <li><strong>B</strong> – Alert the instructor, clear unnecessary people from the area, and turn off nearby burners.</li>
+                <li><strong>C</strong> – Allow sufficient contact time before wiping up with absorbent materials and disposing them in the proper container.</li>
+                <li><strong>D</strong> – Wash the area again with disinfectant and remove PPE for disposal or decontamination as directed.</li>
+            </ul>
+            
+            <p class="question">Enter the correct order of letters (for example, <span class="lock-code">ABCD</span>):</p>
+            <input type="text" id="code2" placeholder="Enter 4-letter sequence">
+            
+            <div>
+                <button class="btn" onclick="checkRoom2()">Check Answer</button>
+                <button class="btn-secondary" onclick="goToRoom(1)">Back to Room 1</button>
+            </div>
+            
+            <div class="feedback" id="feedback2"></div>
+        </div>
+    </div>
+
+    <!-- ROOM 3: BACTERIAL CONTAMINATION -->
+    <div class="room" id="room3">
+        <h2>🦠 Room 3: Contaminated Culture</h2>
+        <span class="badge">Aseptic Technique</span>
+        
+        <div class="story">
+            <strong>Scenario:</strong> You notice unexpected colonies on a "pure culture" streak plate, including different sizes and pigments. Decide which actions are appropriate when contamination is suspected.
+        </div>
+
+       
+        <div class>
+          <img src="https://th.bing.com/th/id/R.fab42bfe774a04bc6546a0203301e2e0?rik=ANy2ujNMq5B8og&pid=ImgRaw&r=0"alt="Biological Spill on Lab Bench" width="550" height="350">
+             </div> Contaminated Petri Dish. <br>
+
+        <div class="puzzle-card">
+            <h3>🔐 Puzzle: Contamination Decision Grid</h3>
+            <p class="question">Select the <strong>two</strong> best actions to take when you suspect plate contamination. Type the two letters together (e.g., <span class="lock-code">AB</span>) in alphabetical order for the lock:</p>
+            
+            <ul>
+                <li><strong>A</strong> – Tape the plate shut, label it as contaminated, and place it in the designated biohazard disposal.</li>
+                <li><strong>B</strong> – Open the plate fully on the bench to inspect colony texture with no flame.</li>
+                <li><strong>C</strong> – Note in your lab notebook that the culture appears contaminated and inform the instructor.</li>
+                <li><strong>D</strong> – Take the plate home to examine later with a magnifying glass.</li>
+                <li><strong>E</strong> – Autoclave or disinfect the plate according to lab policy before disposal.</li>
+            </ul>
+            
+            <input type="text" id="code3" placeholder="Enter 2-letter code (alphabetical)">
+            
+            <div>
+                <button class="btn" onclick="checkRoom3()">Check Answer</button>
+                <button class="btn-secondary" onclick="goToRoom(2)">Back to Room 2</button>
+            </div>
+            
+            <div class="feedback" id="feedback3"></div>
+        </div>
+    </div>
+
+    <!-- ROOM 4: AUTOCLAVING & WASTE -->
+    <div class="room" id="room4">
+        <h2>🔥 Room 4: Autoclave Room</h2>
+        <span class="badge">Decontamination</span>
+        
+        <div class="story">
+            <strong>Scenario:</strong> The biohazard bin is full of used agar plates and culture tubes. You must set up the autoclave cycle correctly to decontaminate the waste.
+        </div>
+
+       <div class>
+              <img src="https://cdn.careeronestop.org/OccVids/OccupationVideos/31-9093.00.jpg" alt="Autoclave" width="550" height="350">
+             </div>Autoclave in Laboratory<br>
+
+        <div class="puzzle-card">
+            <h3>🔐 Puzzle: Autoclave Settings Lock</h3>
+            <p class="question">Complete the autoclave settings for a standard gravity cycle for microbiology waste:</p>
+            
+            <div class="grid-inputs">
+                <div>
+                    <label for="temp4">Temperature (°C)</label>
+                    <input type="text" id="temp4" placeholder="e.g., 100">
+                </div>
+                <div>
+                    <label for="psi4">Pressure (psi)</label>
+                    <input type="text" id="psi4" placeholder="e.g., 15">
+                </div>
+                <div>
+                    <label for="time4">Time (min)</label>
+                    <input type="text" id="time4" placeholder="e.g., 10">
+                </div>
+            </div>
+            
+            <p class="question">When the three values are correct, the autoclave panel reveals a 4‑character lock code in the format <span class="lock-code">TPTM</span> (first digits of Temperature, Pressure, Time):</p>
+            <input type="text" id="code4" placeholder="Enter 4-character code">
+            
+            <div>
+                <button class="btn" onclick="checkRoom4()">Check Answer</button>
+                <button class="btn-secondary" onclick="goToRoom(3)">Back to Room 3</button>
+            </div>
+   <div class="feedback" id="feedback4"></div>
+        </div>
+    </div>
+
+    <!-- ROOM 5: FINAL SAFETY CHECK -->
+    <div class="room" id="room5">
+        <h2>✅ Room 5: Exit Checklist</h2>
+        <span class="badge">Final Lock</span>
+        
+        <div class="story">
+            <strong>Scenario:</strong> Lab is ending for the day. You must complete the end‑of‑lab safety checklist correctly to unlock the lab door and "escape."
+        </div>
+
+       <div class>
+      <img src="https://media.sketchfab.com/models/4ad9f395571a4dfaadce33dfeccc7a53/thumbnails/f744d9f3ba2c46b99be54a813b454952/7675cc95dc6e45a7804e42483d5a98c6.jpeg"alt="Microbiology Lab BSL2" width="550" height="350">>
+                </div>Laboratory Exit.<br>
+  
+        <div class="puzzle-card">
+            <h3>🔐 Puzzle: Exit Order Combination</h3>
+            <p class="question">Choose the best order for these exit tasks. Use the numbers 1–4 in the correct sequence (no spaces) to form the final lock code:</p>
+            
+            <ol>
+                <li><strong>(1)</strong> Remove gloves and other disposable PPE and discard into appropriate biohazard or trash containers.</li>
+                <li><strong>(2)</strong> Disinfect bench top thoroughly and allow appropriate contact time.</li>
+                <li><strong>(3)</strong> Wash hands with soap and water for the required duration.</li>
+                <li><strong>(4)</strong> Log out of the lab, collect personal items, and exit.</li>
+            </ol>
+            
+            <input type="text" id="code5" placeholder="Enter 4-digit sequence (e.g., 1234)">
+            <p style="font-style: italic; color: #94a3b8;">Hint: Think about when hands are the cleanest relative to touching door handles and personal items.</p>
+            
+            <div>
+                <button class="btn" onclick="checkRoom5()">Check Answer</button>
+                <button class="btn-secondary" onclick="goToRoom(4)">Back to Room 4</button>
+            </div>
+            
+            <div class="feedback" id="feedback5"></div>
+        </div>
+ </div>
+        <div id="successSection" style="display:none;">
+            <div class="success-banner">
+                <h2>🎉 Lab Secured – You Escaped! 🎉</h2>
+                <p>You have completed all safety checkpoints and demonstrated safe practices in PPE use, spill response, contamination management, and autoclaving.</p>
+                <p style="font-size:0.95rem; margin-top: 20px;">Share your final lock code phrase with your instructor as directed:</p>
+                <p style="margin-top:15px; font-size: 1.3rem;">Final phrase: <span class="lock-code">SAFE LAB</span></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
+    // Track completed rooms
+    let completedRooms = [false, false, false, false, false];
+    let currentRoom = 1;
 
-/* =========================================
-   GAME SETTINGS
-========================================= */
+    function updateProgress() {
+        document.getElementById('progress').textContent = 'Room ' + currentRoom + ' of 5';
+    }
 
-const totalChallenges = 4;
-
-let currentChallenge = 1;
-let solvedChallenges = 0;
-
-let timeRemaining = 20 * 60;
-
-let timerInterval;
-
-
-/* =========================================
-   START TIMER
-========================================= */
-
-function startTimer() {
-
-    timerInterval = setInterval(function() {
-
-        timeRemaining--;
-
-        updateTimer();
-
-        if (timeRemaining <= 0) {
-
-            clearInterval(timerInterval);
-
-            endGame();
-
+    function goToRoom(roomNum) {
+        // Hide all rooms
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById('room' + i).classList.remove('active');
         }
-
-    }, 1000);
-
-}
-
-
-/* =========================================
-   UPDATE TIMER
-========================================= */
-
-function updateTimer() {
-
-    const minutes = Math.floor(timeRemaining / 60);
-
-    const seconds = timeRemaining % 60;
-
-    document.getElementById("timer").textContent =
-        minutes.toString().padStart(2, "0")
-        + ":"
-        + seconds.toString().padStart(2, "0");
-
-}
-
-
-/* =========================================
-   CHECK MULTIPLE CHOICE
-========================================= */
-
-function checkChoice(challengeNumber) {
-
-    const challenge =
-        document.getElementById("challenge" + challengeNumber);
-
-    const selected =
-        challenge.querySelector(".choice.selected");
-
-    const feedback =
-        document.getElementById("feedback" + challengeNumber);
-
-
-    if (!selected) {
-
-        feedback.textContent =
-            "⚠️ Select an answer first.";
-
-        feedback.className =
-            "feedback incorrect";
-
-        return;
-
-    }
-
-
-    if (selected.dataset.answer === "correct") {
-
-        selected.classList.add("correct");
-
-        feedback.textContent =
-            "✅ Correct! You found the clue!";
-
-        feedback.className =
-            "feedback correct";
-
-
-        solvedChallenges++;
-
+        // Show selected room
+        document.getElementById('room' + roomNum).classList.add('active');
+        currentRoom = roomNum;
         updateProgress();
-
-
-        challenge
-            .querySelectorAll(".choice")
-            .forEach(function(button) {
-
-                button.disabled = true;
-
-            });
-
-
-        const checkButton =
-            challenge.querySelector(".check-button");
-
-        checkButton.disabled = true;
-
-
-        setTimeout(function() {
-
-            nextChallenge(challengeNumber);
-
-        }, 1200);
-
-
-    } else {
-
-        selected.classList.add("incorrect");
-
-        feedback.textContent =
-            "❌ Not quite. Review the clue and try again.";
-
-        feedback.className =
-            "feedback incorrect";
-
+        window.scrollTo(0, 0);
     }
 
-}
-
-
-/* =========================================
-   SELECT ANSWER
-========================================= */
-
-document.querySelectorAll(".choice").forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        const parent =
-            button.closest(".challenge");
-
-        parent.querySelectorAll(".choice")
-            .forEach(function(choice) {
-
-                choice.classList.remove("selected");
-
-            });
-
-        button.classList.add("selected");
-
-    });
-
-});
-
-
-/* =========================================
-   NEXT CHALLENGE
-========================================= */
-
-function nextChallenge(number) {
-
-    const current =
-        document.getElementById("challenge" + number);
-
-    current.classList.add("hidden");
-
-
-    if (number < totalChallenges) {
-
-        const next =
-            document.getElementById("challenge" + (number + 1));
-
-        next.classList.remove("hidden");
-
-        currentChallenge = number + 1;
-
-    } else {
-
-        finishGame();
-
+    function unlockNextRoom(roomNum) {
+        completedRooms[roomNum - 1] = true;
+        
+        if (roomNum < 6) {
+            // Add "Next Room" button if not already there
+            const feedback = document.getElementById('feedback' + roomNum);
+            const existingBtn = feedback.parentElement.querySelector('.btn-next');
+            
+            if (!existingBtn) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'btn btn-next';
+                nextBtn.textContent = '➜ Proceed to Room ' + (roomNum + 1);
+                nextBtn.onclick = function() {
+                    goToRoom(roomNum + 1);
+                };
+                feedback.parentElement.insertBefore(nextBtn, feedback);
+            }
+        }
     }
 
-}
+    function checkRoom1() {
+        const checkboxes = [
+            {id: 'ppe1', value: 'labcoat', correct: true},
+            {id: 'ppe2', value: 'gloves', correct: true},
+            {id: 'ppe3', value: 'sandals', correct: false},
+            {id: 'ppe4', value: 'goggles', correct: true},
+            {id: 'ppe5', value: 'shorts', correct: false},
+            {id: 'ppe6', value: 'closedshoes', correct: true}
+        ];
+        
+        let allCorrect = true;
+        checkboxes.forEach(cb => {
+            const elem = document.getElementById(cb.id);
+            if (elem.checked !== cb.correct) {
+                allCorrect = false;
+            }
+        });
+        
+        const codeInput = document.getElementById('code1').value.trim();
+        const feedback = document.getElementById('feedback1');
+        
+        if (!allCorrect) {
+            feedback.textContent = '❌ Check your PPE: make sure you have full protection and no unsafe items (like sandals or shorts).';
+            feedback.className = 'feedback incorrect';
+            return;
+        }
+        
+        if (codeInput === '4') {
+            feedback.textContent = '✅ Correct! Door unlocked. Click "Proceed to Room 2" to continue.';
+            feedback.className = 'feedback correct';
+            unlockNextRoom(1);
+        } else {
+     feedback.textContent = '❌ Your PPE is correct, but the lock code is wrong. Count the number of required PPE items.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
 
+    function resetRoom1() {
+        ['ppe1', 'ppe2', 'ppe3', 'ppe4', 'ppe5', 'ppe6'].forEach(id => {
+            document.getElementById(id).checked = false;
+        });
+        document.getElementById('code1').value = '';
+        const feedback = document.getElementById('feedback1');
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+    }
 
-/* =========================================
-   UPDATE PROGRESS
-========================================= */
+    function checkRoom2() {
+        if (!completedRooms[0]) {
+            alert('⚠️ You must complete Room 1 before proceeding!');
+            return;
+        }
+        
+        const code = document.getElementById('code2').value.trim().toUpperCase();
+        const feedback = document.getElementById('feedback2');
+        
+        if (code === 'BACD') {
+            feedback.textContent = '✅ Sequence correct! The spill is safely managed. Click "Proceed to Room 3" to continue.';
+            feedback.className = 'feedback correct';
+            unlockNextRoom(2);
+        } else {
+            feedback.textContent = '❌ Incorrect sequence. Begin with safety and notification, then disinfect, wait, clean, and final decon.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
 
-function updateProgress() {
+    function checkRoom3() {
+        if (!completedRooms[1]) {
+            alert('⚠️ You must complete Room 2 before proceeding!');
+            return;
+        }
+        
+        const code = document.getElementById('code3').value.trim().toUpperCase();
+        const feedback = document.getElementById('feedback3');
+        
+        if (code === 'AC') {
+            feedback.textContent = '✅ Good contamination control. The incubator door unlocks. Click "Proceed to Room 4" to continue.';
+            feedback.className = 'feedback correct';
+            unlockNextRoom(3);
+        } else {
+            feedback.textContent = '❌ Reconsider: prioritize safe disposal and communication, not taking contaminated material outside the lab.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
 
-    document.getElementById("progress").textContent =
-        solvedChallenges + " / " + totalChallenges;
+    function checkRoom4() {
+        if (!completedRooms[2]) {
+            alert('⚠️ You must complete Room 3 before proceeding!');
+            return;
+        }
+        
+        const temp = document.getElementById('temp4').value.trim();
+        const psi = document.getElementById('psi4').value.trim();
+        const time = document.getElementById('time4').value.trim();
+        const codeInput = document.getElementById('code4').value.trim();
+        const feedback = document.getElementById('feedback4');
+        
+        if (temp === '121' && psi === '15' && time === '30') {
+            if (codeInput === '1130') {
+                feedback.textContent = '✅ Autoclave programmed correctly. Waste is decontaminated. Click "Proceed to Room 5" to continue.';
+                feedback.className = 'feedback correct';
+                unlockNextRoom(4);
+            } else {
+                feedback.textContent = '❌ Settings are correct. Now form the lock code using the first digits: 1 (temp), 1 (pressure), and 30 (time).';
+                feedback.className = 'feedback incorrect';
+            }
+        } else {
+            feedback.textContent = '❌ At least one setting is off. Review standard parameters for sterilizing microbiology waste.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
 
-}
-
-
-/* =========================================
-   FINISH GAME
-========================================= */
-
-function finishGame() {
-
-    clearInterval(timerInterval);
-
-    document.getElementById("gameArea")
-        .classList.add("hidden");
-
-    document.getElementById("successScreen")
-        .classList.remove("hidden");
-
-}
-
-
-/* =========================================
-   TIME EXPIRED
-========================================= */
-
-function endGame() {
-
-    document.getElementById("gameArea")
-        .classList.add("hidden");
-
-    document.getElementById("failureScreen")
-        .classList.remove("hidden");
-
-}
-
-
-/* =========================================
-   RESTART
-========================================= */
-
-function restartGame() {
-
+    function checkRoom5() {
+        if (!completedRooms[3]) {
+            alert('⚠️ You must complete Room 4 before proceeding!');
+            return;
+        }
+        
+        const code = document.getElementById('code5').value.trim();
+        const feedback = document.getElementById('feedback5');
+        
+        if (code === '2134') {
+            feedback.textContent = '✅ Exit sequence correct! The final door opens. Congratulations!';
+            feedback.className = 'feedback correct';
+            completedRooms[4] = true;
+            document.getElementById('successSection').style.display = 'block';
+        } else {
+            feedback.textContent = '❌ Think about when your hands are cleanest and when you should touch shared surfaces and personal items.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
+    // Initialize
+    updateProgress();
+</script>
+</body>
+</html>
