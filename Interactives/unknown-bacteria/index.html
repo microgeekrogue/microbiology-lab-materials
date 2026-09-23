@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unknown Bacteria ID — Microbe Hunters</title>
+<style>
+:root{
+  --navy:#172554; --blue:#2563eb; --teal:#0f766e; --purple:#7c3aed;
+  --pink:#db2777; --green:#16a34a; --gold:#f59e0b; --bg:#eef7f7;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#e0f2fe,#f5f3ff 55%,#ecfdf5);color:#172033}
+header{background:linear-gradient(135deg,var(--navy),#164e63);color:white;padding:22px 28px;position:sticky;top:0;z-index:5;box-shadow:0 3px 15px #0002}
+header h1{margin:0 0 5px;font-size:clamp(24px,4vw,38px)}
+header p{margin:0;opacity:.9}
+.wrap{max-width:1100px;margin:auto;padding:25px 18px 50px}
+.card{background:white;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 8px 25px #17203318;border:1px solid #dbeafe}
+.hero{background:linear-gradient(135deg,#312e81,#0f766e);color:white}
+.hero h2{font-size:30px;margin-top:0}
+.notice{padding:14px 17px;border-left:5px solid var(--gold);background:#fffbeb;border-radius:8px;margin:15px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+button,.btn{border:0;border-radius:12px;padding:13px 16px;font-size:15px;font-weight:bold;cursor:pointer;background:var(--blue);color:white;transition:.15s}
+button:hover,.btn:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.btn.green{background:var(--green)} .btn.purple{background:var(--purple)}
+.btn.pink{background:var(--pink)} .btn.gold{background:#d97706}
+.small{font-size:13px;opacity:.75}
+.hidden{display:none}
+.section-title{display:flex;align-items:center;gap:10px}
+.badge{display:inline-block;background:#dbeafe;color:#1e40af;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:bold}
+.mission-list li{margin:9px 0}
+.test-buttons button{width:100%;text-align:left;background:#f1f5f9;color:#172033;border:2px solid #e2e8f0}
+.test-buttons button:hover{border-color:var(--blue);background:#eff6ff}
+.test-panel{margin-top:16px;padding:18px;border-radius:14px;background:#f8fafc;border:2px dashed #94a3b8}
+.test-panel img{max-width:100%;max-height:420px;display:block;margin:12px auto;border-radius:12px;box-shadow:0 4px 15px #0002}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;border-bottom:1px solid #e2e8f0;text-align:left}
+th{background:#eff6ff}
+footer{text-align:center;font-size:13px;opacity:.7;padding:20px}
+@media(max-width:600px){.card{padding:18px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🦠 Unknown Bacteria ID</h1>
+  <p>Microbe Hunters • A bacterial identification investigation</p>
+</header>
 
+<div class="wrap">
+<section id="home" class="card hero">
+  <h2>Welcome, aspiring Microbe Detectives!</h2>
+  <p>Are you ready to embark on an exciting journey into the unseen world of microscopic organisms?</p>
+  <p>Your mission is to unmask the identity of an unknown bacterium using Gram staining, morphology, culture characteristics, hemolysis, fermentation tests, H₂S production, oxidase, and catalase.</p>
+  <p><strong>Each test is a clue. Each result brings you closer to solving the case.</strong></p>
+  <button onclick="show('mission')">Accept the Mission →</button>
+</section>
+
+<section id="mission" class="card hidden">
+  <div class="section-title"><h2>🕵️ Mission Directive</h2><span class="badge">CASE FILE</span></div>
+  <ol class="mission-list">
+    <li><strong>Assemble Your Detective Squad</strong> — form your team.</li>
+    <li><strong>Gear Up for the Hunt</strong> — determine the biochemical tests and growth media needed.</li>
+    <li><strong>Conduct the Stakeout</strong> — examine the unknown using the available test results.</li>
+    <li><strong>Analyze the Clues</strong> — compare evidence against the suspect lineup.</li>
+    <li><strong>Uncover the Microbe's Secret Life</strong> — investigate habitat, disease, or beneficial roles.</li>
+    <li><strong>The Big Reveal</strong> — submit your final identification and report.</li>
+  </ol>
+  <div class="grid">
+    <a class="btn green" href="https://forms.gle/FYA2u8nxX52B9qKD7" target="_blank">Assemble Your Squad ↗</a>
+    <button class="btn purple" onclick="show('briefing')">Gear Up for the Hunt</button>
+  </div>
+</section>
+
+<section id="briefing" class="card hidden">
+  <h2>🔬 Mission Briefing</h2>
+  <p>For each characteristic below, determine the appropriate biochemical test or growth medium and explain why it is useful for identification.</p>
+  <div class="grid">
+    <div><strong>Gram disguise</strong><br>Gram stain</div>
+    <div><strong>Morphological blueprint</strong><br>Shape</div>
+    <div><strong>Colony code</strong><br>Culture characteristics</div>
+    <div><strong>Blood reaction</strong><br>Hemolysis</div>
+    <div><strong>Glucose</strong><br>Fermentation</div>
+    <div><strong>Sucrose</strong><br>Fermentation</div>
+    <div><strong>Lactose</strong><br>Fermentation</div>
+    <div><strong>Mannitol</strong><br>Fermentation</div>
+    <div><strong>H₂S</strong><br>Production</div>
+    <div><strong>Oxygen radical response</strong><br>Oxidase</div>
+    <div><strong>Peroxide defense</strong><br>Catalase</div>
+  </div>
+  <div class="notice"><strong>Mission Control:</strong> Submit your diagnostic test determination, then proceed to the suspect lineup when instructed.</div>
+  <div class="grid">
+    <a class="btn gold" href="https://forms.gle/bunzYTMvmb7dzhEy5" target="_blank">Submit Test Determination ↗</a>
+    <button onclick="show('lineup')">View Suspect Lineup →</button>
+  </div>
+</section>
+
+<section id="lineup" class="card hidden">
+  <h2>🚨 Suspect Lineup</h2>
+  <p>Mission Control has prepared a lineup of bacterial suspects. Select your assigned unknown. Examine every available clue and compare the evidence with your reference materials.</p>
+  <div class="grid" id="suspects"></div>
+  <div class="grid" style="margin-top:14px">
+    <button class="btn purple" onclick="show('resources')">Investigation Resources</button>
+  </div>
+</section>
+
+<section id="resources" class="card hidden">
+  <h2>📚 Investigation Resources</h2>
+  <div class="grid">
+    <button onclick="openResource('Unknown Bacteria Flowchart.png')">Identification Flowchart</button>
+    <button onclick="openResource('typical reactions grid.png')">Typical Reactions Grid</button>
+  </div>
+  <div id="resourcePanel" class="test-panel hidden"></div>
+</section>
+
+<section id="case" class="card hidden">
+  <h2 id="caseTitle">Unknown</h2>
+  <p>Microbe Hunters, your suspect has been isolated and awaits expert analysis. Choose a clue to examine.</p>
+  <div class="grid test-buttons" id="tests"></div>
+  <div id="testPanel" class="test-panel hidden"></div>
+  <div class="notice">
+    <strong>Detective tip:</strong> Record the result of every test. Your identification should be supported by multiple independent characteristics.
+  </div>
+  <div class="grid">
+    <button class="btn green" onclick="window.open('https://forms.gle/KE4MTGfGq2FfPvFR7','_blank')">Submit Your Findings ↗</button>
+    <button onclick="show('lineup')">← Return to Suspect Lineup</button>
+  </div>
+</section>
+</div>
+
+<footer>Unknown Bacteria ID • Educational game • Designed for course use</footer>
+
+<script>
+const cases = {
+  "1": {
+    tests:{
+      "Culture":"1 culture.jpg","Gram Stain":"1 gram stain.jpg","Hemolysis":"beta hemolysis.jpg",
+      "Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg","Catalase":"catalase.png",
+      "H₂S production":"1 h2s.jpg","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  },
+  "6": {
+    tests:{
+      "Culture":"6 cuture.png","Gram Stain":"6 12 gram.jpg","Hemolysis":"beta hemolysis.jpg",
+      "Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg","Catalase":"catalase.png",
+      "H₂S production":"1 h2s.jpg","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  },
+  "10": {
+    tests:{
+      "Culture":"10 culture.jpg","Gram Stain":"10 gram.jpg","Hemolysis":"10 15 hemolysis.png",
+      "Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg","Catalase":"catalase.png",
+      "H₂S production":"1 h2s.jpg","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  },
+  "11": {
+    tests:{
+      "Culture":"culture 11.png","Gram Stain":"gram 11.png","Hemolysis":"10 15 hemolysis.png",
+      "Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg","Catalase":"catalase.png",
+      "H₂S production":"h2s 11.png","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  },
+  "12": {
+    tests:{
+      "Culture":"Figure2-Show-Pseudomonas-aregenosa-colony-on-cetrimide-agar.png","Gram Stain":"6 12 gram.jpg",
+      "Hemolysis":"beta hemolysis.jpg","Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg",
+      "Catalase":"catalase.png","H₂S production":"1 h2s.jpg","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  },
+  "15": {
+    tests:{
+      "Culture":"15 culture.jpg","Gram Stain":"15 gram.jpg","Hemolysis":"10 15 hemolysis.png",
+      "Glucose Fermentation":"glucose.png","Oxidase":"oxidase.jpg","Catalase":"catalase.png",
+      "H₂S production":"1 6 10 12  h2s.jpg","Lactose Fermentation":"lactose.png",
+      "Sucrose Fermentation":"sucrose.png","Mannitol Fermentation":"1 mannitol.png"
+    }
+  }
+};
+
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openCase(n){
+  document.getElementById('caseTitle').textContent='🦠 Unknown #'+n;
+  const box=document.getElementById('tests');
+  box.innerHTML='';
+  Object.entries(cases[n].tests).forEach(([name,file])=>{
+    const b=document.createElement('button');
+    b.textContent='🔎 '+name;
+    b.onclick=()=>showTest(name,file);
+    box.appendChild(b);
+  });
+  document.getElementById('testPanel').classList.add('hidden');
+  show('case');
+}
+function showTest(name,file){
+  const p=document.getElementById('testPanel');
+  p.classList.remove('hidden');
+  p.innerHTML='<h3>'+name+'</h3><p class="small">Evidence image from the original Quest game: '+file+'</p><img src="'+file+'" alt="'+name+' result" onerror="this.outerHTML=\'<div class=&quot;notice&quot;><strong>Image not included yet.</strong><br>Place <code>'+file+'</code> in the same folder as this HTML file to display it.</div>\'">';
+}
+function openResource(file){
+  const p=document.getElementById('resourcePanel');
+  p.classList.remove('hidden');
+  p.innerHTML='<h3>'+file+'</h3><img src="'+file+'" alt="'+file+'" onerror="this.outerHTML=\'<div class=&quot;notice&quot;>Place <code>'+file+'</code> in the same folder as this HTML file to display it.</div>\'">';
+}
+const suspects=document.getElementById('suspects');
+Object.keys(cases).forEach(n=>{
+  const b=document.createElement('button');
+  b.className='btn';
+  b.textContent='Unknown #'+n;
+  b.onclick=()=>openCase(n);
+  suspects.appendChild(b);
+});
+</script>
+</body>
+</html>
