@@ -1,1 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔐 Microbiology Escape Room</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600;700&display=swap');
+
+:root {
+    --purple: #8b5cf6;
+    --blue: #3b82f6;
+    --green: #10b981;
+    --yellow: #fbbf24;
+    --red: #ef4444;
+    --dark: #1f2937;
+    --light: #f8fafc;
+    --shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Floating microbes */
+
+.microbe {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.12;
+    z-index: 0;
+    animation: float 18s infinite ease-in-out;
+}
+
+.microbe.one {
+    top: 10%;
+    left: 5%;
+    font-size: 3rem;
+}
+
+.microbe.two {
+    top: 60%;
+    right: 8%;
+    font-size: 2.5rem;
+}
+
+.microbe.three {
+    bottom: 15%;
+    left: 15%;
+    font-size: 3rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+/* Header */
+
+header {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.98);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 5px solid var(--purple);
+    box-shadow: var(--shadow);
+}
+
+h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 3.2rem;
+    color: var(--purple);
+}
+
+.subtitle {
+    color: #666;
+    font-weight: 600;
+}
+
+/* Main container */
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Back button */
+
+.back-button {
+    display: inline-block;
+    background: white;
+    color: var(--purple);
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Mission briefing */
+
+.mission {
+    background: rgba(255,255,255,0.97);
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.mission h2 {
+    font-family: 'Caveat', cursive;
+    color: var(--purple);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.mission p {
+    max-width: 750px;
+    margin: auto;
+}
+
+/* Game status */
+
+.status-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-card {
+    background: rgba(255,255,255,0.96);
+    padding: 1rem;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.status-label {
+    font-size: 0.8rem;
+    color: #777;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.timer {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--red);
+}
+
+.progress {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--green);
+}
+
+/* Challenge */
+
+.challenge {
+    background: rgba(255,255,255,0.97);
+    border-radius: 25px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.challenge-number {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.challenge h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.3rem;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+}
+
+.clue {
+    background: #eef2ff;
+    border-left: 5px solid var(--purple);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.question {
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+/* Answer choices */
+
+.choices {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.choice {
+    background: #f8fafc;
+    border: 2px solid #d1d5db;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.choice:hover {
+    border-color: var(--purple);
+    background: #f5f3ff;
+}
+
+.choice.selected {
+    border-color: var(--purple);
+    background: #ede9fe;
+}
+
+.choice.correct {
+    border-color: var(--green);
+    background: #d1fae5;
+}
+
+.choice.incorrect {
+    border-color: var(--red);
+    background: #fee2e2;
+}
+
+/* Text answer */
+
+.answer-area {
+    margin-top: 1rem;
+}
+
+.answer-area input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.answer-area input:focus {
+    outline: none;
+    border-color: var(--purple);
+}
+
+/* Buttons */
+
+button {
+    font-family: inherit;
+}
+
+.check-button,
+.next-button,
+.restart-button {
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+}
+
+.check-button {
+    background: var(--purple);
+    color: white;
+}
+
+.next-button {
+    background: var(--green);
+    color: white;
+}
+
+.restart-button {
+    background: var(--blue);
+    color: white;
+}
+
+.check-button:hover,
+.next-button:hover,
+.restart-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Feedback */
+
+.feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 700;
+    display: none;
+}
+
+.feedback.correct {
+    display: block;
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.feedback.incorrect {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Hidden */
+
+.hidden {
+    display: none;
+}
+
+/* Success screen */
+
+.success {
+    background: rgba(255,255,255,0.98);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.success-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.success h2 {
+    font-family: 'Caveat', cursive;
+    color: var(--green);
+    font-size: 3.5rem;
+}
+
+.success p {
+    margin: 1rem auto;
+    max-width: 650px;
+}
+
+/* Failure screen */
+
+.failure {
+    background: rgba(255,255,255,0.98);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.failure h2 {
+    font-family: 'Caveat', cursive;
+    color: var(--red);
+    font-size: 3.2rem;
+}
+
+/* Footer */
+
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    color: #666;
+}
+
+/* Mobile */
+
+@media(max-width: 700px) {
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .status-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .challenge {
+        padding: 1.5rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="microbe one">🦠</div>
+<div class="microbe two">🔬</div>
+<div class="microbe three">🧫</div>
+
+
+<header>
+
+    <h1>🔐 Microbiology Escape Room 🦠</h1>
+
+    <p class="subtitle">
+        Solve the clues. Crack the codes. Escape the lab!
+    </p>
+
+</header>
+
+
+<div class="container">
+
+    <a class="back-button" href="../">
+        ← Back to Interactives
+    </a>
+
+
+    <!-- Mission briefing -->
+
+    <div class="mission">
+
+        <h2>🚨 The Lab Lockdown</h2>
+
+        <p>
+            Something has gone terribly wrong in the microbiology lab!
+            The laboratory doors have locked and the security system
+            has activated.
+        </p>
+
+        <br>
+
+        <p>
+            You have <strong>20 minutes</strong> to solve the microbiology
+            challenges, collect the clues, and escape the lab.
+        </p>
+
+        <br>
+
+        <strong>
+            🔬 Your microbiology knowledge is your only way out!
+        </strong>
+
+    </div>
+
+
+    <!-- Status -->
+
+    <div class="status-bar">
+
+        <div class="status-card">
+
+            <div class="status-label">
+                Time Remaining
+            </div>
+
+            <div class="timer" id="timer">
+                20:00
+            </div>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <div class="status-label">
+                Challenges Solved
+            </div>
+
+            <div class="progress" id="progress">
+                0 / 4
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME AREA -->
+
+    <div id="gameArea">
+
+
+        <!-- Challenge 1 -->
+
+        <div class="challenge" id="challenge1">
+
+            <span class="challenge-number">
+                🔬 Challenge 1
+            </span>
+
+            <h2>The Mystery Stain</h2>
+
+            <div class="clue">
+
+                A bacterial sample has been Gram stained.
+
+                <br><br>
+
+                Under the microscope, the cells appear
+                <strong>purple</strong>.
+
+            </div>
+
+            <p class="question">
+                What does this result indicate?
+            </p>
+
+            <div class="choices">
+
+                <button class="choice"
+                    data-answer="wrong">
+                    The bacteria are Gram-negative
+                </button>
+
+                <button class="choice"
+                    data-answer="correct">
+                    The bacteria are Gram-positive
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    The bacteria are acid-fast
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    The bacteria cannot be stained
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback1"></div>
+
+            <button class="check-button" onclick="checkChoice(1)">
+                🔍 Check Answer
+            </button>
+
+        </div>
+
+
+        <!-- Challenge 2 -->
+
+        <div class="challenge hidden" id="challenge2">
+
+            <span class="challenge-number">
+                🧫 Challenge 2
+            </span>
+
+            <h2>The Culture Clue</h2>
+
+            <div class="clue">
+
+                You streak a bacterial sample onto an agar plate.
+
+                After incubation, you observe several
+                <strong>separate colonies</strong>.
+
+            </div>
+
+            <p class="question">
+                What is the primary purpose of the streak plate technique?
+            </p>
+
+            <div class="choices">
+
+                <button class="choice"
+                    data-answer="wrong">
+                    To increase the temperature of the culture
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    To add nutrients to the bacteria
+                </button>
+
+                <button class="choice"
+                    data-answer="correct">
+                    To isolate individual colonies
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    To kill the bacteria
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback2"></div>
+
+            <button class="check-button" onclick="checkChoice(2)">
+                🔍 Check Answer
+            </button>
+
+        </div>
+
+
+        <!-- Challenge 3 -->
+
+        <div class="challenge hidden" id="challenge3">
+
+            <span class="challenge-number">
+                🧪 Challenge 3
+            </span>
+
+            <h2>The Biochemical Code</h2>
+
+            <div class="clue">
+
+                Your unknown organism produces bubbles
+                immediately after hydrogen peroxide is added.
+
+                <br><br>
+
+                You need to identify the enzyme responsible.
+
+            </div>
+
+            <p class="question">
+                Which enzyme is being detected?
+            </p>
+
+            <div class="choices">
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Coagulase
+                </button>
+
+                <button class="choice"
+                    data-answer="correct">
+                    Catalase
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Amylase
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Oxidase
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback3"></div>
+
+            <button class="check-button" onclick="checkChoice(3)">
+                🔍 Check Answer
+            </button>
+
+        </div>
+
+
+        <!-- Challenge 4 -->
+
+        <div class="challenge hidden" id="challenge4">
+
+            <span class="challenge-number">
+                🦠 Final Challenge
+            </span>
+
+            <h2>Identify the Unknown</h2>
+
+            <div class="clue">
+
+                Your mystery organism is:
+
+                <br><br>
+
+                • Gram-positive
+
+                <br>
+
+                • Cocci
+
+                <br>
+
+                • Catalase positive
+
+                <br>
+
+                • Grows in clusters
+
+            </div>
+
+            <p class="question">
+                Which organism best matches these characteristics?
+            </p>
+
+            <div class="choices">
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Escherichia coli
+                </button>
+
+                <button class="choice"
+                    data-answer="correct">
+                    Staphylococcus
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Streptococcus
+                </button>
+
+                <button class="choice"
+                    data-answer="wrong">
+                    Bacillus
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback4"></div>
+
+            <button class="check-button" onclick="checkChoice(4)">
+                🔍 Check Answer
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Success -->
+
+    <div class="success hidden" id="successScreen">
+
+        <div class="success-icon">
+            🎉🔓🦠
+        </div>
+
+        <h2>YOU ESCAPED!</h2>
+
+        <p>
+            Excellent work, microbiologist!
+        </p>
+
+        <p>
+            You successfully solved all four laboratory challenges
+            and escaped the microbiology lab.
+        </p>
+
+        <p>
+            <strong>
+                🔬 Your microbiology skills saved the day!
+            </strong>
+        </p>
+
+        <button class="restart-button" onclick="restartGame()">
+            🔄 Play Again
+        </button>
+
+    </div>
+
+
+    <!-- Time expired -->
+
+    <div class="failure hidden" id="failureScreen">
+
+        <div class="success-icon">
+            ⏰🧫
+        </div>
+
+        <h2>TIME'S UP!</h2>
+
+        <p>
+            The laboratory doors remain locked.
+        </p>
+
+        <p>
+            Review the clues and try the escape room again!
+        </p>
+
+        <button class="restart-button" onclick="restartGame()">
+            🔄 Try Again
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    🦠 Created for Microbiology Instruction | Megan Kundinger
+    <br>
+    Stay curious. Stay sterile. 🔬
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   GAME SETTINGS
+========================================= */
+
+const totalChallenges = 4;
+
+let currentChallenge = 1;
+let solvedChallenges = 0;
+
+let timeRemaining = 20 * 60;
+
+let timerInterval;
+
+
+/* =========================================
+   START TIMER
+========================================= */
+
+function startTimer() {
+
+    timerInterval = setInterval(function() {
+
+        timeRemaining--;
+
+        updateTimer();
+
+        if (timeRemaining <= 0) {
+
+            clearInterval(timerInterval);
+
+            endGame();
+
+        }
+
+    }, 1000);
+
+}
+
+
+/* =========================================
+   UPDATE TIMER
+========================================= */
+
+function updateTimer() {
+
+    const minutes = Math.floor(timeRemaining / 60);
+
+    const seconds = timeRemaining % 60;
+
+    document.getElementById("timer").textContent =
+        minutes.toString().padStart(2, "0")
+        + ":"
+        + seconds.toString().padStart(2, "0");
+
+}
+
+
+/* =========================================
+   CHECK MULTIPLE CHOICE
+========================================= */
+
+function checkChoice(challengeNumber) {
+
+    const challenge =
+        document.getElementById("challenge" + challengeNumber);
+
+    const selected =
+        challenge.querySelector(".choice.selected");
+
+    const feedback =
+        document.getElementById("feedback" + challengeNumber);
+
+
+    if (!selected) {
+
+        feedback.textContent =
+            "⚠️ Select an answer first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    if (selected.dataset.answer === "correct") {
+
+        selected.classList.add("correct");
+
+        feedback.textContent =
+            "✅ Correct! You found the clue!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        solvedChallenges++;
+
+        updateProgress();
+
+
+        challenge
+            .querySelectorAll(".choice")
+            .forEach(function(button) {
+
+                button.disabled = true;
+
+            });
+
+
+        const checkButton =
+            challenge.querySelector(".check-button");
+
+        checkButton.disabled = true;
+
+
+        setTimeout(function() {
+
+            nextChallenge(challengeNumber);
+
+        }, 1200);
+
+
+    } else {
+
+        selected.classList.add("incorrect");
+
+        feedback.textContent =
+            "❌ Not quite. Review the clue and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =========================================
+   SELECT ANSWER
+========================================= */
+
+document.querySelectorAll(".choice").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const parent =
+            button.closest(".challenge");
+
+        parent.querySelectorAll(".choice")
+            .forEach(function(choice) {
+
+                choice.classList.remove("selected");
+
+            });
+
+        button.classList.add("selected");
+
+    });
+
+});
+
+
+/* =========================================
+   NEXT CHALLENGE
+========================================= */
+
+function nextChallenge(number) {
+
+    const current =
+        document.getElementById("challenge" + number);
+
+    current.classList.add("hidden");
+
+
+    if (number < totalChallenges) {
+
+        const next =
+            document.getElementById("challenge" + (number + 1));
+
+        next.classList.remove("hidden");
+
+        currentChallenge = number + 1;
+
+    } else {
+
+        finishGame();
+
+    }
+
+}
+
+
+/* =========================================
+   UPDATE PROGRESS
+========================================= */
+
+function updateProgress() {
+
+    document.getElementById("progress").textContent =
+        solvedChallenges + " / " + totalChallenges;
+
+}
+
+
+/* =========================================
+   FINISH GAME
+========================================= */
+
+function finishGame() {
+
+    clearInterval(timerInterval);
+
+    document.getElementById("gameArea")
+        .classList.add("hidden");
+
+    document.getElementById("successScreen")
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================================
+   TIME EXPIRED
+========================================= */
+
+function endGame() {
+
+    document.getElementById("gameArea")
+        .classList.add("hidden");
+
+    document.getElementById("failureScreen")
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================================
+   RESTART
+========================================= */
+
+function restartGame() {
 
