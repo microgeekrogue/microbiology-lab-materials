@@ -1,1 +1,32 @@
+function loadRound() {
+  const round = rounds[currentRound];
 
+  document.getElementById("round-title").innerText = round.title;
+  document.getElementById("feedback").innerText = "";
+  document.getElementById("progress").innerText =
+    `Round ${currentRound + 1} of ${rounds.length}`;
+
+  const grid = document.getElementById("term-grid");
+  grid.innerHTML = "";
+
+  // Create objects that keep track of the original index
+  const shuffledOptions = round.options.map((option, index) => ({
+    text: option,
+    originalIndex: index
+  }));
+
+  // Shuffle the choices
+  shuffledOptions.sort(() => Math.random() - 0.5);
+
+  shuffledOptions.forEach((option) => {
+    const btn = document.createElement("button");
+    btn.className = "term";
+    btn.innerText = option.text;
+
+    btn.addEventListener("click", () => {
+      checkAnswer(btn, option.originalIndex);
+    });
+
+    grid.appendChild(btn);
+  });
+}
