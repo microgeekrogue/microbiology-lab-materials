@@ -1,1 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology Lab Techniques - Word Association</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 25%, #6C5B7B 50%, #355C7D 75%, #2A9D8F 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #FF6B9D, #C06C84, #6C5B7B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            font-size: 1.8em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #355C7D;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #FFF4E6 0%, #FFE0B2 100%);
+            border-radius: 10px;
+            border: 3px solid #FF6B9D;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.85em;
+            color: #6C5B7B;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .score-value {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #FF6B9D;
+        }
+
+        .game-area {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .word-bank {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #2A9D8F;
+        }
+
+        .word-bank h2 {
+            color: #2A9D8F;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .word {
+            background: linear-gradient(135deg, #2A9D8F 0%, #1B7F79 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: move;
+            user-select: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            font-size: 0.9em;
+            border: 2px solid #ffffff;
+        }
+
+        .word:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+        }
+
+        .word:active {
+            cursor: grabbing;
+        }
+
+        .word.dragging {
+            opacity: 0.5;
+            transform: scale(1.1);
+        }
+
+        .categories {
+            display: block;
+        }
+
+        .category {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 3px dashed #ccc;
+            transition: all 0.3s;
+        }
+
+        .category:nth-child(1) {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border-color: #9C27B0;
+        }
+
+        .category:nth-child(2) {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-color: #2196F3;
+        }
+
+        .category:nth-child(3) {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-color: #FF9800;
+        }
+
+        .category:nth-child(4) {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+            border-color: #E91E63;
+        }
+
+        .category.drag-over {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            border-style: solid;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .category-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background: #ffffff;
+            border: 3px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .category:nth-child(1) .category-image {
+            border-color: #9C27B0;
+        }
+
+        .category:nth-child(2) .category-image {
+            border-color: #2196F3;
+        }
+
+        .category:nth-child(3) .category-image {
+            border-color: #FF9800;
+        }
+
+        .category:nth-child(4) .category-image {
+            border-color: #E91E63;
+        }
+
+        .category h3 {
+            flex: 1;
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .category:nth-child(1) h3 {
+            color: #9C27B0;
+        }
+
+        .category:nth-child(2) h3 {
+            color: #2196F3;
+        }
+
+        .category:nth-child(3) h3 {
+            color: #FF9800;
+        }
+
+        .category:nth-child(4) h3 {
+            color: #E91E63;
+        }
+
+        .category-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 50px;
+        }
+
+        .category .word {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            border-color: #ffffff;
+        }
+
+        .category .word.incorrect {
+            background: linear-gradient(135deg, #F44336 0%, #D32F2F 100%);
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 2px solid white;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #FF8AB4 0%, #D087A0 100%);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            min-height: 30px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .feedback.correct {
+            color: #2E7D32;
+            background: #C8E6C9;
+        }
+
+        .feedback.incorrect {
+            color: #C62828;
+            background: #FFCDD2;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+            border: 3px solid #FBC02D;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .instructions p {
+            color: #F57F17;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            
+            .score-board {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .category-image {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Microbiology Lab Techniques Game</h1>
+        <p class="subtitle">Drag and Drop Words to Match Techniques!</p>
+        
+        <div class="instructions">
+            <p>📌 Drag words from the green box below</p>
+            <p>📌 Drop them into the correct colored category</p>
+            <p>📌 Click "Check Answers" when ready!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <div class="score-label">Score</div>
+                <div class="score-value" id="score">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Correct</div>
+                <div class="score-value" id="correct">0</div>
+            </div>
+            <div class="score-item">
+                <div class="score-label">Attempts</div>
+                <div class="score-value" id="attempts">0</div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="word-bank">
+                <h2>📝 Word Bank - Drag From Here!</h2>
+                <div class="words-container" id="wordBank"></div>
+            </div>
+
+            <div class="categories">
+                <div class="category" data-category="gram-staining">
+                    <div class="category-header">
+                        <div class="category-image">🧪</div>
+                        <h3>Gram Staining</h3>
+                    </div>
+                    <div class="category-words"></div>
+                </div>
+                
+                <div class="category" data-category="aseptic">
+                    <div class="category-header">
+                        <div class="category-image">🔥</div>
+                        <h3>Aseptic Technique</h3>
+                    </div>
+                    <div class="category-words"></div>
+                </div>
+                
+                <div class="category" data-category="culture">
+                    <div class="category-header">
+                        <div class="category-image">🦠</div>
+                        <h3>Culture Methods</h3>
+                    </div>
+                    <div class="category-words"></div>
+                </div>
+                
+                <div class="category" data-category="microscopy">
+                    <div class="category-header">
+                        <div class="category-image">🔬</div>
+                        <h3>Microscopy</h3>
+                    </div>
+                    <div class="category-words"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button onclick="checkAnswers()">✓ Check Answers</button>
+            <button onclick="resetGame()">↻ Reset Game</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        const words = {
+            'gram-staining': ['Crystal Violet', 'Safranin', 'Iodine', 'Alcohol Decolorizer', 'Peptidoglycan', 'Purple Cells', 'Pink Cells'],
+            'aseptic': ['Bunsen Burner', 'Flame Sterilization', 'Laminar Flow Hood', 'Sterile Technique', 'Contamination Prevention'],
+            'culture': ['Streak Plate', 'Agar Medium', 'Incubation', 'Colony Formation', 'Petri Dish', 'Inoculation Loop'],
+            'microscopy': ['Objective Lens', 'Oil Immersion', 'Stage', 'Condenser', 'Magnification', 'Resolution', 'Slide Preparation']
+        };
+
+        let score = 0;
+        let correct = 0;
+        let attempts = 0;
+        let draggedElement = null;
+
+        function initGame() {
+            const wordBank = document.getElementById('wordBank');
+            wordBank.innerHTML = '';
+            
+            const allWords = Object.values(words).flat();
+            shuffleArray(allWords);
+            
+            allWords.forEach(word => {
+                const wordEl = createWordElement(word);
+                wordBank.appendChild(wordEl);
+            });
+
+            document.querySelectorAll('.category-words').forEach(cat => {
+                cat.innerHTML = '';
+            });
+
+            score = 0;
+            correct = 0;
+            attempts = 0;
+            updateScores();
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('feedback').className = 'feedback';
+        }
+
+        function createWordElement(text) {
+            const wordEl = document.createElement('div');
+            wordEl.className = 'word';
+            wordEl.textContent = text;
+            wordEl.draggable = true;
+            
+            wordEl.addEventListener('dragstart', function(e) {
+                draggedElement = e.target;
+                e.target.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', e.target.innerHTML);
+            });
+            
+            wordEl.addEventListener('dragend', function(e) {
+                e.target.classList.remove('dragging');
+            });
+            
+            wordEl.addEventListener('touchstart', handleTouchStart, false);
+            wordEl.addEventListener('touchmove', handleTouchMove, false);
+            wordEl.addEventListener('touchend', handleTouchEnd, false);
+            
+            return wordEl;
+        }
+
+        let touchElement = null;
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        function handleTouchStart(e) {
+            touchElement = e.target;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }
+
+        function handleTouchMove(e) {
+            if (!touchElement) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchElement.style.position = 'fixed';
+            touchElement.style.zIndex = '1000';
+            touchElement.style.left = touch.clientX - 50 + 'px';
+            touchElement.style.top = touch.clientY - 20 + 'px';
+        }
+
+        function handleTouchEnd(e) {
+            if (!touchElement) return;
+            
+            const touch = e.changedTouches[0];
+            const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+            
+            touchElement.style.position = '';
+            touchElement.style.zIndex = '';
+            touchElement.style.left = '';
+            touchElement.style.top = '';
+            
+            if (dropTarget) {
+                const category = dropTarget.closest('.category');
+                const wordBank = dropTarget.closest('.word-bank');
+                
+                if (category) {
+                    const categoryWords = category.querySelector('.category-words');
+                    categoryWords.appendChild(touchElement);
+                } else if (wordBank) {
+                    document.getElementById('wordBank').appendChild(touchElement);
+                }
+            }
+            
+            touchElement = null;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        document.querySelectorAll('.category').forEach(function(category) {
+            const categoryWords = category.querySelector('.category-words');
+            
+            category.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+                category.classList.add('drag-over');
+            });
+            
+            category.addEventListener('dragleave', function() {
+                category.classList.remove('drag-over');
+            });
+            
+            category.addEventListener('drop', function(e) {
+                e.preventDefault();
+                category.classList.remove('drag-over');
+                
+                if (draggedElement) {
+                    categoryWords.appendChild(draggedElement);
+                    draggedElement = null;
+                }
+            });
+        });
+
+        const wordBank = document.getElementById('wordBank');
+        wordBank.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+        
+        wordBank.addEventListener('drop', function(e) {
+            e.preventDefault();
+            if (draggedElement && !draggedElement.classList.contains('incorrect')) {
+                wordBank.appendChild(draggedElement);
+                draggedElement.classList.remove('incorrect');
+                draggedElement = null;
+            }
+        });
+
+        function checkAnswers() {
+            attempts++;
+            let correctCount = 0;
+            let totalPlaced = 0;
+            
+            document.querySelectorAll('.category').forEach(function(category) {
+                const categoryType = category.dataset.category;
+                const correctWords = words[categoryType];
+                const placedWords = category.querySelectorAll('.word');
+                
+                placedWords.forEach(function(wordEl) {
+                    totalPlaced++;
+                    const wordText = wordEl.textContent;
+                    
+                    if (correctWords.includes(wordText)) {
+                        wordEl.classList.remove('incorrect');
+                        correctCount++;
+                    } else {
+                        wordEl.classList.add('incorrect');
+                        setTimeout(function() {
+                            if (wordEl.classList.contains('incorrect')) {
+                                document.getElementById('wordBank').appendChild(wordEl);
+                                wordEl.classList.remove('incorrect');
+                            }
+                        }, 1000);
+                    }
+                });
+            });
+
+            const totalWords = Object.values(words).flat().length;
+            correct = correctCount;
+            score = Math.round((correctCount / totalWords) * 100);
+            
+            updateScores();
+            
+            const feedback = document.getElementById('feedback');
+            if (correctCount === totalWords) {
+                feedback.textContent = '🎉 Perfect! All words correctly matched!';
+                feedback.className = 'feedback correct';
+            } else if (correctCount === totalPlaced && totalPlaced > 0) {
+                feedback.textContent = '✓ ' + correctCount + ' correct! Keep going!';
+                feedback.className = 'feedback correct';
+            } else if (totalPlaced === 0) {
+                feedback.textContent = '⚠️ Please drag words into categories first!';
+                feedback.className = 'feedback incorrect';
+            } else {
+                feedback.textContent = correctCount + '/' + totalPlaced + ' correct. Incorrect words returned to bank.';
+                feedback.className = 'feedback incorrect';
+            }
+        }
+
+        function updateScores() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('attempts').textContent = attempts;
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener('load', initGame, false);
+        } else if (window.attachEvent) {
+            window.attachEvent('onload', initGame);
+        } else {
+            window.onload = initGame;
+        }
+    </script>
+</body>
+</html>
