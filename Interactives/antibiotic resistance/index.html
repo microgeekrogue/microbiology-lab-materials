@@ -1,1 +1,291 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antibiotic Resistance Lab</title>
+ 
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f3f5f7;
+margin:20px;
+}
+ 
+.container{
+max-width:1000px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+ 
+h1{
+text-align:center;
+color:#7a0019;
+}
+ 
+.plate-container{
+display:flex;
+justify-content:center;
+margin:20px 0;
+}
+ 
+.plate{
+position:relative;
+width:400px;
+height:400px;
+background:#c9b18c;
+border-radius:50%;
+border:8px solid #777;
+}
+ 
+.disk{
+position:absolute;
+width:26px;
+height:26px;
+background:white;
+border-radius:50%;
+border:2px solid black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:12px;
+font-weight:bold;
+}
+ 
+.zone{
+position:absolute;
+border-radius:50%;
+border:3px solid rgba(0,200,255,.7);
+}
+ 
+.inputs{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:20px;
+}
+ 
+.card{
+border:1px solid #ddd;
+padding:15px;
+border-radius:8px;
+}
+ 
+input{
+width:80px;
+padding:5px;
+}
+ 
+button{
+background:#7a0019;
+color:white;
+border:none;
+padding:12px 20px;
+margin-top:20px;
+cursor:pointer;
+border-radius:8px;
+}
+ 
+button:hover{
+background:#5a0012;
+}
+ 
+.feedback{
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+}
+</style>
+</head>
+ 
+<body>
+ 
+<div class="container">
+ 
+<h1>Antibiotic Resistance Lab</h1>
+ 
+<p>
+Unknown bacterium isolated from a patient. Measure the zones
+of inhibition shown on the simulated Kirby-Bauer plate and determine
+whether the organism is Susceptible (S), Intermediate (I), or Resistant (R).
+</p>
+ 
+<div class="plate-container">
+<div class="plate" id="plate"></div>
+</div>
+ 
+<div class="inputs">
+ 
+<div class="card">
+<h3>Penicillin (P)</h3>
+Zone Diameter (mm):
+<input type="number" id="pen">
+</div>
+ 
+<div class="card">
+<h3>Tetracycline (T)</h3>
+Zone Diameter (mm):
+<input type="number" id="tet">
+</div>
+ 
+<div class="card">
+<h3>Ciprofloxacin (CIP)</h3>
+Zone Diameter (mm):
+<input type="number" id="cip">
+</div>
+ 
+<div class="card">
+<h3>Vancomycin (VA)</h3>
+Zone Diameter (mm):
+<input type="number" id="van">
+</div>
+ 
+</div>
+ 
+<hr>
+ 
+<h3>Which antibiotic should be selected?</h3>
+ 
+<select id="best">
+<option>Select</option>
+<option>Penicillin</option>
+<option>Tetracycline</option>
+<option>Ciprofloxacin</option>
+<option>Vancomycin</option>
+</select>
+ 
+<h3>Which antibiotic should NOT be selected?</h3>
+ 
+<select id="worst">
+<option>Select</option>
+<option>Penicillin</option>
+<option>Tetracycline</option>
+<option>Ciprofloxacin</option>
+<option>Vancomycin</option>
+</select>
+ 
+<br>
+<button onclick="gradeActivity()">Submit</button>
+ 
+<div id="results" class="feedback"></div>
+ 
+</div>
+ 
+<script>
+ 
+const caseData = {
+bacterium:"MRSA",
+ 
+pen:8,
+tet:16,
+cip:24,
+van:35
+};
+ 
+const plate=document.getElementById("plate");
+ 
+const antibiotics=[
+{
+label:"P",
+x:70,
+y:70,
+diameter:caseData.pen
+},
+{
+label:"T",
+x:280,
+y:80,
+diameter:caseData.tet
+},
+{
+label:"C",
+x:100,
+y:250,
+diameter:caseData.cip
+},
+{
+label:"V",
+x:270,
+y:240,
+diameter:caseData.van
+}
+];
+ 
+antibiotics.forEach(ab=>{
+ 
+const zone=document.createElement("div");
+zone.className="zone";
+ 
+zone.style.width=ab.diameter*4+"px";
+zone.style.height=ab.diameter*4+"px";
+ 
+zone.style.left=(ab.x-(ab.diameter*2)+13)+"px";
+zone.style.top=(ab.y-(ab.diameter*2)+13)+"px";
+ 
+plate.appendChild(zone);
+ 
+const disk=document.createElement("div");
+disk.className="disk";
+ 
+disk.innerHTML=ab.label;
+disk.style.left=ab.x+"px";
+disk.style.top=ab.y+"px";
+ 
+plate.appendChild(disk);
+ 
+});
+ 
+function classify(mm){
+ 
+if(mm>=25)
+return "S";
+ 
+if(mm>=15)
+return "I";
+ 
+return "R";
+}
+ 
+function gradeActivity(){
+ 
+let score=0;
+ 
+const pen=parseInt(document.getElementById("pen").value);
+const tet=parseInt(document.getElementById("tet").value);
+const cip=parseInt(document.getElementById("cip").value);
+const van=parseInt(document.getElementById("van").value);
+ 
+if(pen===caseData.pen) score++;
+if(tet===caseData.tet) score++;
+if(cip===caseData.cip) score++;
+if(van===caseData.van) score++;
+ 
+let best=document.getElementById("best").value;
+let worst=document.getElementById("worst").value;
+ 
+if(best==="Vancomycin") score++;
+if(worst==="Penicillin") score++;
+ 
+document.getElementById("results").innerHTML=
+`
+Score: ${score}/6 <br><br>
+ 
+Interpretation:<br>
+Penicillin = ${classify(caseData.pen)}<br>
+Tetracycline = ${classify(caseData.tet)}<br>
+Ciprofloxacin = ${classify(caseData.cip)}<br>
+Vancomycin = ${classify(caseData.van)}<br><br>
+ 
+Best Choice: Vancomycin<br>
+Do NOT Select: Penicillin
+`;
+ 
+}
+ 
+</script>
+ 
+</body>
+</html>
