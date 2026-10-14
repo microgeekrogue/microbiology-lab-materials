@@ -1,22 +1,195 @@
 
-salem-mystery-lab/
-
-index.html
-timeline.html
-fungus-lab.html
-microscope.html
-evidence-wall.html
-
-css/
-  style.css
-
-js/
-  app.js
-
-images/
-  ergot.jpg
-  mushroom.jpg
-  spores.jpg
-
-data/
-  timeline.json
+s<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Salem Mystery Lab | Science, Spores, and the Witch Trials</title>
+<style>
+  :root{
+    --ink:#1b1410;
+    --parchment:#f4ead7;
+    --dark:#241a14;
+    --rye:#c8a24a;
+    --fungus:#6d4c8f;
+    --danger:#a33b3b;
+    --good:#3d7a4f;
+    --card:#fffaf0;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Georgia, "Times New Roman", serif;
+    background:var(--parchment);
+    color:var(--ink);
+    line-height:1.55;
+  }
+  header.hero{
+    min-height:75vh;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    color:#fff;
+    background:
+      linear-gradient(rgba(20,12,8,.78), rgba(20,12,8,.88)),
+      radial-gradient(circle at 20% 25%, #4b3520 0 12%, transparent 13%),
+      radial-gradient(circle at 75% 70%, #5c4425 0 9%, transparent 10%),
+      repeating-linear-gradient(90deg, #2b2015 0 18px, #332718 18px 36px);
+  }
+  .hero-inner{max-width:900px;padding:3rem 1.25rem}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:.25em;
+    font-size:.78rem;
+    color:var(--rye);
+  }
+  h1{
+    font-size:clamp(2.4rem,7vw,5rem);
+    margin:.3rem 0;
+    text-shadow:0 4px 18px rgba(0,0,0,.55);
+  }
+  .subtitle{font-size:1.25rem;max-width:700px;margin:0 auto 1.5rem}
+  .cta{
+    display:inline-block;
+    background:var(--rye);
+    color:#20160d;
+    padding:.9rem 1.5rem;
+    border-radius:999px;
+    font-weight:bold;
+    text-decoration:none;
+    border:3px solid #fff2;
+    transition:.2s;
+  }
+  .cta:hover{transform:translateY(-2px);background:#dcb75e}
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:#1d150f;
+    color:#f3e6c8;
+    display:flex;gap:.25rem;overflow-x:auto;
+    padding:.55rem .75rem;
+    border-bottom:3px solid var(--rye);
+  }
+  nav a{
+    color:#f3e6c8;text-decoration:none;
+    padding:.45rem .7rem;border-radius:6px;white-space:nowrap;
+  }
+  nav a:hover{background:#3a2b1d}
+  main{max-width:1100px;margin:auto;padding:1rem}
+  section{
+    background:var(--card);
+    border:1px solid #d8c6a2;
+    border-radius:16px;
+    padding:1.5rem;
+    margin:1.5rem 0;
+    box-shadow:0 10px 24px rgba(60,40,20,.08);
+  }
+  h2{
+    margin-top:0;
+    color:#3c2a17;
+    border-bottom:3px solid var(--rye);
+    padding-bottom:.35rem;
+  }
+  .station-label{
+    display:inline-block;
+    background:var(--fungus);
+    color:#fff;
+    padding:.25rem .7rem;
+    border-radius:999px;
+    font-size:.8rem;
+    margin-bottom:.5rem;
+  }
+  .video-box{
+    position:relative;
+    padding-top:56.25%;
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .video-box iframe{
+    position:absolute;inset:0;width:100%;height:100%;border:0;
+  }
+  .note{
+    background:#fff6dd;
+    border-left:6px solid var(--rye);
+    padding:.8rem 1rem;
+    border-radius:8px;
+  }
+  .question{
+    background:#fdf7e7;
+    border:1px solid #d9c59b;
+    padding:1rem;
+    border-radius:12px;
+    margin:1rem 0;
+  }
+  .question h3{margin:.1rem 0 .6rem}
+  label.choice{
+    display:flex;gap:.55rem;align-items:flex-start;
+    background:#fff;
+    border:1px solid #d8c6a2;
+    padding:.55rem .7rem;
+    border-radius:8px;
+    margin:.35rem 0;
+    cursor:pointer;
+  }
+  label.choice:hover{border-color:var(--fungus)}
+  .feedback{
+    margin-top:.6rem;font-weight:bold;
+  }
+  .correct{color:var(--good)}
+  .incorrect{color:var(--danger)}
+  button, select, input, textarea{
+    font-family:inherit;font-size:1rem;
+  }
+  button{
+    background:var(--dark);
+    color:#f7e9c8;
+    border:0;
+    padding:.6rem 1rem;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  button:hover{background:#3d2c1d}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
+  .card{
+    background:#fff;
+    border:2px solid #c8a24a;
+    border-radius:10px;
+    padding:.7rem;
+    text-align:center;
+    cursor:grab;
+    user-select:none;
+  }
+  .dropzones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem}
+  .dropzone{
+    min-height:180px;
+    border:2px dashed #a58a55;
+    border-radius:12px;
+    padding:.8rem;
+    background:#fffdf5;
+  }
+  .dropzone.over{border-color:var(--fungus);background:#f3edff}
+  .hotspot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+  .hotspot{
+    background:#f0e7d2;
+    border:2px solid #b49a67;
+    border-radius:12px;
+    padding:1rem;
+    cursor:pointer;
+  }
+  .hotspot .reveal{display:none;margin-top:.6rem}
+  .hotspot.open .reveal{display:block}
+  .microscope{
+    background:#101010;color:#e9e2cf;
+    border-radius:12px;padding:1rem;
+  }
+  .slide-view{
+    min-height:230px;
+    border-radius:10px;
+    border:4px solid #555;
+    display:grid;place-items:center;
+    text-align:center;
+    padding:1rem;
+    background:
+      radial-gradient(circle at 50% 50%, #3b3b3b 0 35%, #1a1a1a 100%);
+  }
+  .slide-buttons{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
