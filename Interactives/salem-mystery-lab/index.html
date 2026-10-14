@@ -244,7 +244,17 @@
   @media(max-width:650px){
     section{padding:1rem}
     .dropzones{grid-template-columns:1fr}
-  }
+  .card.selected-card {
+  outline: 4px solid #6d4c8f;
+  outline-offset: 3px;
+  background: #f3edff;
+}
+
+.card:focus-visible,
+.dropzone:focus-visible {
+  outline: 3px solid #6d4c8f;
+  outline-offset: 3px;
+}}
 </style>
 </head>
 <body>
@@ -764,19 +774,104 @@ function checkEvidenceReason(){
   }
 }
 
-function allowDrop(event){
+let selectedCard = null;
+
+function allowDrop(event) {
   event.preventDefault();
   event.currentTarget.classList.add("over");
 }
 
-function dropCard(event){
+function dropCard(event) {
   event.preventDefault();
-  event.currentTarget.classList.remove("over");
-  const card = document.querySelector(".card.dragging");
-  if(card) event.currentTarget.appendChild(card);
+
+  const zone = event.currentTarget;
+  zone.classList.remove("over");
+
+  // Prefer the card being dragged; otherwise use the selected card.
+  const cardId = event.dataTransfer
+    ? event.dataTransfer.getData("text/plain")
+    : "";
+
+  const card = (cardId && document.getElementById(cardId))
+    || selectedCard;
+
+  if (card && card.classList.contains("card")) {
+    zone.appendChild(card);
+    card.classList.remove("selected-card");
+    selectedCard = null;
+  }
 }
 
-document.querySelectorAll(".card").forEach(card=>{
+// Set up every card for dragging and click-to-select.
+document.querySelectorAll("#cardBank .card").forEach((card, index) => {
+  if (!card.id) {
+    card.id = "salem-card-" + (index + 1);
+  }
+
+  card.draggable = true;
+  card.setAttribute("tabindex", "0");
+  card.setAttribute("role", "button");
+  card.setAttribute("aria-label", "Select or drag " + card.textContent.trim());
+
+  card.addEventListener("dragstart", event => {
+    selectedCard = card;
+    event.dataTransfer.setData("text/plain", card.id);
+    event.dataTransfer.effectAllowed = "move";
+    card.classList.add("selected-card");
+  });
+
+  card.addEventListener("dragend", () => {
+    card.classList.remove("selected-card");
+    document.querySelectorAll(".dropzone").forEach(zone => {
+      zone.classList.remove("over");
+    });
+  });
+
+  // Clicking selects a card so students can place it with a click.
+  card.addEventListener("click", event => {
+    event.stopPropagation();
+
+    if (selectedCard) {
+      selectedCard.classList.remove("selected-card");
+    }
+
+    selectedCard = card;
+    card.classList.add("selected-card");
+  });
+
+  // Keyboard selection support.
+  card.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      card.click();
+    }
+  });
+});
+
+// Set up both drop zones.
+document.querySelectorAll(".dropzone").forEach(zone => {
+  zone.addEventListener("dragover", allowDrop);
+
+  zone.addEventListener("dragleave", event => {
+    if (!zone.contains(event.relatedTarget)) {
+      zone.classList.remove("over");
+    }
+  });
+
+  zone.addEventListener("drop", dropCard);
+
+  // Clicking a zone places the selected card there.
+  zone.addEventListener("click", event => {
+    if (event.target.closest(".card")) return;
+    if (selectedCard) dropCard({
+      preventDefault() {},
+      currentTarget: zone,
+      dataTransfer: null
+    });
+  });
+});
+
+  {
   card.addEventListener("dragstart", ()=>{
     card.classList.add("dragging");
   });
