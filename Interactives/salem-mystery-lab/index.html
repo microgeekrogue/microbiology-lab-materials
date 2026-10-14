@@ -708,8 +708,7 @@ function saveField(id){
 }
 
 function restoreFields(){
-  ["initialHypothesis","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{
-    const el = document.getElementById(id);
+["initialHypothesis","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{    const el = document.getElementById(id);
     if(el && progress[id]) el.value = progress[id];
   });
 }
@@ -800,11 +799,36 @@ function voteEvidence(button, evidenceId, choice){
 }
 
 const slides = [
-  {title:"Slide 1: Healthy Rye Grain", text:"A healthy rye grain is a seed produced by the rye plant. It can be ground into flour and used as food."},
-  {title:"Slide 2: Ergot-Infected Rye", text:"An ergot is a dark, hardened fungal sclerotium that replaces part of the rye grain. It may contain toxic alkaloids."},
-  {title:"Slide 3: Mushroom Gills", text:"Gills are thin, folded structures beneath the cap of many mushrooms. They increase the surface area available for spore production."},
-  {title:"Slide 4: Basidiospores", text:"Basidiospores are microscopic reproductive cells produced by basidiomycete fungi. Their color can be used to help identify mushroom groups."},
-  {title:"Slide 5: Student Spore Print", text:"A spore print forms when mushroom spores fall onto paper or foil. The color and pattern provide clues about the mushroom’s identity."}
+  {
+    title: "Slide 1: Healthy Rye Grain",
+    image: "images/healthy-rye.jpg",
+    alt: "Microscope view of a healthy rye grain",
+    text: "A healthy rye grain is a seed produced by the rye plant. It can be ground into flour and used as food. Look for the smooth outer seed coat and the stored nutrients inside."
+  },
+  {
+    title: "Slide 2: Ergot-Infected Rye",
+    image: "images/ergot-rye.jpg",
+    alt: "Dark ergot sclerotium replacing part of a rye grain",
+    text: "An ergot is a dark, hardened fungal structure called a sclerotium. It replaces part of the rye grain and may contain toxic alkaloids. Compare its dark color and elongated shape with the healthy rye grain."
+  },
+  {
+    title: "Slide 3: Mushroom Gills",
+    image: "images/mushroom-gills.jpg",
+    alt: "Close-up of mushroom gills beneath the cap",
+    text: "Gills are thin, folded structures beneath the cap of many mushrooms. Their large surface area helps the fungus produce and release large numbers of spores."
+  },
+  {
+    title: "Slide 4: Basidiospores",
+    image: "images/basidiospores.jpg",
+    alt: "Microscope image of basidiospores",
+    text: "Basidiospores are microscopic reproductive cells produced by basidiomycete fungi. Their color, shape, and surface features can help identify different groups of mushrooms."
+  },
+  {
+    title: "Slide 5: Student Spore Print",
+    image: "images/student-spore-print.jpg",
+    alt: "Example mushroom spore print on paper",
+    text: "A spore print forms when mushroom spores fall onto paper or foil. The color and pattern provide clues about the mushroom’s identity. Replace this image with a photo from your own lab."
+  }
 ];
 
 let currentSlide = 0;
@@ -812,7 +836,26 @@ let currentSlide = 0;
 function renderSlide(){
   const view = document.getElementById("slideView");
   const buttons = document.getElementById("slideButtons");
-  view.innerHTML = `<h3>${slides[currentSlide].title}</h3><p>${slides[currentSlide].text}</p>`;
+  const slide = slides[currentSlide];
+
+  view.innerHTML = `
+    <div>
+      <h3>${slide.title}</h3>
+      <img
+        src="${slide.image}"
+        alt="${slide.alt}"
+        style="
+          max-width:100%;
+          max-height:260px;
+          border-radius:8px;
+          border:3px solid #777;
+          background:#fff;
+          object-fit:contain;
+        "
+      >
+      <p style="max-width:750px;margin:1rem auto 0;">${slide.text}</p>
+    </div>
+  `;
   buttons.innerHTML = "";
   slides.forEach((slide,index)=>{
     const b = document.createElement("button");
@@ -894,16 +937,28 @@ ${g("grade_ergotSymptoms")}
 3. ENVIRONMENTAL CONDITIONS
 ${g("grade_conditions")}
 
-4. INITIAL HYPOTHESIS
+4. CASE STUDY SUMMARY
+${g("caseSummary")}
+
+CASE STUDY SUPPORTING EVIDENCE
+${g("caseSupport")}
+
+CASE STUDY LIMITATIONS OR ALTERNATIVE EXPLANATIONS
+${g("caseChallenge")}
+
+CORRELATION VS. CAUSATION
+${g("caseCorrelation")}
+
+5. INITIAL HYPOTHESIS
 ${g("initialHypothesis")}
 
-5. FUNGUS FUNCTION CHECK
+6. FUNGUS FUNCTION CHECK
 ${g("grade_fungusRole")}
 
-6. SPORE FUNCTION
+7. SPORE FUNCTION
 ${g("grade_sporeFunction")}
 
-7. MICROSCOPY OBSERVATIONS
+8. MICROSCOPY OBSERVATIONS
 ${g("microscopyNotes")}
 
 SPORE PRINT LAB
@@ -916,7 +971,7 @@ Interesting findings: ${g("sporeFindings")}
 EVIDENCE WALL
 ${evidenceVotes}
 
-8. EVIDENCE EVALUATION
+9. EVIDENCE EVALUATION
 ${g("evidenceReason")}
 
 FUNGUS LAB MODEL
