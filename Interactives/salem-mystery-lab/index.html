@@ -261,8 +261,9 @@
 
 <nav>
   <a href="#station1">🎥 Crime Scene</a>
-  <a href="#station2">🧠 Hypothesis</a>
-  <a href="#station3">🍄 The Fungus</a>
+  <a href="#caseStudy">📖 Case Study</a>
+  <a href="#station3">🧠 Hypothesis</a>
+  <a href="#station4">🍄 The Fungus</a>
   <a href="#microscope">🔬 Microscope</a>
   <a href="#spores">🍄 Spore Print</a>
   <a href="#evidence">⚖️ Evidence Wall</a>
@@ -362,9 +363,95 @@
     <div class="feedback"></div>
   </div>
 </section>
-
-<section id="station2">
+<section id="caseStudy">
   <span class="station-label">Station 2</span>
+  <h2>📖 Read the Case Study</h2>
+  <p>
+    Read the case study carefully before continuing. As you read, look for the scientific problem,
+    the proposed ergot hypothesis, the evidence used to support it, and the limitations or alternative
+    explanations.
+  </p>
+
+  <div class="note">
+    <strong>Reading focus:</strong>
+    <ul>
+      <li>What symptoms were reported in Salem?</li>
+      <li>What is ergot, and how might it contaminate food?</li>
+      <li>What environmental conditions may have supported ergot growth?</li>
+      <li>What evidence supports the ergot hypothesis?</li>
+      <li>What evidence or reasoning challenges the ergot hypothesis?</li>
+    </ul>
+  </div>
+
+  <div class="video-box" style="height:650px;padding-top:0">
+    <iframe
+      src="salem_secrets.pdf"
+      title="Salem Secrets Case Study"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <p>
+    If the PDF does not display in your browser,
+    <a href="salem_secrets.pdf" target="_blank" rel="noopener"><strong>open the case study in a new tab</strong></a>.
+  </p>
+
+  <div class="question" data-q="caseProblem">
+    <h3>Case Study Question 1</h3>
+    <p>What was the main scientific question investigated in the case study?</p>
+    <label class="choice"><input type="radio" name="caseProblem" value="a"> Whether Salem’s strange symptoms could be explained by ergot poisoning</label>
+    <label class="choice"><input type="radio" name="caseProblem" value="b"> Whether rye plants can perform photosynthesis</label>
+    <label class="choice"><input type="radio" name="caseProblem" value="c"> Whether mushrooms can be used to treat infections</label>
+    <button type="button" onclick="gradeRadio('caseProblem','a','Correct. The case study examines whether ergot contamination could help explain the Salem symptoms.')">Check Answer</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-q="caseEvidence">
+    <h3>Case Study Question 2</h3>
+    <p>Which type of evidence was used to support the ergot hypothesis?</p>
+    <label class="choice"><input type="radio" name="caseEvidence" value="a"> Modern DNA sequencing of the afflicted girls</label>
+    <label class="choice"><input type="radio" name="caseEvidence" value="b"> Historical weather and crop-growing conditions, along with reported symptoms</label>
+    <label class="choice"><input type="radio" name="caseEvidence" value="c"> Photographs of ergot-contaminated bread from 1692</label>
+    <button type="button" onclick="gradeRadio('caseEvidence','b','Correct. The hypothesis relies on historical climate, crop, and symptom evidence—not direct modern testing of the original grain.')">Check Answer</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question" data-q="caseLimit">
+    <h3>Case Study Question 3</h3>
+    <p>Which statement best describes the strength of the ergot hypothesis?</p>
+    <label class="choice"><input type="radio" name="caseLimit" value="a"> It has been proven because ergot can cause hallucinations and convulsions.</label>
+    <label class="choice"><input type="radio" name="caseLimit" value="b"> It is an interesting hypothesis, but the historical and medical evidence does not fully confirm it.</label>
+    <label class="choice"><input type="radio" name="caseLimit" value="c"> It has been disproven because fungi cannot grow on rye.</label>
+    <button type="button" onclick="gradeRadio('caseLimit','b','Correct. Ergot can cause serious symptoms, but that does not prove it caused the Salem events.')">Check Answer</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="question">
+    <h3>Case Study Written Response 1</h3>
+    <label for="caseSummary">Summarize the ergot hypothesis in 2–3 sentences. Include the fungus, the food source, and the symptoms it might explain.</label>
+    <textarea id="caseSummary" oninput="saveField('caseSummary')"></textarea>
+  </div>
+
+  <div class="question">
+    <h3>Case Study Written Response 2</h3>
+    <label for="caseSupport">Identify one piece of evidence from the case study that supports the ergot hypothesis. Explain why it supports the hypothesis.</label>
+    <textarea id="caseSupport" oninput="saveField('caseSupport')"></textarea>
+  </div>
+
+  <div class="question">
+    <h3>Case Study Written Response 3</h3>
+    <label for="caseChallenge">Identify one limitation, weakness, or alternative explanation discussed in the case study. Why does this make the ergot hypothesis uncertain?</label>
+    <textarea id="caseChallenge" oninput="saveField('caseChallenge')"></textarea>
+  </div>
+
+  <div class="question">
+    <h3>Case Study Written Response 4</h3>
+    <label for="caseCorrelation">Explain the difference between correlation and causation using the Salem ergot hypothesis as your example.</label>
+    <textarea id="caseCorrelation" oninput="saveField('caseCorrelation')"></textarea>
+  </div>
+</section>
+<section id="station2">
+  <span class="station-label">Station 3</span>
   <h2>🧠 Build Your First Hypothesis</h2>
   <p>Before learning more about fungi, sort each possible cause. Drag or tap each card into the zone where you think it belongs. This is your <strong>initial hypothesis</strong>; you may revise it later.</p>
 
@@ -397,7 +484,7 @@
 </section>
 
 <section id="station3">
-  <span class="station-label">Station 3</span>
+  <span class="station-label">Station 4</span>
   <h2>🍄 Meet the Fungus: <em>Claviceps purpurea</em></h2>
   <p>Click each part of the ergot story to reveal a scientific clue.</p>
 
@@ -432,7 +519,7 @@
 </section>
 
 <section id="microscope">
-  <span class="station-label">Station 4</span>
+  <span class="station-label">Station 5</span>
   <h2>🔬 Virtual Microscope</h2>
   <p>Click through the slides. Later, replace the descriptions with your own microscope photographs of rye, ergot, mushroom gills, and spore prints.</p>
 
@@ -459,7 +546,7 @@
 </section>
 
 <section id="spores">
-  <span class="station-label">Station 5</span>
+  <span class="station-label">Station 6</span>
   <h2>🍄 Spore Print Challenge</h2>
   <p>Complete your mushroom spore-print lab, then record your observations below. You may also upload a photo of your spore print to Blackboard.</p>
 
@@ -489,7 +576,7 @@
 </section>
 
 <section id="evidence">
-  <span class="station-label">Station 6</span>
+  <span class="station-label">Station 7</span>
   <h2>⚖️ Salem Evidence Wall</h2>
   <p>Decide whether each item is <strong>scientific evidence</strong> or <strong>not scientific evidence</strong>. Scientific evidence should be observable, measurable, testable, or independently verifiable.</p>
 
@@ -527,7 +614,7 @@
 </section>
 
 <section id="simulation">
-  <span class="station-label">Station 7</span>
+  <span class="station-label">Station 8</span>
   <h2>🌦️ Mushroom Mystery Lab</h2>
   <p>Adjust the environmental variables to estimate the risk of ergot contamination. This is a simplified model, not a prediction of what actually happened in Salem.</p>
 
