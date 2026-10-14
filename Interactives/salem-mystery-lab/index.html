@@ -774,6 +774,7 @@ function checkEvidenceReason(){
   }
 }
 
+
 let selectedCard = null;
 
 function allowDrop(event) {
@@ -868,20 +869,6 @@ document.querySelectorAll(".dropzone").forEach(zone => {
       currentTarget: zone,
       dataTransfer: null
     });
-  });
-});
-
-  {
-  card.addEventListener("dragstart", ()=>{
-    card.classList.add("dragging");
-  });
-  card.addEventListener("dragend", ()=>{
-    card.classList.remove("dragging");
-  });
-  card.addEventListener("click", ()=>{
-    const zones = document.querySelectorAll(".dropzone");
-    const target = zones.length ? zones[0] : null;
-    if(target) target.appendChild(card);
   });
 });
 
