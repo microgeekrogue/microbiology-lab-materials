@@ -875,18 +875,6 @@ function renderSlide(){
     buttons.appendChild(b);
   });
 }
-  buttons.innerHTML = "";
-  slides.forEach((slide,index)=>{
-    const b = document.createElement("button");
-    b.textContent = index + 1;
-    if(index === currentSlide) b.classList.add("active");
-    b.onclick = ()=>{
-      currentSlide = index;
-      renderSlide();
-    };
-    buttons.appendChild(b);
-  });
-}
 
 function updateRisk(){
   const rain = +document.getElementById("rain").value;
