@@ -5,1012 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Salem Mystery Lab | Science, Spores, and the Witch Trials</title>
 <style>
-  :root{
-    --ink:#1b1410;
-    --parchment:#f4ead7;
-    --dark:#241a14;
-    --rye:#c8a24a;
-    --fungus:#6d4c8f;
-    --danger:#a33b3b;
-    --good:#3d7a4f;
-    --card:#fffaf0;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Georgia, "Times New Roman", serif;
-    background:var(--parchment);
-    color:var(--ink);
-    line-height:1.55;
-  }
-  header.hero{
-    min-height:75vh;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    color:#fff;
-    background:
-      linear-gradient(rgba(20,12,8,.78), rgba(20,12,8,.88)),
-      radial-gradient(circle at 20% 25%, #4b3520 0 12%, transparent 13%),
-      radial-gradient(circle at 75% 70%, #5c4425 0 9%, transparent 10%),
-      repeating-linear-gradient(90deg, #2b2015 0 18px, #332718 18px 36px);
-  }
-  .hero-inner{max-width:900px;padding:3rem 1.25rem}
-  .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:.25em;
-    font-size:.78rem;
-    color:var(--rye);
-  }
-  h1{
-    font-size:clamp(2.4rem,7vw,5rem);
-    margin:.3rem 0;
-    text-shadow:0 4px 18px rgba(0,0,0,.55);
-  }
-  .subtitle{font-size:1.25rem;max-width:700px;margin:0 auto 1.5rem}
-  .cta{
-    display:inline-block;
-    background:var(--rye);
-    color:#20160d;
-    padding:.9rem 1.5rem;
-    border-radius:999px;
-    font-weight:bold;
-    text-decoration:none;
-    border:3px solid #fff2;
-    transition:.2s;
-  }
-  .cta:hover{transform:translateY(-2px);background:#dcb75e}
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:#1d150f;
-    color:#f3e6c8;
-    display:flex;gap:.25rem;overflow-x:auto;
-    padding:.55rem .75rem;
-    border-bottom:3px solid var(--rye);
-  }
-  nav a{
-    color:#f3e6c8;text-decoration:none;
-    padding:.45rem .7rem;border-radius:6px;white-space:nowrap;
-  }
-  nav a:hover{background:#3a2b1d}
-  main{max-width:1100px;margin:auto;padding:1rem}
-  section{
-    background:var(--card);
-    border:1px solid #d8c6a2;
-    border-radius:16px;
-    padding:1.5rem;
-    margin:1.5rem 0;
-    box-shadow:0 10px 24px rgba(60,40,20,.08);
-  }
-  h2{
-    margin-top:0;
-    color:#3c2a17;
-    border-bottom:3px solid var(--rye);
-    padding-bottom:.35rem;
-  }
-  .station-label{
-    display:inline-block;
-    background:var(--fungus);
-    color:#fff;
-    padding:.25rem .7rem;
-    border-radius:999px;
-    font-size:.8rem;
-    margin-bottom:.5rem;
-  }
-  .video-box{
-    position:relative;
-    padding-top:56.25%;
-    background:#000;
-    border-radius:12px;
-    overflow:hidden;
-  }
-  .video-box iframe{
-    position:absolute;inset:0;width:100%;height:100%;border:0;
-  }
-  .note{
-    background:#fff6dd;
-    border-left:6px solid var(--rye);
-    padding:.8rem 1rem;
-    border-radius:8px;
-  }
-  .question{
-    background:#fdf7e7;
-    border:1px solid #d9c59b;
-    padding:1rem;
-    border-radius:12px;
-    margin:1rem 0;
-  }
-  .question h3{margin:.1rem 0 .6rem}
-  label.choice{
-    display:flex;gap:.55rem;align-items:flex-start;
-    background:#fff;
-    border:1px solid #d8c6a2;
-    padding:.55rem .7rem;
-    border-radius:8px;
-    margin:.35rem 0;
-    cursor:pointer;
-  }
-  label.choice:hover{border-color:var(--fungus)}
-  .feedback{
-    margin-top:.6rem;font-weight:bold;
-  }
-  .correct{color:var(--good)}
-  .incorrect{color:var(--danger)}
-  button, select, input, textarea{
-    font-family:inherit;font-size:1rem;
-  }
-  button{
-    background:var(--dark);
-    color:#f7e9c8;
-    border:0;
-    padding:.6rem 1rem;
-    border-radius:8px;
-    cursor:pointer;
-  }
-  button:hover{background:#3d2c1d}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
-  .card{
-    background:#fff;
-    border:2px solid #c8a24a;
-    border-radius:10px;
-    padding:.7rem;
-    text-align:center;
-    cursor:grab;
-    user-select:none;
-  }
-  .dropzones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem}
-  .dropzone{
-    min-height:180px;
-    border:2px dashed #a58a55;
-    border-radius:12px;
-    padding:.8rem;
-    background:#fffdf5;
-  }
-  .dropzone.over{border-color:var(--fungus);background:#f3edff}
-  .hotspot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-  .hotspot{
-    background:#f0e7d2;
-    border:2px solid #b49a67;
-    border-radius:12px;
-    padding:1rem;
-    cursor:pointer;
-  }
-  .hotspot .reveal{display:none;margin-top:.6rem}
-  .hotspot.open .reveal{display:block}
-  .microscope{
-    background:#101010;color:#e9e2cf;
-    border-radius:12px;padding:1rem;
-  }
-  .slide-view{
-    min-height:230px;
-    border-radius:10px;
-    border:4px solid #555;
-    display:grid;place-items:center;
-    text-align:center;
-    padding:1rem;
-    background:
-      radial-gradient(circle at 50% 50%, #3b3b3b 0 35%, #1a1a1a 100%);
-  }
-  .slide-buttons{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
-  .slide-buttons button.active{background:var(--fungus)}
-  .evidence-item{
-    display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;
-    justify-content:space-between;
-    background:#fff;
-    border:1px solid #d5c19b;
-    border-radius:10px;
-    padding:.8rem;
-    margin:.5rem 0;
-  }
-  .vote button{margin-right:.3rem}
-  .vote .selected{outline:3px solid var(--rye)}
-  .sim-controls{display:grid;gap:.8rem;max-width:600px}
-  .sim-controls label{font-weight:bold}
-  input[type=range]{width:100%}
-  .risk{
-    font-size:1.4rem;font-weight:bold;
-    padding:.7rem;border-radius:10px;text-align:center;
-  }
-  .low{background:#d9efd9;color:#245c33}
-  .moderate{background:#fdf0c8;color:#7a5b12}
-  .high{background:#f8d3d3;color:#7d2424}
-  .badge{
-    display:none;
-    background:linear-gradient(135deg,#6d4c8f,#c8a24a);
-    color:#fff;padding:1rem;border-radius:12px;text-align:center;
-    margin-top:1rem;
-  }
-  .badge.show{display:block}
-  .egg{
-    cursor:pointer;font-size:1.4rem;
-    background:none;padding:.2rem;
-  }
-  textarea{
-    width:100%;min-height:90px;
-    border:1px solid #c8b087;border-radius:8px;padding:.6rem;
-    background:#fff;
-  }
-  .final-output{
-    background:#fff;
-    border:2px solid var(--fungus);
-    border-radius:12px;
-    padding:1rem;
-    white-space:pre-wrap;
-  }
-  footer{
-    text-align:center;color:#5c4a33;
-    padding:2rem 1rem;font-size:.9rem;
-  }
-  @media(max-width:650px){
-    section{padding:1rem}
-    .dropzones{grid-template-columns:1fr}
-  .card.selected-card {
-  outline: 4px solid #6d4c8f;
-  outline-offset: 3px;
-  background: #f3edff;
-}
-
-.card:focus-visible,
-.dropzone:focus-visible {
-  outline: 3px solid #6d4c8f;
-  outline-offset: 3px;
-}}
+:root{--ink:#1b1410;--parchment:#f4ead7;--dark:#241a14;--rye:#c8a24a;--fungus:#6d4c8f;--danger:#a33b3b;--good:#3d7a4f;--card:#fffaf0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;background:var(--parchment);color:var(--ink);line-height:1.55}
+header.hero{min-height:75vh;display:grid;place-items:center;text-align:center;color:#fff;background:linear-gradient(rgba(20,12,8,.78),rgba(20,12,8,.88)),radial-gradient(circle at 20% 25%,#4b3520 0 12%,transparent 13%),radial-gradient(circle at 75% 70%,#5c4425 0 9%,transparent 10%),repeating-linear-gradient(90deg,#2b2015 0 18px,#332718 18px 36px)}
+.hero-inner{max-width:900px;padding:3rem 1.25rem}.eyebrow{text-transform:uppercase;letter-spacing:.25em;font-size:.78rem;color:var(--rye)}
+h1{font-size:clamp(2.4rem,7vw,5rem);margin:.3rem 0;text-shadow:0 4px 18px rgba(0,0,0,.55)}.subtitle{font-size:1.25rem;max-width:700px;margin:0 auto 1.5rem}
+.cta{display:inline-block;background:var(--rye);color:#20160d;padding:.9rem 1.5rem;border-radius:999px;font-weight:bold;text-decoration:none;border:3px solid #fff2;transition:.2s}.cta:hover{transform:translateY(-2px);background:#dcb75e}
+nav{position:sticky;top:0;z-index:50;background:#1d150f;color:#f3e6c8;display:flex;gap:.25rem;overflow-x:auto;padding:.55rem .75rem;border-bottom:3px solid var(--rye)}nav a{color:#f3e6c8;text-decoration:none;padding:.45rem .7rem;border-radius:6px;white-space:nowrap}nav a:hover{background:#3a2b1d}
+main{max-width:1100px;margin:auto;padding:1rem}section{background:var(--card);border:1px solid #d8c6a2;border-radius:16px;padding:1.5rem;margin:1.5rem 0;box-shadow:0 10px 24px rgba(60,40,20,.08)}
+h2{margin-top:0;color:#3c2a17;border-bottom:3px solid var(--rye);padding-bottom:.35rem}.station-label{display:inline-block;background:var(--fungus);color:#fff;padding:.25rem .7rem;border-radius:999px;font-size:.8rem;margin-bottom:.5rem}
+.video-box{position:relative;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden}.video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.note{background:#fff6dd;border-left:6px solid var(--rye);padding:.8rem 1rem;border-radius:8px}.question{background:#fdf7e7;border:1px solid #d9c59b;padding:1rem;border-radius:12px;margin:1rem 0}.question h3{margin:.1rem 0 .6rem}
+label.choice{display:flex;gap:.55rem;align-items:flex-start;background:#fff;border:1px solid #d8c6a2;padding:.55rem .7rem;border-radius:8px;margin:.35rem 0;cursor:pointer}label.choice:hover{border-color:var(--fungus)}
+.feedback{margin-top:.6rem;font-weight:bold}.correct{color:var(--good)}.incorrect{color:var(--danger)}
+button,select,input,textarea{font-family:inherit;font-size:1rem}button{background:var(--dark);color:#f7e9c8;border:0;padding:.6rem 1rem;border-radius:8px;cursor:pointer;margin:.15rem}button:hover{background:#3d2c1d}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}.card{background:#fff;border:2px solid #c8a24a;border-radius:10px;padding:.7rem;text-align:center;cursor:grab;user-select:none}
+.card.selected-card{outline:4px solid #6d4c8f;outline-offset:3px;background:#f3edff}.card:focus-visible,.dropzone:focus-visible{outline:3px solid #6d4c8f;outline-offset:3px}
+.dropzones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem}.dropzone{min-height:180px;border:2px dashed #a58a55;border-radius:12px;padding:.8rem;background:#fffdf5}.dropzone.over{border-color:var(--fungus);background:#f3edff}
+.hotspot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.hotspot{background:#f0e7d2;border:2px solid #b49a67;border-radius:12px;padding:1rem;cursor:pointer}.hotspot .reveal{display:none;margin-top:.6rem}.hotspot.open .reveal{display:block}
+.microscope{background:#101010;color:#e9e2cf;border-radius:12px;padding:1rem}.slide-view{min-height:230px;border-radius:10px;border:4px solid #555;display:grid;place-items:center;text-align:center;padding:1rem;background:radial-gradient(circle at 50% 50%,#3b3b3b 0 35%,#1a1a1a 100%)}.slide-buttons{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}.slide-buttons button.active{background:var(--fungus)}
+.evidence-item{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;background:#fff;border:1px solid #d5c19b;border-radius:10px;padding:.8rem;margin:.5rem 0}.vote button{margin-right:.3rem}.vote .selected{outline:3px solid var(--rye)}
+.sim-controls{display:grid;gap:.8rem;max-width:600px}.sim-controls label{font-weight:bold}input[type=range]{width:100%}
+.risk{font-size:1.4rem;font-weight:bold;padding:.7rem;border-radius:10px;text-align:center}.low{background:#d9efd9;color:#245c33}.moderate{background:#fdf0c8;color:#7a5b12}.high{background:#f8d3d3;color:#7d2424}
+.badge{display:none;background:linear-gradient(135deg,#6d4c8f,#c8a24a);color:#fff;padding:1rem;border-radius:12px;text-align:center;margin-top:1rem}.badge.show{display:block}.egg{cursor:pointer;font-size:1.4rem;background:none;padding:.2rem}
+textarea{width:100%;min-height:90px;border:1px solid #c8b087;border-radius:8px;padding:.6rem;background:#fff}.final-output{background:#fff;border:2px solid var(--fungus);border-radius:12px;padding:1rem;white-space:pre-wrap;overflow-wrap:anywhere}
+footer{text-align:center;color:#5c4a33;padding:2rem 1rem;font-size:.9rem}@media(max-width:650px){section{padding:1rem}.dropzones{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<header class="hero" id="top">
-  <div class="hero-inner">
-    <div class="eyebrow">An Interdisciplinary Investigation</div>
-    <h1>🔮 The Salem Mystery Lab</h1>
-    <p class="subtitle">Science, Spores, and the Witch Trials</p>
-    <p><strong>Guiding Question:</strong> Were the strange events in Salem caused by witchcraft, mass hysteria, toxic fungi, or something else?</p>
-    <a class="cta" href="#station1">🚪 Enter the Investigation</a>
-  </div>
-</header>
-
-<nav>
-  <a href="#station1">🎥 Crime Scene</a>
-  <a href="#caseStudy">📖 Case Study</a>
-  <a href="#station3">🧠 Hypothesis</a>
-  <a href="#station4">🍄 The Fungus</a>
-  <a href="#microscope">🔬 Microscope</a>
-  <a href="#spores">🍄 Spore Print</a>
-  <a href="#evidence">⚖️ Evidence Wall</a>
-  <a href="#simulation">🌦️ Fungus Lab</a>
-  <a href="#verdict">📜 Final Verdict</a>
-</nav>
-
+<header class="hero" id="top"><div class="hero-inner"><div class="eyebrow">An Interdisciplinary Investigation</div><h1>🔮 The Salem Mystery Lab</h1><p class="subtitle">Science, Spores, and the Witch Trials</p><p><strong>Guiding Question:</strong> Were the strange events in Salem caused by witchcraft, mass hysteria, toxic fungi, or something else?</p><a class="cta" href="#station1">🚪 Enter the Investigation</a></div></header>
+<nav><a href="#station1">🎥 Crime Scene</a><a href="#caseStudy">📖 Case Study</a><a href="#station2">🧠 Hypothesis</a><a href="#station3">🍄 The Fungus</a><a href="#microscope">🔬 Microscope</a><a href="#spores">🍄 Spore Print</a><a href="#evidence">⚖️ Evidence Wall</a><a href="#simulation">🌦️ Fungus Lab</a><a href="#verdict">📜 Final Verdict</a></nav>
 <main>
-
-<section id="intro">
-  <h2>Become a Scientific Investigator</h2>
-  <p>In this activity, you will examine the Salem Witch Trials like a historian, disease detective, mycologist, and microscopist. You will collect evidence, test competing explanations, and decide which explanation is best supported by the available information.</p>
-  <div class="note">
-    <strong>Important:</strong> The ergot hypothesis is <em>not proven</em>. A good scientist distinguishes between an interesting hypothesis, supporting evidence, and a conclusion that can be demonstrated with certainty.
-  </div>
-  <p>Your work saves automatically in this browser. At the end, use <strong>Copy My Answers for Blackboard</strong> and paste the results into your Blackboard assignment.</p>
-</section>
-
-<section id="station1">
-  <span class="station-label">Station 1</span>
-  <h2>🎥 The Crime Scene</h2>
-  <p>Watch the assigned video, <em>Secrets of the Dead: The Witch’s Curse</em>. As you watch, record the symptoms and evidence described in the case.</p>
-
- <div class="video-box">
-  <div style="
-    position:absolute;
-    inset:0;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    color:#fff;
-    padding:1rem;
-    background:#000;
-  ">
-    <div>
-      <h3>🎥 Secrets of the Dead: The Witch’s Curse</h3>
-      <p>
-        Dailymotion does not allow this video to play inside an external website.
-        Click below to watch it in a new tab, then return here to complete the questions.
-      </p>
-      <a
-        href="https://www.dailymotion.com/video/x6lsjex"
-        target="_blank"
-        rel="noopener"
-        style="
-          display:inline-block;
-          background:#c8a24a;
-          color:#20160d;
-          padding:.8rem 1.2rem;
-          border-radius:999px;
-          font-weight:bold;
-          text-decoration:none;
-        ">
-        ▶️ Open Video in New Tab
-      </a>
-      <p style="font-size:.9rem; margin-top:.8rem;">
-        While watching, look for symptoms, environmental clues, and evidence for or against the ergot hypothesis.
-      </p>
-    </div>
-  </div>
-</div>
-<div class="note">
-  <strong>While watching:</strong>
-  Record the symptoms described, the environmental conditions connected to rye and ergot,
-  and one piece of evidence that either supports or challenges the ergot hypothesis.
-</div>
-  <div class="question" data-q="symptoms">
-    <h3>1. Symptoms Observed</h3>
-    <p>Select <strong>all</strong> symptoms reported among the afflicted girls in Salem.</p>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Convulsions"> Convulsions</label>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Hallucinations"> Hallucinations</label>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Screaming"> Screaming</label>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Visions"> Visions</label>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Muscle spasms"> Muscle spasms</label>
-    <label class="choice"><input type="checkbox" name="symptoms" value="Unusual behavior"> Unusual behavior</label>
-    <button type="button" onclick="gradeCheckbox('symptoms',['Convulsions','Hallucinations','Screaming','Visions','Muscle spasms','Unusual behavior'])">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question" data-q="ergotSymptoms">
-    <h3>2. Ergot Poisoning Symptoms</h3>
-    <p>Which symptoms are associated with <strong>convulsive ergotism</strong>?</p>
-    <label class="choice"><input type="radio" name="ergotSymptoms" value="a"> Muscle spasms, hallucinations, and distorted perceptions</label>
-    <label class="choice"><input type="radio" name="ergotSymptoms" value="b"> Improved vision and increased energy</label>
-    <label class="choice"><input type="radio" name="ergotSymptoms" value="c"> A mild rash that disappears within hours</label>
-    <button type="button" onclick="gradeRadio('ergotSymptoms','a','Correct. Convulsive ergotism can involve muscle spasms, hallucinations, delusions, and abnormal sensations.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question" data-q="conditions">
-    <h3>3. Environmental Conditions</h3>
-    <p>Which conditions favor ergot fungus growth on rye?</p>
-    <label class="choice"><input type="radio" name="conditions" value="a"> Dry, hot conditions with little moisture</label>
-    <label class="choice"><input type="radio" name="conditions" value="b"> Cool, damp, rainy conditions</label>
-    <label class="choice"><input type="radio" name="conditions" value="c"> Freezing temperatures with no precipitation</label>
-    <button type="button" onclick="gradeRadio('conditions','b','Correct. Rainfall and high moisture support ergot development and spore production.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-</section>
-<section id="caseStudy">
-  <span class="station-label">Station 2</span>
-  <h2>📖 Read the Case Study</h2>
-  <p>
-    Read the case study carefully before continuing. As you read, look for the scientific problem,
-    the proposed ergot hypothesis, the evidence used to support it, and the limitations or alternative
-    explanations.
-  </p>
-
-  <div class="note">
-    <strong>Reading focus:</strong>
-    <ul>
-      <li>What symptoms were reported in Salem?</li>
-      <li>What is ergot, and how might it contaminate food?</li>
-      <li>What environmental conditions may have supported ergot growth?</li>
-      <li>What evidence supports the ergot hypothesis?</li>
-      <li>What evidence or reasoning challenges the ergot hypothesis?</li>
-    </ul>
-  </div>
-
-  <div class="video-box" style="height:650px;padding-top:0">
-    <iframe
-      src="salem_secrets.pdf"
-      title="Salem Secrets Case Study"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <p>
-    If the PDF does not display in your browser,
-    <a href="salem_secrets.pdf" target="_blank" rel="noopener"><strong>open the case study in a new tab</strong></a>.
-  </p>
-
-  <div class="question" data-q="caseProblem">
-    <h3>Case Study Question 1</h3>
-    <p>What was the main scientific question investigated in the case study?</p>
-    <label class="choice"><input type="radio" name="caseProblem" value="a"> Whether Salem’s strange symptoms could be explained by ergot poisoning</label>
-    <label class="choice"><input type="radio" name="caseProblem" value="b"> Whether rye plants can perform photosynthesis</label>
-    <label class="choice"><input type="radio" name="caseProblem" value="c"> Whether mushrooms can be used to treat infections</label>
-    <button type="button" onclick="gradeRadio('caseProblem','a','Correct. The case study examines whether ergot contamination could help explain the Salem symptoms.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question" data-q="caseEvidence">
-    <h3>Case Study Question 2</h3>
-    <p>Which type of evidence was used to support the ergot hypothesis?</p>
-    <label class="choice"><input type="radio" name="caseEvidence" value="a"> Modern DNA sequencing of the afflicted girls</label>
-    <label class="choice"><input type="radio" name="caseEvidence" value="b"> Historical weather and crop-growing conditions, along with reported symptoms</label>
-    <label class="choice"><input type="radio" name="caseEvidence" value="c"> Photographs of ergot-contaminated bread from 1692</label>
-    <button type="button" onclick="gradeRadio('caseEvidence','b','Correct. The hypothesis relies on historical climate, crop, and symptom evidence—not direct modern testing of the original grain.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question" data-q="caseLimit">
-    <h3>Case Study Question 3</h3>
-    <p>Which statement best describes the strength of the ergot hypothesis?</p>
-    <label class="choice"><input type="radio" name="caseLimit" value="a"> It has been proven because ergot can cause hallucinations and convulsions.</label>
-    <label class="choice"><input type="radio" name="caseLimit" value="b"> It is an interesting hypothesis, but the historical and medical evidence does not fully confirm it.</label>
-    <label class="choice"><input type="radio" name="caseLimit" value="c"> It has been disproven because fungi cannot grow on rye.</label>
-    <button type="button" onclick="gradeRadio('caseLimit','b','Correct. Ergot can cause serious symptoms, but that does not prove it caused the Salem events.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <h3>Case Study Written Response 1</h3>
-    <label for="caseSummary">Summarize the ergot hypothesis in 2–3 sentences. Include the fungus, the food source, and the symptoms it might explain.</label>
-    <textarea id="caseSummary" oninput="saveField('caseSummary')"></textarea>
-  </div>
-
-  <div class="question">
-    <h3>Case Study Written Response 2</h3>
-    <label for="caseSupport">Identify one piece of evidence from the case study that supports the ergot hypothesis. Explain why it supports the hypothesis.</label>
-    <textarea id="caseSupport" oninput="saveField('caseSupport')"></textarea>
-  </div>
-
-  <div class="question">
-    <h3>Case Study Written Response 3</h3>
-    <label for="caseChallenge">Identify one limitation, weakness, or alternative explanation discussed in the case study. Why does this make the ergot hypothesis uncertain?</label>
-    <textarea id="caseChallenge" oninput="saveField('caseChallenge')"></textarea>
-  </div>
-
-  <div class="question">
-    <h3>Case Study Written Response 4</h3>
-    <label for="caseCorrelation">Explain the difference between correlation and causation using the Salem ergot hypothesis as your example.</label>
-    <textarea id="caseCorrelation" oninput="saveField('caseCorrelation')"></textarea>
-  </div>
-</section>
-<section id="station2">
-  <span class="station-label">Station 3</span>
-  <h2>🧠 Build Your First Hypothesis</h2>
-  <p>Before learning more about fungi, sort each possible cause. Drag or tap each card into the zone where you think it belongs. This is your <strong>initial hypothesis</strong>; you may revise it later.</p>
-
-  <div class="cards" id="cardBank">
-    <div class="card" draggable="true">Witchcraft</div>
-    <div class="card" draggable="true">Poison</div>
-    <div class="card" draggable="true">Disease</div>
-    <div class="card" draggable="true">Mass hysteria</div>
-    <div class="card" draggable="true">Contaminated food</div>
-    <div class="card" draggable="true">Ergot fungus</div>
-    <div class="card" draggable="true">Environmental stress</div>
-  </div>
-
-  <div class="dropzones">
-    <div class="dropzone" data-zone="supports" ondragover="allowDrop(event)" ondrop="dropCard(event)" ontouchend="dropCard(event)">
-      <h3>✅ Evidence May Support</h3>
-      <p class="small">Place possible causes here.</p>
-    </div>
-    <div class="dropzone" data-zone="doesNotSupport" ondragover="allowDrop(event)" ondrop="dropCard(event)" ontouchend="dropCard(event)">
-      <h3>❌ Evidence Does Not Yet Support</h3>
-      <p class="small">Place possible causes here.</p>
-    </div>
-  </div>
-
-  <div class="question">
-    <h3>4. Initial Explanation</h3>
-    <label for="initialHypothesis">Based on the video so far, which explanation seems most likely? Explain your reasoning in 2–3 sentences.</label>
-    <textarea id="initialHypothesis" oninput="saveField('initialHypothesis')"></textarea>
-  </div>
-</section>
-
-<section id="station3">
-  <span class="station-label">Station 4</span>
-  <h2>🍄 Meet the Fungus: <em>Claviceps purpurea</em></h2>
-  <p>Click each part of the ergot story to reveal a scientific clue.</p>
-
-  <div class="hotspot-grid">
-    <div class="hotspot" onclick="this.classList.toggle('open')">
-      <strong>🌾 Infects rye</strong>
-      <div class="reveal"><em>Claviceps purpurea</em> infects rye and related grasses. The fungal structure replaces part of the grain with a hard ergot body called a sclerotium.</div>
-    </div>
-    <div class="hotspot" onclick="this.classList.toggle('open')">
-      <strong>⚫ Forms ergots</strong>
-      <div class="reveal">Ergots are dark purple-black sclerotia. They contain ergot alkaloids, including compounds related to lysergic acid.</div>
-    </div>
-    <div class="hotspot" onclick="this.classList.toggle('open')">
-      <strong>☠️ Produces toxins</strong>
-      <div class="reveal">Ergot alkaloids can cause ergotism. Depending on the toxins and dose, effects may include convulsions, hallucinations, vomiting, burning sensations, and circulation problems.</div>
-    </div>
-    <div class="hotspot" onclick="this.classList.toggle('open')">
-      <strong>🌧️ Thrives in wet conditions</strong>
-      <div class="reveal">Rainfall or high soil moisture supports ergot development. A cold winter followed by a wet spring can increase the chance of contamination in rye crops.</div>
-    </div>
-  </div>
-
-  <div class="question" data-q="fungusRole">
-    <h3>5. Fungus Function Check</h3>
-    <p>What is the ergot fungus doing when it forms a sclerotium?</p>
-    <label class="choice"><input type="radio" name="fungusRole" value="a"> Helping the rye plant make more grain</label>
-    <label class="choice"><input type="radio" name="fungusRole" value="b"> Replacing part of the grain with a compact fungal survival structure</label>
-    <label class="choice"><input type="radio" name="fungusRole" value="c"> Producing pollen for the rye plant</label>
-    <button type="button" onclick="gradeRadio('fungusRole','b','Correct. The sclerotium is a compact fungal structure that can contain toxic alkaloids.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-</section>
-
-<section id="microscope">
-  <span class="station-label">Station 5</span>
-  <h2>🔬 Virtual Microscope</h2>
-  <p>Click through the slides. Later, replace the descriptions with your own microscope photographs of rye, ergot, mushroom gills, and spore prints.</p>
-
-  <div class="microscope">
-    <div class="slide-view" id="slideView"></div>
-    <div class="slide-buttons" id="slideButtons"></div>
-  </div>
-
-  <div class="question" data-q="sporeFunction">
-    <h3>6. Spore Function</h3>
-    <p>What is the main reproductive role of basidiospores in mushrooms?</p>
-    <label class="choice"><input type="radio" name="sporeFunction" value="a"> They carry genetic material and can disperse to start new fungal growth</label>
-    <label class="choice"><input type="radio" name="sporeFunction" value="b"> They digest food inside the mushroom cap</label>
-    <label class="choice"><input type="radio" name="sporeFunction" value="c"> They produce chlorophyll for photosynthesis</label>
-    <button type="button" onclick="gradeRadio('sporeFunction','a','Correct. Spores are reproductive dispersal units; fungi do not photosynthesize.')">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-
-  <div class="question">
-    <h3>7. Microscopy Observations</h3>
-    <label for="microscopyNotes">Describe one structure you observed or expect to observe under the microscope. What does its structure help the fungus do?</label>
-    <textarea id="microscopyNotes" oninput="saveField('microscopyNotes')"></textarea>
-  </div>
-</section>
-
-<section id="spores">
-  <span class="station-label">Station 6</span>
-  <h2>🍄 Spore Print Challenge</h2>
-  <p>Complete your mushroom spore-print lab, then record your observations below. You may also upload a photo of your spore print to Blackboard.</p>
-
-  <div class="question">
-    <label for="mushroomSpecies">My mushroom species or unknown label:</label>
-    <input id="mushroomSpecies" style="width:100%;padding:.6rem;border:1px solid #c8b087;border-radius:8px" oninput="saveField('mushroomSpecies')">
-
-    <label for="sporeColor" style="display:block;margin-top:.8rem">Color of spore print:</label>
-    <select id="sporeColor" onchange="saveField('sporeColor')" style="width:100%;padding:.6rem;border-radius:8px">
-      <option value="">Choose one…</option>
-      <option>White</option>
-      <option>Brown</option>
-      <option>Black</option>
-      <option>Pink</option>
-      <option>Purple-brown</option>
-    </select>
-
-    <label for="sporeDrawing" style="display:block;margin-top:.8rem">Drawing description or upload notes:</label>
-    <textarea id="sporeDrawing" oninput="saveField('sporeDrawing')"></textarea>
-
-    <label for="sporeStructures" style="display:block;margin-top:.8rem">Observed structures:</label>
-    <textarea id="sporeStructures" oninput="saveField('sporeStructures')"></textarea>
-
-    <label for="sporeFindings" style="display:block;margin-top:.8rem">Interesting findings:</label>
-    <textarea id="sporeFindings" oninput="saveField('sporeFindings')"></textarea>
-  </div>
-</section>
-
-<section id="evidence">
-  <span class="station-label">Station 7</span>
-  <h2>⚖️ Salem Evidence Wall</h2>
-  <p>Decide whether each item is <strong>scientific evidence</strong> or <strong>not scientific evidence</strong>. Scientific evidence should be observable, measurable, testable, or independently verifiable.</p>
-
-  <div class="evidence-item">
-    <div><strong>Spectral evidence:</strong> “I saw her spirit.”</div>
-    <div class="vote">
-      <button onclick="voteEvidence(this,'spectral','scientific')">🔴 Scientific</button>
-      <button onclick="voteEvidence(this,'spectral','notScientific')">🟢 Not Scientific</button>
-    </div>
-  </div>
-
-  <div class="evidence-item">
-    <div><strong>Physical symptoms:</strong> convulsions and muscle spasms</div>
-    <div class="vote">
-      <button onclick="voteEvidence(this,'physical','scientific')">🔴 Scientific</button>
-      <button onclick="voteEvidence(this,'physical','notScientific')">🟢 Not Scientific</button>
-    </div>
-  </div>
-
-  <div class="evidence-item">
-    <div><strong>Contaminated grain:</strong> possible ergot in stored rye</div>
-    <div class="vote">
-      <button onclick="voteEvidence(this,'grain','scientific')">🔴 Scientific</button>
-      <button onclick="voteEvidence(this,'grain','notScientific')">🟢 Not Scientific</button>
-    </div>
-  </div>
-
-  <div class="question" data-q="evidenceReason">
-    <h3>8. Evidence Evaluation</h3>
-    <p>Why is spectral evidence generally considered <strong>not scientific</strong>? Answer in 1–2 sentences.</p>
-    <textarea id="evidenceReason" oninput="saveField('evidenceReason')"></textarea>
-    <button type="button" onclick="checkEvidenceReason()">Check Answer</button>
-    <div class="feedback"></div>
-  </div>
-</section>
-
-<section id="simulation">
-  <span class="station-label">Station 8</span>
-  <h2>🌦️ Mushroom Mystery Lab</h2>
-  <p>Adjust the environmental variables to estimate the risk of ergot contamination. This is a simplified model, not a prediction of what actually happened in Salem.</p>
-
-  <div class="sim-controls">
-    <label>🌧️ Rainfall: <span id="rainValue">50</span>%</label>
-    <input type="range" id="rain" min="0" max="100" value="50" oninput="updateRisk()">
-
-    <label>🌾 Rye production: <span id="ryeValue">50</span>%</label>
-    <input type="range" id="rye" min="0" max="100" value="50" oninput="updateRisk()">
-
-    <label>🍄 Fungal growth: <span id="fungusValue">50</span>%</label>
-    <input type="range" id="fungus" min="0" max="100" value="50" oninput="updateRisk()">
-
-    <label>🧺 Food supply dependence on rye: <span id="foodValue">50</span>%</label>
-    <input type="range" id="food" min="0" max="100" value="50" oninput="updateRisk()">
-  </div>
-
-  <div class="risk moderate" id="riskResult">Moderate Risk</div>
-  <p id="riskExplanation"></p>
-</section>
-
-<section id="verdict">
-  <span class="station-label">Final Artifact</span>
-  <h2>📜 The Salem Mystery Verdict</h2>
-  <p>Use the evidence you collected to write your final scientific explanation.</p>
-
-  <label for="finalClaim"><strong>Claim:</strong> What best explains the strange events in Salem?</label>
-  <textarea id="finalClaim" oninput="saveField('finalClaim')"></textarea>
-
-  <label for="finalEvidence" style="display:block;margin-top:.8rem"><strong>Evidence:</strong> List at least three pieces of evidence from the video, fungus background, microscope activity, or evidence wall.</label>
-  <textarea id="finalEvidence" oninput="saveField('finalEvidence')"></textarea>
-
-  <label for="finalReasoning" style="display:block;margin-top:.8rem"><strong>Reasoning:</strong> Explain how your evidence supports your claim. Address correlation versus causation.</label>
-  <textarea id="finalReasoning" oninput="saveField('finalReasoning')"></textarea>
-
-  <label for="confidence" style="display:block;margin-top:.8rem"><strong>Confidence Level:</strong></label>
-  <select id="confidence" onchange="saveField('confidence')" style="width:100%;padding:.6rem;border-radius:8px">
-    <option value="">Choose one…</option>
-    <option>⭐ Low confidence</option>
-    <option>⭐⭐ Some confidence</option>
-    <option>⭐⭐⭐ Moderate confidence</option>
-    <option>⭐⭐⭐⭐ High confidence</option>
-    <option>⭐⭐⭐⭐⭐ Very high confidence</option>
-  </select>
-
-  <div style="margin-top:1rem">
-    <button onclick="buildSubmission()">📋 Copy My Answers for Blackboard</button>
-    <button onclick="downloadSubmission()">⬇️ Download Answers</button>
-    <button onclick="clearProgress()">🗑️ Clear My Work</button>
-  </div>
-
-  <div id="copyStatus" class="feedback"></div>
-  <div class="final-output" id="submissionPreview"></div>
-</section>
-
-<section id="eggs">
-  <h2>🕵️ Hidden Detective Challenge</h2>
-  <p>Find all five hidden objects to earn the <strong>Master Mycologist Detective Badge</strong>.</p>
-  <p>
-    <button class="egg" onclick="findEgg('candle')">🕯️</button>
-    <button class="egg" onclick="findEgg('record')">📜</button>
-    <button class="egg" onclick="findEgg('mushroom')">🍄</button>
-    <button class="egg" onclick="findEgg('rye')">🌾</button>
-    <button class="egg" onclick="findEgg('microscope')">🔬</button>
-  </p>
-  <div class="badge" id="detectiveBadge">
-    🏅 Master Mycologist Detective Badge Earned!<br>
-    You found all five hidden clues.
-  </div>
-</section>
-
+<section id="intro"><h2>Become a Scientific Investigator</h2><p>In this activity, you will examine the Salem Witch Trials like a historian, disease detective, mycologist, and microscopist. You will collect evidence, test competing explanations, and decide which explanation is best supported by the available information.</p><div class="note"><strong>Important:</strong> The ergot hypothesis is <em>not proven</em>. A good scientist distinguishes between an interesting hypothesis, supporting evidence, and a conclusion that can be demonstrated with certainty.</div><p>Your work saves automatically in this browser. At the end, use <strong>Copy My Answers for Blackboard</strong> and paste the results into your Blackboard assignment.</p></section>
+<section id="station1"><span class="station-label">Station 1</span><h2>🎥 The Crime Scene</h2><p>Watch the assigned video, <em>Secrets of the Dead: The Witch’s Curse</em>. As you watch, record the symptoms and evidence described in the case.</p>
+<div class="video-box"><div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:1rem;background:#000"><div><h3>🎥 Secrets of the Dead: The Witch’s Curse</h3><p>Dailymotion does not allow this video to play inside an external website. Click below to watch it in a new tab, then return here to complete the questions.</p><a href="https://www.dailymotion.com/video/x6lsjex" target="_blank" rel="noopener" style="display:inline-block;background:#c8a24a;color:#20160d;padding:.8rem 1.2rem;border-radius:999px;font-weight:bold;text-decoration:none">▶️ Open Video in New Tab</a><p style="font-size:.9rem;margin-top:.8rem">While watching, look for symptoms, environmental clues, and evidence for or against the ergot hypothesis.</p></div></div></div>
+<div class="note"><strong>While watching:</strong> Record the symptoms described, the environmental conditions connected to rye and ergot, and one piece of evidence that either supports or challenges the ergot hypothesis.</div>
+<div class="question" data-q="symptoms"><h3>1. Symptoms Observed</h3><p>Select <strong>all</strong> symptoms reported among the afflicted girls in Salem.</p><label class="choice"><input type="checkbox" name="symptoms" value="Convulsions"> Convulsions</label><label class="choice"><input type="checkbox" name="symptoms" value="Hallucinations"> Hallucinations</label><label class="choice"><input type="checkbox" name="symptoms" value="Screaming"> Screaming</label><label class="choice"><input type="checkbox" name="symptoms" value="Visions"> Visions</label><label class="choice"><input type="checkbox" name="symptoms" value="Muscle spasms"> Muscle spasms</label><label class="choice"><input type="checkbox" name="symptoms" value="Unusual behavior"> Unusual behavior</label><button type="button" onclick="gradeCheckbox('symptoms',['Convulsions','Hallucinations','Screaming','Visions','Muscle spasms','Unusual behavior'])">Check Answer</button><div class="feedback"></div></div>
+<div class="question" data-q="ergotSymptoms"><h3>2. Ergot Poisoning Symptoms</h3><p>Which symptoms are associated with <strong>convulsive ergotism</strong>?</p><label class="choice"><input type="radio" name="ergotSymptoms" value="a"> Muscle spasms, hallucinations, and distorted perceptions</label><label class="choice"><input type="radio" name="ergotSymptoms" value="b"> Improved vision and increased energy</label><label class="choice"><input type="radio" name="ergotSymptoms" value="c"> A mild rash that disappears within hours</label><button type="button" onclick="gradeRadio('ergotSymptoms','a','Correct. Convulsive ergotism can involve muscle spasms, hallucinations, delusions, and abnormal sensations.')">Check Answer</button><div class="feedback"></div></div>
+<div class="question" data-q="conditions"><h3>3. Environmental Conditions</h3><p>Which conditions favor ergot fungus growth on rye?</p><label class="choice"><input type="radio" name="conditions" value="a"> Dry, hot conditions with little moisture</label><label class="choice"><input type="radio" name="conditions" value="b"> Cool, damp, rainy conditions</label><label class="choice"><input type="radio" name="conditions" value="c"> Freezing temperatures with no precipitation</label><button type="button" onclick="gradeRadio('conditions','b','Correct. Rainfall and high moisture support ergot development and spore production.')">Check Answer</button><div class="feedback"></div></div></section>
+<section id="caseStudy"><span class="station-label">Station 2</span><h2>📖 Read the Case Study</h2><p>Read the case study carefully before continuing. As you read, look for the scientific problem, the proposed ergot hypothesis, the evidence used to support it, and the limitations or alternative explanations.</p><div class="note"><strong>Reading focus:</strong><ul><li>What symptoms were reported in Salem?</li><li>What is ergot, and how might it contaminate food?</li><li>What environmental conditions may have supported ergot growth?</li><li>What evidence supports the ergot hypothesis?</li><li>What evidence or reasoning challenges the ergot hypothesis?</li></ul></div><div class="video-box" style="height:650px;padding-top:0"><iframe src="salem_secrets.pdf" title="Salem Secrets Case Study" loading="lazy"></iframe></div><p>If the PDF does not display in your browser, <a href="salem_secrets.pdf" target="_blank" rel="noopener"><strong>open the case study in a new tab</strong></a>.</p>
+<div class="question" data-q="caseProblem"><h3>Case Study Question 1</h3><p>What was the main scientific question investigated in the case study?</p><label class="choice"><input type="radio" name="caseProblem" value="a"> Whether Salem’s strange symptoms could be explained by ergot poisoning</label><label class="choice"><input type="radio" name="caseProblem" value="b"> Whether rye plants can perform photosynthesis</label><label class="choice"><input type="radio" name="caseProblem" value="c"> Whether mushrooms can be used to treat infections</label><button type="button" onclick="gradeRadio('caseProblem','a','Correct. The case study examines whether ergot contamination could help explain the Salem symptoms.')">Check Answer</button><div class="feedback"></div></div>
+<div class="question" data-q="caseEvidence"><h3>Case Study Question 2</h3><p>Which type of evidence was used to support the ergot hypothesis?</p><label class="choice"><input type="radio" name="caseEvidence" value="a"> Modern DNA sequencing of the afflicted girls</label><label class="choice"><input type="radio" name="caseEvidence" value="b"> Historical weather and crop-growing conditions, along with reported symptoms</label><label class="choice"><input type="radio" name="caseEvidence" value="c"> Photographs of ergot-contaminated bread from 1692</label><button type="button" onclick="gradeRadio('caseEvidence','b','Correct. The hypothesis relies on historical climate, crop, and symptom evidence—not direct modern testing of the original grain.')">Check Answer</button><div class="feedback"></div></div>
+<div class="question" data-q="caseLimit"><h3>Case Study Question 3</h3><p>Which statement best describes the strength of the ergot hypothesis?</p><label class="choice"><input type="radio" name="caseLimit" value="a"> It has been proven because ergot can cause hallucinations and convulsions.</label><label class="choice"><input type="radio" name="caseLimit" value="b"> It is an interesting hypothesis, but the historical and medical evidence does not fully confirm it.</label><label class="choice"><input type="radio" name="caseLimit" value="c"> It has been disproven because fungi cannot grow on rye.</label><button type="button" onclick="gradeRadio('caseLimit','b','Correct. Ergot can cause serious symptoms, but that does not prove it caused the Salem events.')">Check Answer</button><div class="feedback"></div></div>
+<div class="question"><h3>Case Study Written Response 1</h3><label for="caseSummary">Summarize the ergot hypothesis in 2–3 sentences. Include the fungus, the food source, and the symptoms it might explain.</label><textarea id="caseSummary" oninput="saveField('caseSummary')"></textarea></div>
+<div class="question"><h3>Case Study Written Response 2</h3><label for="caseSupport">Identify one piece of evidence from the case study that supports the ergot hypothesis. Explain why it supports the hypothesis.</label><textarea id="caseSupport" oninput="saveField('caseSupport')"></textarea></div>
+<div class="question"><h3>Case Study Written Response 3</h3><label for="caseChallenge">Identify one limitation, weakness, or alternative explanation discussed in the case study. Why does this make the ergot hypothesis uncertain?</label><textarea id="caseChallenge" oninput="saveField('caseChallenge')"></textarea></div>
+<div class="question"><h3>Case Study Written Response 4</h3><label for="caseCorrelation">Explain the difference between correlation and causation using the Salem ergot hypothesis as your example.</label><textarea id="caseCorrelation" oninput="saveField('caseCorrelation')"></textarea></div></section>
+<section id="station2"><span class="station-label">Station 3</span><h2>🧠 Build Your First Hypothesis</h2><p>Before learning more about fungi, sort each possible cause. Drag or tap each card into the zone where you think it belongs. This is your <strong>initial hypothesis</strong>; you may revise it later.</p>
+<div class="cards" id="cardBank"><div class="card" draggable="true">Witchcraft</div><div class="card" draggable="true">Poison</div><div class="card" draggable="true">Disease</div><div class="card" draggable="true">Mass hysteria</div><div class="card" draggable="true">Contaminated food</div><div class="card" draggable="true">Ergot fungus</div><div class="card" draggable="true">Environmental stress</div></div>
+<div class="dropzones"><div class="dropzone" data-zone="supports"><h3>✅ Evidence May Support</h3><p class="small">Place possible causes here.</p></div><div class="dropzone" data-zone="doesNotSupport"><h3>❌ Evidence Does Not Yet Support</h3><p class="small">Place possible causes here.</p></div></div>
+<div class="question"><h3>4. Initial Explanation</h3><label for="initialHypothesis">Based on the video so far, which explanation seems most likely? Explain your reasoning in 2–3 sentences.</label><textarea id="initialHypothesis" oninput="saveField('initialHypothesis')"></textarea></div></section>
+<section id="station3"><span class="station-label">Station 4</span><h2>🍄 Meet the Fungus: <em>Claviceps purpurea</em></h2><p>Click each part of the ergot story to reveal a scientific clue.</p><div class="hotspot-grid">
+<div class="hotspot" onclick="this.classList.toggle('open')"><strong>🌾 Infects rye</strong><div class="reveal"><em>Claviceps purpurea</em> infects rye and related grasses. The fungal structure replaces part of the grain with a hard ergot body called a sclerotium.</div></div>
+<div class="hotspot" onclick="this.classList.toggle('open')"><strong>⚫ Forms ergots</strong><div class="reveal">Ergots are dark purple-black sclerotia. They contain ergot alkaloids, including compounds related to lysergic acid.</div></div>
+<div class="hotspot" onclick="this.classList.toggle('open')"><strong>☠️ Produces toxins</strong><div class="reveal">Ergot alkaloids can cause ergotism. Depending on the toxins and dose, effects may include convulsions, hallucinations, vomiting, burning sensations, and circulation problems.</div></div>
+<div class="hotspot" onclick="this.classList.toggle('open')"><strong>🌧️ Thrives in wet conditions</strong><div class="reveal">Rainfall or high soil moisture supports ergot development. A cold winter followed by a wet spring can increase the chance of contamination in rye crops.</div></div></div>
+<div class="question" data-q="fungusRole"><h3>5. Fungus Function Check</h3><p>What is the ergot fungus doing when it forms a sclerotium?</p><label class="choice"><input type="radio" name="fungusRole" value="a"> Helping the rye plant make more grain</label><label class="choice"><input type="radio" name="fungusRole" value="b"> Replacing part of the grain with a compact fungal survival structure</label><label class="choice"><input type="radio" name="fungusRole" value="c"> Producing pollen for the rye plant</label><button type="button" onclick="gradeRadio('fungusRole','b','Correct. The sclerotium is a compact fungal structure that can contain toxic alkaloids.')">Check Answer</button><div class="feedback"></div></div></section>
+<section id="microscope"><span class="station-label">Station 5</span><h2>🔬 Virtual Microscope</h2><p>Click through the slides. Later, replace the descriptions with your own microscope photographs of rye, ergot, mushroom gills, and spore prints.</p><div class="microscope"><div class="slide-view" id="slideView"></div><div class="slide-buttons" id="slideButtons"></div></div>
+<div class="question" data-q="sporeFunction"><h3>6. Spore Function</h3><p>What is the main reproductive role of basidiospores in mushrooms?</p><label class="choice"><input type="radio" name="sporeFunction" value="a"> They carry genetic material and can disperse to start new fungal growth</label><label class="choice"><input type="radio" name="sporeFunction" value="b"> They digest food inside the mushroom cap</label><label class="choice"><input type="radio" name="sporeFunction" value="c"> They produce chlorophyll for photosynthesis</label><button type="button" onclick="gradeRadio('sporeFunction','a','Correct. Spores are reproductive dispersal units; fungi do not photosynthesize.')">Check Answer</button><div class="feedback"></div></div>
+<div class="question"><h3>7. Microscopy Observations</h3><label for="microscopyNotes">Describe one structure you observed or expect to observe under the microscope. What does its structure help the fungus do?</label><textarea id="microscopyNotes" oninput="saveField('microscopyNotes')"></textarea></div></section>
+<section id="spores"><span class="station-label">Station 6</span><h2>🍄 Spore Print Challenge</h2><p>Complete your mushroom spore-print lab, then record your observations below. You may also upload a photo of your spore print to Blackboard.</p><div class="question">
+<label for="mushroomSpecies">My mushroom species or unknown label:</label><input id="mushroomSpecies" style="width:100%;padding:.6rem;border:1px solid #c8b087;border-radius:8px" oninput="saveField('mushroomSpecies')">
+<label for="sporeColor" style="display:block;margin-top:.8rem">Color of spore print:</label><select id="sporeColor" onchange="saveField('sporeColor')" style="width:100%;padding:.6rem;border-radius:8px"><option value="">Choose one…</option><option>White</option><option>Brown</option><option>Black</option><option>Pink</option><option>Purple-brown</option></select>
+<label for="sporeDrawing" style="display:block;margin-top:.8rem">Drawing description or upload notes:</label><textarea id="sporeDrawing" oninput="saveField('sporeDrawing')"></textarea><label for="sporeStructures" style="display:block;margin-top:.8rem">Observed structures:</label><textarea id="sporeStructures" oninput="saveField('sporeStructures')"></textarea><label for="sporeFindings" style="display:block;margin-top:.8rem">Interesting findings:</label><textarea id="sporeFindings" oninput="saveField('sporeFindings')"></textarea></div></section>
+<section id="evidence"><span class="station-label">Station 7</span><h2>⚖️ Salem Evidence Wall</h2><p>Decide whether each item is <strong>scientific evidence</strong> or <strong>not scientific evidence</strong>. Scientific evidence should be observable, measurable, testable, or independently verifiable.</p>
+<div class="evidence-item"><div><strong>Spectral evidence:</strong> “I saw her spirit.”</div><div class="vote"><button onclick="voteEvidence(this,'spectral','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'spectral','notScientific')">🟢 Not Scientific</button></div></div>
+<div class="evidence-item"><div><strong>Physical symptoms:</strong> convulsions and muscle spasms</div><div class="vote"><button onclick="voteEvidence(this,'physical','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'physical','notScientific')">🟢 Not Scientific</button></div></div>
+<div class="evidence-item"><div><strong>Contaminated grain:</strong> possible ergot in stored rye</div><div class="vote"><button onclick="voteEvidence(this,'grain','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'grain','notScientific')">🟢 Not Scientific</button></div></div>
+<div class="question" data-q="evidenceReason"><h3>8. Evidence Evaluation</h3><p>Why is spectral evidence generally considered <strong>not scientific</strong>? Answer in 1–2 sentences.</p><textarea id="evidenceReason" oninput="saveField('evidenceReason')"></textarea><button type="button" onclick="checkEvidenceReason()">Check Answer</button><div class="feedback"></div></div></section>
+<section id="simulation"><span class="station-label">Station 8</span><h2>🌦️ Mushroom Mystery Lab</h2><p>Adjust the environmental variables to estimate the risk of ergot contamination. This is a simplified model, not a prediction of what actually happened in Salem.</p><div class="sim-controls">
+<label>🌧️ Rainfall: <span id="rainValue">50</span>%</label><input type="range" id="rain" min="0" max="100" value="50" oninput="updateRisk()">
+<label>🌾 Rye production: <span id="ryeValue">50</span>%</label><input type="range" id="rye" min="0" max="100" value="50" oninput="updateRisk()">
+<label>🍄 Fungal growth: <span id="fungusValue">50</span>%</label><input type="range" id="fungus" min="0" max="100" value="50" oninput="updateRisk()">
+<label>🧺 Food supply dependence on rye: <span id="foodValue">50</span>%</label><input type="range" id="food" min="0" max="100" value="50" oninput="updateRisk()"></div><div class="risk moderate" id="riskResult">Moderate Risk</div><p id="riskExplanation"></p></section>
+<section id="verdict"><span class="station-label">Final Artifact</span><h2>📜 The Salem Mystery Verdict</h2><p>Use the evidence you collected to write your final scientific explanation.</p>
+<label for="finalClaim"><strong>Claim:</strong> What best explains the strange events in Salem?</label><textarea id="finalClaim" oninput="saveField('finalClaim')"></textarea>
+<label for="finalEvidence" style="display:block;margin-top:.8rem"><strong>Evidence:</strong> List at least three pieces of evidence from the video, fungus background, microscope activity, or evidence wall.</label><textarea id="finalEvidence" oninput="saveField('finalEvidence')"></textarea>
+<label for="finalReasoning" style="display:block;margin-top:.8rem"><strong>Reasoning:</strong> Explain how your evidence supports your claim. Address correlation versus causation.</label><textarea id="finalReasoning" oninput="saveField('finalReasoning')"></textarea>
+<label for="confidence" style="display:block;margin-top:.8rem"><strong>Confidence Level:</strong></label><select id="confidence" onchange="saveField('confidence')" style="width:100%;padding:.6rem;border-radius:8px"><option value="">Choose one…</option><option>⭐ Low confidence</option><option>⭐⭐ Some confidence</option><option>⭐⭐⭐ Moderate confidence</option><option>⭐⭐⭐⭐ High confidence</option><option>⭐⭐⭐⭐⭐ Very high confidence</option></select>
+<div style="margin-top:1rem"><button onclick="buildSubmission()">📋 Copy My Answers for Blackboard</button><button onclick="downloadSubmission()">⬇️ Download Answers</button><button onclick="clearProgress()">🗑️ Clear My Work</button></div><div id="copyStatus" class="feedback"></div><div class="final-output" id="submissionPreview"></div></section>
+<section id="eggs"><h2>🕵️ Hidden Detective Challenge</h2><p>Find all five hidden objects to earn the <strong>Master Mycologist Detective Badge</strong>.</p><p><button class="egg" onclick="findEgg('candle')">🕯️</button><button class="egg" onclick="findEgg('record')">📜</button><button class="egg" onclick="findEgg('mushroom')">🍄</button><button class="egg" onclick="findEgg('rye')">🌾</button><button class="egg" onclick="findEgg('microscope')">🔬</button></p><div class="badge" id="detectiveBadge">🏅 Master Mycologist Detective Badge Earned!<br>You found all five hidden clues.</div></section>
 </main>
-
-<footer>
-  <p><strong>The Salem Mystery Lab</strong> — Follow the evidence. Test the theories. Solve the mystery.</p>
-  <p>Educational activity for biology, microbiology, history, and scientific-method instruction.</p>
-</footer>
-
+<footer><p><strong>The Salem Mystery Lab</strong> — Follow the evidence. Test the theories. Solve the mystery.</p><p>Educational activity for biology, microbiology, history, and scientific-method instruction.</p></footer>
 <script>
-const STORE_KEY = "salemMysteryLabProgress";
-let progress = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
-let score = {earned:0, possible:0};
-
-function saveProgress(){
-  localStorage.setItem(STORE_KEY, JSON.stringify(progress));
-}
-
-function saveField(id){
-  progress[id] = document.getElementById(id).value;
-  saveProgress();
-}
-
+const STORE_KEY="salemMysteryLabProgress";
+let progress={};
+try{progress=JSON.parse(localStorage.getItem(STORE_KEY)||"{}")||{}}catch(error){progress={}}
+let selectedCard=null;
+function saveProgress(){try{localStorage.setItem(STORE_KEY,JSON.stringify(progress))}catch(error){console.warn("Progress could not be saved in this browser.",error)}}
+function saveField(id){const el=document.getElementById(id);if(el){progress[id]=el.value;saveProgress()}}
 function restoreFields(){
-["initialHypothesis","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{    const el = document.getElementById(id);
-    if(el && progress[id]) el.value = progress[id];
-  });
+["initialHypothesis","caseSummary","caseSupport","caseChallenge","caseCorrelation","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{const el=document.getElementById(id);if(el&&progress[id]!==undefined)el.value=progress[id]})
 }
-
-function gradeRadio(name, correct, correctMessage){
-  const selected = document.querySelector(`input[name="${name}"]:checked`);
-  const feedback = document.querySelector(`[data-q="${name}"] .feedback`);
-  if(!selected){
-    feedback.textContent = "Please choose an answer.";
-    feedback.className = "feedback incorrect";
-    return;
-  }
-  if(selected.value === correct){
-    feedback.textContent = "✅ " + correctMessage;
-    feedback.className = "feedback correct";
-    progress["grade_" + name] = "correct";
-  } else {
-    feedback.textContent = "❌ Not quite. Review the evidence and try again.";
-    feedback.className = "feedback incorrect";
-    progress["grade_" + name] = "incorrect";
-  }
-  saveProgress();
+function gradeRadio(name,correct,correctMessage){
+const selected=document.querySelector(`input[name="${name}"]:checked`);const feedback=document.querySelector(`[data-q="${name}"] .feedback`);if(!feedback)return;
+if(!selected){feedback.textContent="Please choose an answer.";feedback.className="feedback incorrect";return}
+const isCorrect=selected.value===correct;feedback.textContent=isCorrect?"✅ "+correctMessage:"❌ Not quite. Review the evidence and try again.";feedback.className="feedback "+(isCorrect?"correct":"incorrect");progress["grade_"+name]=isCorrect?"correct":"incorrect";saveProgress()
 }
-
-function gradeCheckbox(name, correctAnswers){
-  const checked = [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);
-  const feedback = document.querySelector(`[data-q="${name}"] .feedback`);
-  const isCorrect = checked.length === correctAnswers.length &&
-    correctAnswers.every(answer => checked.includes(answer));
-  if(isCorrect){
-    feedback.textContent = "✅ Correct! All listed symptoms were reported in the Salem case.";
-    feedback.className = "feedback correct";
-    progress["grade_" + name] = "correct";
-  } else {
-    feedback.textContent = "❌ Check the video again. All six symptoms should be selected.";
-    feedback.className = "feedback incorrect";
-    progress["grade_" + name] = "incorrect";
-  }
-  saveProgress();
+function gradeCheckbox(name,correctAnswers){
+const checked=[...document.querySelectorAll(`input[name="${name}"]:checked`)].map(x=>x.value);const feedback=document.querySelector(`[data-q="${name}"] .feedback`);if(!feedback)return;
+const isCorrect=checked.length===correctAnswers.length&&correctAnswers.every(answer=>checked.includes(answer));feedback.textContent=isCorrect?"✅ Correct! All listed symptoms were reported in the Salem case.":"❌ Check the video again. All six symptoms should be selected.";feedback.className="feedback "+(isCorrect?"correct":"incorrect");progress["grade_"+name]=isCorrect?"correct":"incorrect";saveProgress()
 }
-
 function checkEvidenceReason(){
-  const answer = document.getElementById("evidenceReason").value.toLowerCase();
-  const feedback = document.querySelector('[data-q="evidenceReason"] .feedback');
-  const keywords = ["test","measure","observe","verify","reproduc","replicat","evidence"];
-  const hasKeyword = keywords.some(word => answer.includes(word));
-  if(answer.length > 25 && hasKeyword){
-    feedback.textContent = "✅ Strong reasoning. Spectral claims are difficult to test, measure, or independently verify.";
-    feedback.className = "feedback correct";
-  } else {
-    feedback.textContent = "❌ Try again. Mention whether a claim can be tested, measured, observed, or independently verified.";
-    feedback.className = "feedback incorrect";
-  }
+const answer=document.getElementById("evidenceReason").value.toLowerCase();const feedback=document.querySelector('[data-q="evidenceReason"] .feedback');const keywords=["test","measure","observe","verify","reproduc","replicat","evidence"];const hasKeyword=keywords.some(word=>answer.includes(word));
+if(answer.length>25&&hasKeyword){feedback.textContent="✅ Strong reasoning. Spectral claims are difficult to test, measure, or independently verify.";feedback.className="feedback correct"}else{feedback.textContent="❌ Try again. Mention whether a claim can be tested, measured, observed, or independently verified.";feedback.className="feedback incorrect"}
 }
-
-
-let selectedCard = null;
-
-function allowDrop(event) {
-  event.preventDefault();
-  event.currentTarget.classList.add("over");
+function allowDrop(event){event.preventDefault();event.currentTarget.classList.add("over")}
+function dropCard(event){
+event.preventDefault();const zone=event.currentTarget;zone.classList.remove("over");const cardId=event.dataTransfer?event.dataTransfer.getData("text/plain"):"";const card=(cardId&&document.getElementById(cardId))||selectedCard;
+if(card&&card.classList.contains("card")){zone.appendChild(card);card.classList.remove("selected-card");selectedCard=null}
 }
-
-function dropCard(event) {
-  event.preventDefault();
-
-  const zone = event.currentTarget;
-  zone.classList.remove("over");
-
-  // Prefer the card being dragged; otherwise use the selected card.
-  const cardId = event.dataTransfer
-    ? event.dataTransfer.getData("text/plain")
-    : "";
-
-  const card = (cardId && document.getElementById(cardId))
-    || selectedCard;
-
-  if (card && card.classList.contains("card")) {
-    zone.appendChild(card);
-    card.classList.remove("selected-card");
-    selectedCard = null;
-  }
-}
-
-// Set up every card for dragging and click-to-select.
-document.querySelectorAll("#cardBank .card").forEach((card, index) => {
-  if (!card.id) {
-    card.id = "salem-card-" + (index + 1);
-  }
-
-  card.draggable = true;
-  card.setAttribute("tabindex", "0");
-  card.setAttribute("role", "button");
-  card.setAttribute("aria-label", "Select or drag " + card.textContent.trim());
-
-  card.addEventListener("dragstart", event => {
-    selectedCard = card;
-    event.dataTransfer.setData("text/plain", card.id);
-    event.dataTransfer.effectAllowed = "move";
-    card.classList.add("selected-card");
-  });
-
-  card.addEventListener("dragend", () => {
-    card.classList.remove("selected-card");
-    document.querySelectorAll(".dropzone").forEach(zone => {
-      zone.classList.remove("over");
-    });
-  });
-
-  // Clicking selects a card so students can place it with a click.
-  card.addEventListener("click", event => {
-    event.stopPropagation();
-
-    if (selectedCard) {
-      selectedCard.classList.remove("selected-card");
-    }
-
-    selectedCard = card;
-    card.classList.add("selected-card");
-  });
-
-  // Keyboard selection support.
-  card.addEventListener("keydown", event => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      card.click();
-    }
-  });
+document.querySelectorAll("#cardBank .card").forEach((card,index)=>{
+if(!card.id)card.id="salem-card-"+(index+1);card.draggable=true;card.tabIndex=0;card.setAttribute("role","button");card.setAttribute("aria-label","Select or drag "+card.textContent.trim());
+card.addEventListener("dragstart",event=>{selectedCard=card;if(event.dataTransfer){event.dataTransfer.setData("text/plain",card.id);event.dataTransfer.effectAllowed="move"}card.classList.add("selected-card")});
+card.addEventListener("dragend",()=>{card.classList.remove("selected-card");document.querySelectorAll(".dropzone").forEach(zone=>zone.classList.remove("over"))});
+card.addEventListener("click",event=>{event.stopPropagation();if(selectedCard)selectedCard.classList.remove("selected-card");selectedCard=card;card.classList.add("selected-card")});
+card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();card.click()}})
 });
-
-// Set up both drop zones.
-document.querySelectorAll(".dropzone").forEach(zone => {
-  zone.addEventListener("dragover", allowDrop);
-
-  zone.addEventListener("dragleave", event => {
-    if (!zone.contains(event.relatedTarget)) {
-      zone.classList.remove("over");
-    }
-  });
-
-  zone.addEventListener("drop", dropCard);
-
-  // Clicking a zone places the selected card there.
-  zone.addEventListener("click", event => {
-    if (event.target.closest(".card")) return;
-    if (selectedCard) dropCard({
-      preventDefault() {},
-      currentTarget: zone,
-      dataTransfer: null
-    });
-  });
+document.querySelectorAll(".dropzone").forEach(zone=>{
+zone.tabIndex=0;zone.addEventListener("dragover",allowDrop);zone.addEventListener("dragleave",event=>{if(!zone.contains(event.relatedTarget))zone.classList.remove("over")});zone.addEventListener("drop",dropCard);
+zone.addEventListener("click",event=>{if(event.target.closest(".card"))return;if(selectedCard)dropCard({preventDefault(){},currentTarget:zone,dataTransfer:null})});
+zone.addEventListener("keydown",event=>{if((event.key==="Enter"||event.key===" ")&&selectedCard){event.preventDefault();dropCard({preventDefault(){},currentTarget:zone,dataTransfer:null})}})
 });
-
-function voteEvidence(button, evidenceId, choice){
-  const buttons = button.parentElement.querySelectorAll("button");
-  buttons.forEach(b=>b.classList.remove("selected"));
-  button.classList.add("selected");
-  progress["evidence_" + evidenceId] = choice;
-  saveProgress();
-}
-
-const slides = [
-  {
-    title: "Slide 1: Healthy Rye Grain",
-    image: "images/healthy-rye.jpg",
-    alt: "Microscope view of a healthy rye grain",
-    text: "A healthy rye grain is a seed produced by the rye plant. It can be ground into flour and used as food. Look for the smooth outer seed coat and the stored nutrients inside.",
-    credit: "Image source: Wikimedia Commons"
-  },
-  {
-    title: "Slide 2: Ergot-Infected Rye",
-    image: "images/ergot-rye.jpg",
-    alt: "Dark ergot sclerotia growing on rye",
-    text: "The dark structures on this rye head are ergots, or fungal sclerotia. They replace part of the grain and can contain ergot alkaloids. Wet conditions can increase the chance of ergot development.",
-    credit: "Image source: Wikimedia Commons"
-  },
-  {
-    title: "Slide 3: Mushroom Gills",
-    image: "images/mushroom-gills.jpg",
-    alt: "Close-up of mushroom gills beneath the cap",
-    text: "Gills are thin, folded structures beneath the cap of many mushrooms. Their large surface area helps the fungus produce and release large numbers of spores.",
-    credit: "Image source: Wikimedia Commons"
-  },
-  {
-    title: "Slide 4: Basidiospores",
-    image: "images/basidiospores.jpg",
-    alt: "Microscope image of basidiospores",
-    text: "Basidiospores are microscopic reproductive cells produced by basidiomycete fungi. Their color, shape, and surface features can help identify different groups of mushrooms.",
-    credit: "Image source: Wikimedia Commons"
-  },
-  {
-    title: "Slide 5: Student Spore Print",
-    image: "images/student-spore-print.jpg",
-    alt: "Example mushroom spore print on paper",
-    text: "A spore print forms when mushroom spores fall onto paper or foil. The color and pattern provide clues about the mushroom’s identity.",
-    credit: "Image source: Wikimedia Commons"
-  }
+function voteEvidence(button,evidenceId,choice){button.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("selected"));button.classList.add("selected");progress["evidence_"+evidenceId]=choice;saveProgress()}
+const slides=[
+{title:"Slide 1: Healthy Rye Grain",image:"images/healthy-rye.jpg",alt:"Microscope view of a healthy rye grain",text:"A healthy rye grain is a seed produced by the rye plant. It can be ground into flour and used as food. Look for the smooth outer seed coat and the stored nutrients inside.",credit:"Image source: Wikimedia Commons"},
+{title:"Slide 2: Ergot-Infected Rye",image:"images/ergot-rye.jpg",alt:"Dark ergot sclerotia growing on rye",text:"The dark structures on this rye head are ergots, or fungal sclerotia. They replace part of the grain and can contain ergot alkaloids. Wet conditions can increase the chance of ergot development.",credit:"Image source: Wikimedia Commons"},
+{title:"Slide 3: Mushroom Gills",image:"images/mushroom-gills.jpg",alt:"Close-up of mushroom gills beneath the cap",text:"Gills are thin, folded structures beneath the cap of many mushrooms. Their large surface area helps the fungus produce and release large numbers of spores.",credit:"Image source: Wikimedia Commons"},
+{title:"Slide 4: Basidiospores",image:"images/basidiospores.jpg",alt:"Microscope image of basidiospores",text:"Basidiospores are microscopic reproductive cells produced by basidiomycete fungi. Their color, shape, and surface features can help identify different groups of mushrooms.",credit:"Image source: Wikimedia Commons"},
+{title:"Slide 5: Student Spore Print",image:"images/student-spore-print.jpg",alt:"Example mushroom spore print on paper",text:"A spore print forms when mushroom spores fall onto paper or foil. The color and pattern provide clues about the mushroom’s identity.",credit:"Image source: Wikimedia Commons"}
 ];
-let currentSlide = 0;
-
+let currentSlide=0;
 function renderSlide(){
-  const view = document.getElementById("slideView");
-  const buttons = document.getElementById("slideButtons");
-  const slide = slides[currentSlide];
-
-  view.innerHTML = `
-    <div>
-      <h3>${slide.title}</h3>
-      <img
-        src="${slide.image}"
-        alt="${slide.alt}"
-        style="
-          max-width:100%;
-          max-height:260px;
-          border-radius:8px;
-          border:3px solid #777;
-          background:#fff;
-          object-fit:contain;
-        "
-      >
-      <p style="max-width:750px;margin:1rem auto 0;">${slide.text}</p>
-      <p style="font-size:.75rem;color:#bbb;margin-top:.4rem;">${slide.credit}</p>
-    </div>
-  `;
-
-  buttons.innerHTML = "";
-
-  slides.forEach((slide, index) => {
-    const b = document.createElement("button");
-    b.textContent = index + 1;
-    if(index === currentSlide) b.classList.add("active");
-    b.onclick = () => {
-      currentSlide = index;
-      renderSlide();
-    };
-    buttons.appendChild(b);
-  });
+const view=document.getElementById("slideView"),buttons=document.getElementById("slideButtons"),slide=slides[currentSlide];
+view.innerHTML=`<div><h3>${slide.title}</h3><img src="${slide.image}" alt="${slide.alt}" style="max-width:100%;max-height:260px;border-radius:8px;border:3px solid #777;background:#fff;object-fit:contain"><p style="max-width:750px;margin:1rem auto 0">${slide.text}</p><p style="font-size:.75rem;color:#bbb;margin-top:.4rem">${slide.credit}</p></div>`;
+buttons.innerHTML="";slides.forEach((item,index)=>{const b=document.createElement("button");b.textContent=index+1;if(index===currentSlide)b.classList.add("active");b.onclick=()=>{currentSlide=index;renderSlide()};buttons.appendChild(b)})
 }
-
 function updateRisk(){
-  const rain = +document.getElementById("rain").value;
-  const rye = +document.getElementById("rye").value;
-  const fungus = +document.getElementById("fungus").value;
-  const food = +document.getElementById("food").value;
-
-  document.getElementById("rainValue").textContent = rain;
-  document.getElementById("ryeValue").textContent = rye;
-  document.getElementById("fungusValue").textContent = fungus;
-  document.getElementById("foodValue").textContent = food;
-
-  const riskScore = (rain*0.35 + fungus*0.35 + food*0.20 + rye*0.10);
-  const result = document.getElementById("riskResult");
-  const explanation = document.getElementById("riskExplanation");
-
-  if(riskScore < 35){
-    result.textContent = "Low Risk";
-    result.className = "risk low";
-    explanation.textContent = "Low moisture, limited fungal growth, or less reliance on rye reduces the chance that contaminated grain reaches many people.";
-  } else if(riskScore < 70){
-    result.textContent = "Moderate Risk";
-    result.className = "risk moderate";
-    explanation.textContent = "Some conditions favor contamination, but the model does not prove that ergot poisoning occurred. More evidence would be needed.";
-  } else {
-    result.textContent = "High Risk";
-    result.className = "risk high";
-    explanation.textContent = "Wet conditions, fungal growth, and heavy reliance on rye could increase exposure to contaminated grain. This supports a hypothesis, but it does not by itself prove causation.";
-  }
-
-  progress.riskModel = {rain, rye, fungus, food, riskScore: Math.round(riskScore)};
-  saveProgress();
+const rain=+document.getElementById("rain").value,rye=+document.getElementById("rye").value,fungus=+document.getElementById("fungus").value,food=+document.getElementById("food").value;
+document.getElementById("rainValue").textContent=rain;document.getElementById("ryeValue").textContent=rye;document.getElementById("fungusValue").textContent=fungus;document.getElementById("foodValue").textContent=food;
+const riskScore=rain*.35+fungus*.35+food*.20+rye*.10,result=document.getElementById("riskResult"),explanation=document.getElementById("riskExplanation");
+if(riskScore<35){result.textContent="Low Risk";result.className="risk low";explanation.textContent="Low moisture, limited fungal growth, or less reliance on rye reduces the chance that contaminated grain reaches many people."}
+else if(riskScore<70){result.textContent="Moderate Risk";result.className="risk moderate";explanation.textContent="Some conditions favor contamination, but the model does not prove that ergot poisoning occurred. More evidence would be needed."}
+else{result.textContent="High Risk";result.className="risk high";explanation.textContent="Wet conditions, fungal growth, and heavy reliance on rye could increase exposure to contaminated grain. This supports a hypothesis, but it does not by itself prove causation."}
+progress.riskModel={rain,rye,fungus,food,riskScore:Math.round(riskScore)};saveProgress()
 }
-
-function findEgg(eggName){
-  progress.eggs = progress.eggs || [];
-  if(!progress.eggs.includes(eggName)) progress.eggs.push(eggName);
-  saveProgress();
-  if(progress.eggs.length >= 5){
-    document.getElementById("detectiveBadge").classList.add("show");
-  }
-}
-
+function findEgg(eggName){progress.eggs=progress.eggs||[];if(!progress.eggs.includes(eggName))progress.eggs.push(eggName);saveProgress();if(progress.eggs.length>=5)document.getElementById("detectiveBadge").classList.add("show")}
 function buildSubmissionText(){
-  const g = id => progress[id] || "Not completed";
-  const checked = [...document.querySelectorAll('input[name="symptoms"]:checked')].map(x=>x.value).join(", ") || "None selected";
-  const evidenceVotes = ["spectral","physical","grain"].map(id=>{
-    const label = {spectral:"Spectral evidence", physical:"Physical symptoms", grain:"Contaminated grain"}[id];
-    return `${label}: ${progress["evidence_"+id] || "No vote"}`;
-  }).join("\n");
-
-  const eggs = (progress.eggs || []).length;
-
-  return `SALEM MYSTERY LAB — STUDENT SUBMISSION
+const g=id=>progress[id]||"Not completed";const checked=[...document.querySelectorAll('input[name="symptoms"]:checked')].map(x=>x.value).join(", ")||"None selected";
+const evidenceVotes=["spectral","physical","grain"].map(id=>{const label={spectral:"Spectral evidence",physical:"Physical symptoms",grain:"Contaminated grain"}[id];return `${label}: ${progress["evidence_"+id]||"No vote"}`}).join("\n");const eggs=(progress.eggs||[]).length;
+return `SALEM MYSTERY LAB — STUDENT SUBMISSION
 Name: ______________________________
 Date: ${new Date().toLocaleDateString()}
 
@@ -1064,11 +209,11 @@ ${evidenceVotes}
 ${g("evidenceReason")}
 
 FUNGUS LAB MODEL
-Rainfall: ${progress.riskModel?.rain ?? "Not completed"}%
-Rye production: ${progress.riskModel?.rye ?? "Not completed"}%
-Fungal growth: ${progress.riskModel?.fungus ?? "Not completed"}%
-Food supply dependence on rye: ${progress.riskModel?.food ?? "Not completed"}%
-Estimated risk score: ${progress.riskModel?.riskScore ?? "Not completed"}/100
+Rainfall: ${progress.riskModel?.rain??"Not completed"}%
+Rye production: ${progress.riskModel?.rye??"Not completed"}%
+Fungal growth: ${progress.riskModel?.fungus??"Not completed"}%
+Food supply dependence on rye: ${progress.riskModel?.food??"Not completed"}%
+Estimated risk score: ${progress.riskModel?.riskScore??"Not completed"}/100
 
 FINAL VERDICT
 Claim: ${g("finalClaim")}
@@ -1082,43 +227,18 @@ ${g("finalReasoning")}
 Confidence level: ${g("confidence")}
 
 Hidden objects found: ${eggs}/5
-Badge earned: ${eggs >= 5 ? "Yes — Master Mycologist Detective" : "Not yet"}`;
+Badge earned: ${eggs>=5?"Yes — Master Mycologist Detective":"Not yet"}`
 }
-
 function buildSubmission(){
-  const text = buildSubmissionText();
-  document.getElementById("submissionPreview").textContent = text;
-  navigator.clipboard.writeText(text).then(()=>{
-    document.getElementById("copyStatus").textContent = "✅ Copied! Paste this into your Blackboard assignment.";
-  }).catch(()=>{
-    document.getElementById("copyStatus").textContent = "Select and copy the text in the box below, then paste it into Blackboard.";
-  });
+const text=buildSubmissionText();document.getElementById("submissionPreview").textContent=text;
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{document.getElementById("copyStatus").textContent="✅ Copied! Paste this into your Blackboard assignment."}).catch(()=>{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."})}
+else{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."}
 }
-
 function downloadSubmission(){
-  const text = buildSubmissionText();
-  const blob = new Blob([text], {type:"text/plain"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "salem-mystery-lab-submission.txt";
-  a.click();
-  URL.revokeObjectURL(a.href);
+const blob=new Blob([buildSubmissionText()],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="salem-mystery-lab-submission.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
 }
-
-function clearProgress(){
-  if(confirm("Clear all saved answers from this browser?")){
-    localStorage.removeItem(STORE_KEY);
-    location.reload();
-  }
-}
-
-restoreFields();
-renderSlide();
-updateRisk();
-if((progress.eggs || []).length >= 5){
-  document.getElementById("detectiveBadge").classList.add("show");
-}
+function clearProgress(){if(confirm("Clear all saved answers from this browser?")){localStorage.removeItem(STORE_KEY);location.reload()}}
+restoreFields();renderSlide();updateRisk();if((progress.eggs||[]).length>=5)document.getElementById("detectiveBadge").classList.add("show");
 </script>
-
 </body>
 </html>
