@@ -201,6 +201,45 @@ Spore-print color: ${g("sporeColor")}
 Drawing/upload notes: ${g("sporeDrawing")}
 Observed structures: ${g("sporeStructures")}
 Interesting findings: ${g("sporeFindings")}
+
+EVIDENCE WALL
+${evidenceVotes}
+
+9. EVIDENCE EVALUATION
+${g("evidenceReason")}
+
+FUNGUS LAB MODEL
+Rainfall: ${progress.riskModel?.rain??"Not completed"}%
+Rye production: ${progress.riskModel?.rye??"Not completed"}%
+Fungal growth: ${progress.riskModel?.fungus??"Not completed"}%
+Food supply dependence on rye: ${progress.riskModel?.food??"Not completed"}%
+Estimated risk score: ${progress.riskModel?.riskScore??"Not completed"}/100
+
+FINAL VERDICT
+Claim: ${g("finalClaim")}
+
+Evidence:
+${g("finalEvidence")}
+
+Reasoning:
+${g("finalReasoning")}
+
+Confidence level: ${g("confidence")}
+
+Hidden objects found: ${eggs}/5
+Badge earned: ${eggs>=5?"Yes — Master Mycologist Detective":"Not yet"}`
+}
+function buildSubmission(){
+const text=buildSubmissionText();document.getElementById("submissionPreview").textContent=text;
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{document.getElementById("copyStatus").textContent="✅ Copied! Paste this into your Blackboard assignment."}).catch(()=>{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."})}
+else{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."}
+}
+function downloadSubmission(){
+const blob=new Blob([buildSubmissionText()],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="salem-mystery-lab-submission.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
+function clearProgress(){if(confirm("Clear all saved answers from this browser?")){localStorage.removeItem(STORE_KEY);location.reload()}}
+restoreFields();renderSlide();updateRisk();if((progress.eggs||[]).length>=5)document.getElementById("detectiveBadge").classList.add("show");
+</script>
 ```html
 <!-- Mushroom Spore Print Gallery -->
 <section id="spore-gallery" class="spore-gallery-section">
@@ -282,44 +321,31 @@ Interesting findings: ${g("sporeFindings")}
 }
 
 .spore-gallery-activity {
-    margin-top: 
-EVIDENCE WALL
-${evidenceVotes}
-
-9. EVIDENCE EVALUATION
-${g("evidenceReason")}
-
-FUNGUS LAB MODEL
-Rainfall: ${progress.riskModel?.rain??"Not completed"}%
-Rye production: ${progress.riskModel?.rye??"Not completed"}%
-Fungal growth: ${progress.riskModel?.fungus??"Not completed"}%
-Food supply dependence on rye: ${progress.riskModel?.food??"Not completed"}%
-Estimated risk score: ${progress.riskModel?.riskScore??"Not completed"}/100
-
-FINAL VERDICT
-Claim: ${g("finalClaim")}
-
-Evidence:
-${g("finalEvidence")}
-
-Reasoning:
-${g("finalReasoning")}
-
-Confidence level: ${g("confidence")}
-
-Hidden objects found: ${eggs}/5
-Badge earned: ${eggs>=5?"Yes — Master Mycologist Detective":"Not yet"}`
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: #f3e8ff;
+    border-radius: 10px;
+    line-height: 1.6;
 }
-function buildSubmission(){
-const text=buildSubmissionText();document.getElementById("submissionPreview").textContent=text;
-if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>{document.getElementById("copyStatus").textContent="✅ Copied! Paste this into your Blackboard assignment."}).catch(()=>{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."})}
-else{document.getElementById("copyStatus").textContent="Select and copy the text in the box below, then paste it into Blackboard."}
+
+.spore-gallery-activity h3 {
+    margin-top: 0;
+    color: #6d28d9;
 }
-function downloadSubmission(){
-const blob=new Blob([buildSubmissionText()],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="salem-mystery-lab-submission.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+
+.spore-gallery-activity li {
+    margin-bottom: 0.5rem;
 }
-function clearProgress(){if(confirm("Clear all saved answers from this browser?")){localStorage.removeItem(STORE_KEY);location.reload()}}
-restoreFields();renderSlide();updateRisk();if((progress.eggs||[]).length>=5)document.getElementById("detectiveBadge").classList.add("show");
-</script>
-</body>
+
+@media (max-width: 600px) {
+    .spore-gallery-section {
+        padding: 0.75rem;
+    }
+
+    .spore-gallery-embed iframe {
+        height: 608px;
+    }
+}
+</style>
+```</body>
 </html>
