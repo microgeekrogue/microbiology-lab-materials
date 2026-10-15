@@ -25,7 +25,7 @@ button,select,input,textarea{font-family:inherit;font-size:1rem}button{backgroun
 .dropzones{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1rem}.dropzone{min-height:180px;border:2px dashed #a58a55;border-radius:12px;padding:.8rem;background:#fffdf5}.dropzone.over{border-color:var(--fungus);background:#f3edff}
 .hotspot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}.hotspot{background:#f0e7d2;border:2px solid #b49a67;border-radius:12px;padding:1rem;cursor:pointer}.hotspot .reveal{display:none;margin-top:.6rem}.hotspot.open .reveal{display:block}
 .microscope{background:#101010;color:#e9e2cf;border-radius:12px;padding:1rem}.slide-view{min-height:230px;border-radius:10px;border:4px solid #555;display:grid;place-items:center;text-align:center;padding:1rem;background:radial-gradient(circle at 50% 50%,#3b3b3b 0 35%,#1a1a1a 100%)}.slide-buttons{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}.slide-buttons button.active{background:var(--fungus)}
-.evidence-item{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;background:#fff;border:1px solid #d5c19b;border-radius:10px;padding:.8rem;margin:.5rem 0}.vote button{margin-right:.3rem}.vote .selected{outline:3px solid var(--rye)}
+.evidence-item{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;background:#fff;border:1px solid #d5c19b;border-radius:10px;padding:.8rem;margin:.5rem 0}.vote button{margin-right:.3rem}.vote button.selected{outline:3px solid var(--rye);box-shadow:0 0 0 2px #fff inset}.vote button[aria-pressed="true"]{font-weight:bold}.evidence-feedback{flex-basis:100%;padding:.7rem .85rem;border-radius:8px;background:#f2eee7;border-left:5px solid var(--fungus);margin-top:.25rem}.evidence-feedback.correct{background:#e7f4e8;border-left-color:var(--good)}.evidence-feedback.incorrect{background:#fff0e8;border-left-color:var(--danger)}.padlet-wrap{border:1px solid #d8c6a2;border-radius:12px;overflow:hidden;background:#f4f4f4}.padlet-wrap iframe{display:block;width:100%;height:608px;border:0}.observation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem}.observation-grid label{display:block;font-weight:bold;margin-bottom:.3rem}
 .sim-controls{display:grid;gap:.8rem;max-width:600px}.sim-controls label{font-weight:bold}input[type=range]{width:100%}
 .risk{font-size:1.4rem;font-weight:bold;padding:.7rem;border-radius:10px;text-align:center}.low{background:#d9efd9;color:#245c33}.moderate{background:#fdf0c8;color:#7a5b12}.high{background:#f8d3d3;color:#7d2424}
 .badge{display:none;background:linear-gradient(135deg,#6d4c8f,#c8a24a);color:#fff;padding:1rem;border-radius:12px;text-align:center;margin-top:1rem}.badge.show{display:block}.egg{cursor:pointer;font-size:1.4rem;background:none;padding:.2rem}
@@ -35,7 +35,7 @@ footer{text-align:center;color:#5c4a33;padding:2rem 1rem;font-size:.9rem}@media(
 </head>
 <body>
 <header class="hero" id="top"><div class="hero-inner"><div class="eyebrow">An Interdisciplinary Investigation</div><h1>🔮 The Salem Mystery Lab</h1><p class="subtitle">Science, Spores, and the Witch Trials</p><p><strong>Guiding Question:</strong> Were the strange events in Salem caused by witchcraft, mass hysteria, toxic fungi, or something else?</p><a class="cta" href="#station1">🚪 Enter the Investigation</a></div></header>
-<nav><a href="#station1">🎥 Crime Scene</a><a href="#caseStudy">📖 Case Study</a><a href="#station2">🧠 Hypothesis</a><a href="#station3">🍄 The Fungus</a><a href="#microscope">🔬 Microscope</a><a href="#spores">🍄 Spore Print</a><a href="#evidence">⚖️ Evidence Wall</a><a href="#simulation">🌦️ Fungus Lab</a><a href="#verdict">📜 Final Verdict</a></nav>
+<nav><a href="#station1">🎥 Crime Scene</a><a href="#caseStudy">📖 Case Study</a><a href="#station2">🧠 Hypothesis</a><a href="#station3">🍄 The Fungus</a><a href="#microscope">🔬 Microscope</a><a href="#spores">🍄 Spore Print</a><a href="#sporeGallery">🖼️ Spore Gallery</a><a href="#evidence">⚖️ Evidence Wall</a><a href="#simulation">🌦️ Fungus Lab</a><a href="#verdict">📜 Final Verdict</a></nav>
 <main>
 <section id="intro"><h2>Become a Scientific Investigator</h2><p>In this activity, you will examine the Salem Witch Trials like a historian, disease detective, mycologist, and microscopist. You will collect evidence, test competing explanations, and decide which explanation is best supported by the available information.</p><div class="note"><strong>Important:</strong> The ergot hypothesis is <em>not proven</em>. A good scientist distinguishes between an interesting hypothesis, supporting evidence, and a conclusion that can be demonstrated with certainty.</div><p>Your work saves automatically in this browser. At the end, use <strong>Copy My Answers for Blackboard</strong> and paste the results into your Blackboard assignment.</p></section>
 <section id="station1"><span class="station-label">Station 1</span><h2>🎥 The Crime Scene</h2><p>Watch the assigned video, <em>Secrets of the Dead: The Witch’s Curse</em>. As you watch, record the symptoms and evidence described in the case.</p>
@@ -65,14 +65,20 @@ footer{text-align:center;color:#5c4a33;padding:2rem 1rem;font-size:.9rem}@media(
 <section id="microscope"><span class="station-label">Station 5</span><h2>🔬 Virtual Microscope</h2><p>Click through the slides. Later, replace the descriptions with your own microscope photographs of rye, ergot, mushroom gills, and spore prints.</p><div class="microscope"><div class="slide-view" id="slideView"></div><div class="slide-buttons" id="slideButtons"></div></div>
 <div class="question" data-q="sporeFunction"><h3>6. Spore Function</h3><p>What is the main reproductive role of basidiospores in mushrooms?</p><label class="choice"><input type="radio" name="sporeFunction" value="a"> They carry genetic material and can disperse to start new fungal growth</label><label class="choice"><input type="radio" name="sporeFunction" value="b"> They digest food inside the mushroom cap</label><label class="choice"><input type="radio" name="sporeFunction" value="c"> They produce chlorophyll for photosynthesis</label><button type="button" onclick="gradeRadio('sporeFunction','a','Correct. Spores are reproductive dispersal units; fungi do not photosynthesize.')">Check Answer</button><div class="feedback"></div></div>
 <div class="question"><h3>7. Microscopy Observations</h3><label for="microscopyNotes">Describe one structure you observed or expect to observe under the microscope. What does its structure help the fungus do?</label><textarea id="microscopyNotes" oninput="saveField('microscopyNotes')"></textarea></div></section>
-<section id="spores"><span class="station-label">Station 6</span><h2>🍄 Spore Print Challenge</h2><p>Complete your mushroom spore-print lab, then record your observations below. You may also upload a photo of your spore print to the Padlet at the bottom of the page.</p><div class="question">
+<section id="spores"><span class="station-label">Station 6</span><h2>🍄 Spore Print Challenge</h2><p>Complete your mushroom spore-print lab, then record what you actually observed below. Include a description of the print pattern and any visible structures or differences. You may upload a photo of your spore print to Blackboard, and you can also share your spore-print photo and observations on the <strong>Spore Gallery Padlet just below this lab</strong>.</p><div class="question">
 <label for="mushroomSpecies">My mushroom species or unknown label:</label><input id="mushroomSpecies" style="width:100%;padding:.6rem;border:1px solid #c8b087;border-radius:8px" oninput="saveField('mushroomSpecies')">
 <label for="sporeColor" style="display:block;margin-top:.8rem">Color of spore print:</label><select id="sporeColor" onchange="saveField('sporeColor')" style="width:100%;padding:.6rem;border-radius:8px"><option value="">Choose one…</option><option>White</option><option>Brown</option><option>Black</option><option>Pink</option><option>Purple-brown</option></select>
-<label for="sporeDrawing" style="display:block;margin-top:.8rem">Drawing description or upload notes:</label><textarea id="sporeDrawing" oninput="saveField('sporeDrawing')"></textarea><label for="sporeStructures" style="display:block;margin-top:.8rem">Observed structures:</label><textarea id="sporeStructures" oninput="saveField('sporeStructures')"></textarea><label for="sporeFindings" style="display:block;margin-top:.8rem">Interesting findings:</label><textarea id="sporeFindings" oninput="saveField('sporeFindings')"></textarea></div></section>
-<section id="evidence"><span class="station-label">Station 7</span><h2>⚖️ Salem Evidence Wall</h2><p>Decide whether each item is <strong>scientific evidence</strong> or <strong>not scientific evidence</strong>. Scientific evidence should be observable, measurable, testable, or independently verifiable.</p>
-<div class="evidence-item"><div><strong>Spectral evidence:</strong> “I saw her spirit.”</div><div class="vote"><button onclick="voteEvidence(this,'spectral','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'spectral','notScientific')">🟢 Not Scientific</button></div></div>
-<div class="evidence-item"><div><strong>Physical symptoms:</strong> convulsions and muscle spasms</div><div class="vote"><button onclick="voteEvidence(this,'physical','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'physical','notScientific')">🟢 Not Scientific</button></div></div>
-<div class="evidence-item"><div><strong>Contaminated grain:</strong> possible ergot in stored rye</div><div class="vote"><button onclick="voteEvidence(this,'grain','scientific')">🔴 Scientific</button><button onclick="voteEvidence(this,'grain','notScientific')">🟢 Not Scientific</button></div></div>
+<label for="sporeDrawing" style="display:block;margin-top:.8rem">Drawing description or upload notes:</label><textarea id="sporeDrawing" oninput="saveField('sporeDrawing')"></textarea><label for="sporeStructures" style="display:block;margin-top:.8rem">Observed structures:</label><textarea id="sporeStructures" oninput="saveField('sporeStructures')"></textarea><label for="sporeFindings" style="display:block;margin-top:.8rem">Interesting findings:</label><textarea id="sporeFindings" oninput="saveField('sporeFindings')" placeholder="What stood out? What might the color or pattern tell you?"></textarea>
+<div class="question"><h3>Spore Print Investigation Notes</h3><p>Use these prompts to record observations before you interpret them. Describe what you can see; do not guess at a species based on color alone.</p><div class="observation-grid">
+<div><label for="sporePattern">1. Pattern and distribution</label><textarea id="sporePattern" oninput="saveField('sporePattern')" placeholder="For example: radial pattern, clustered dots, uneven deposit…"></textarea></div>
+<div><label for="sporeComparison">2. Comparisons or differences</label><textarea id="sporeComparison" oninput="saveField('sporeComparison')" placeholder="Compare areas of the print or compare with a classmate's print."></textarea></div>
+<div><label for="sporeInterpretation">3. What can you conclude—and what remains uncertain?</label><textarea id="sporeInterpretation" oninput="saveField('sporeInterpretation')" placeholder="State one evidence-based observation and one limitation."></textarea></div>
+</div></div></section>
+<section id="sporeGallery"><span class="station-label">Spore Gallery</span><h2>🖼️ Share and Compare Spore Prints</h2><p>Post a photo of your spore print to the Padlet below, if your instructor has enabled posting. Add your mushroom label, spore-print color, and one observation. Then compare the visible patterns with at least one other post.</p><div class="note"><strong>Gallery investigation:</strong> Record two specific observations from the gallery and one question or difference you noticed. You will use these notes in your final scientific explanation.</div><div class="question"><label for="galleryObservation1">Gallery observation 1</label><textarea id="galleryObservation1" oninput="saveField('galleryObservation1')" placeholder="Describe a specific feature you can see in a posted spore print."></textarea><label for="galleryObservation2" style="display:block;margin-top:.8rem">Gallery observation 2</label><textarea id="galleryObservation2" oninput="saveField('galleryObservation2')" placeholder="Describe a second feature, comparison, or difference."></textarea><label for="galleryQuestion" style="display:block;margin-top:.8rem">Question or pattern you noticed</label><textarea id="galleryQuestion" oninput="saveField('galleryQuestion')" placeholder="What would you like to investigate further?"></textarea></div><div class="padlet-wrap"><iframe src="https://padlet.com/embed/s024j3mbu2faw3xbzith" title="Salem Mystery Lab spore-print gallery on Padlet" loading="lazy" allow="camera;microphone;geolocation"></iframe></div><p><small>If Padlet does not allow posting inside the embedded view, open the Padlet directly using the link your instructor provided.</small></p></section>
+<section id="evidence"><span class="station-label">Station 7</span><h2>⚖️ Salem Evidence Wall</h2><p>Classify each item. Select a button to see whether your choice is supported and why. Scientific evidence can be observed or documented, but evidence may still be incomplete or unable to prove a cause by itself.</p>
+<div class="evidence-item"><div><strong>Spectral evidence:</strong> “I saw her spirit.”</div><div class="vote"><button type="button" aria-pressed="false" onclick="voteEvidence(this,'spectral','scientific')">🔴 Scientific</button><button type="button" aria-pressed="false" onclick="voteEvidence(this,'spectral','notScientific')">🟢 Not Scientific</button></div><div class="evidence-feedback" id="feedback-spectral" aria-live="polite">Choose a classification to see feedback.</div></div>
+<div class="evidence-item"><div><strong>Physical symptoms:</strong> convulsions and muscle spasms</div><div class="vote"><button type="button" aria-pressed="false" onclick="voteEvidence(this,'physical','scientific')">🔴 Scientific</button><button type="button" aria-pressed="false" onclick="voteEvidence(this,'physical','notScientific')">🟢 Not Scientific</button></div><div class="evidence-feedback" id="feedback-physical" aria-live="polite">Choose a classification to see feedback.</div></div>
+<div class="evidence-item"><div><strong>Contaminated grain:</strong> possible ergot in stored rye</div><div class="vote"><button type="button" aria-pressed="false" onclick="voteEvidence(this,'grain','scientific')">🔴 Scientific</button><button type="button" aria-pressed="false" onclick="voteEvidence(this,'grain','notScientific')">🟢 Not Scientific</button></div><div class="evidence-feedback" id="feedback-grain" aria-live="polite">Choose a classification to see feedback.</div></div>
 <div class="question" data-q="evidenceReason"><h3>8. Evidence Evaluation</h3><p>Why is spectral evidence generally considered <strong>not scientific</strong>? Answer in 1–2 sentences.</p><textarea id="evidenceReason" oninput="saveField('evidenceReason')"></textarea><button type="button" onclick="checkEvidenceReason()">Check Answer</button><div class="feedback"></div></div></section>
 <section id="simulation"><span class="station-label">Station 8</span><h2>🌦️ Mushroom Mystery Lab</h2><p>Adjust the environmental variables to estimate the risk of ergot contamination. This is a simplified model, not a prediction of what actually happened in Salem.</p><div class="sim-controls">
 <label>🌧️ Rainfall: <span id="rainValue">50</span>%</label><input type="range" id="rain" min="0" max="100" value="50" oninput="updateRisk()">
@@ -96,7 +102,7 @@ let selectedCard=null;
 function saveProgress(){try{localStorage.setItem(STORE_KEY,JSON.stringify(progress))}catch(error){console.warn("Progress could not be saved in this browser.",error)}}
 function saveField(id){const el=document.getElementById(id);if(el){progress[id]=el.value;saveProgress()}}
 function restoreFields(){
-["initialHypothesis","caseSummary","caseSupport","caseChallenge","caseCorrelation","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{const el=document.getElementById(id);if(el&&progress[id]!==undefined)el.value=progress[id]})
+["initialHypothesis","caseSummary","caseSupport","caseChallenge","caseCorrelation","microscopyNotes","mushroomSpecies","sporeColor","sporeDrawing","sporeStructures","sporeFindings","sporePattern","sporeComparison","sporeInterpretation","galleryObservation1","galleryObservation2","galleryQuestion","evidenceReason","finalClaim","finalEvidence","finalReasoning","confidence"].forEach(id=>{const el=document.getElementById(id);if(el&&progress[id]!==undefined)el.value=progress[id]})
 }
 function gradeRadio(name,correct,correctMessage){
 const selected=document.querySelector(`input[name="${name}"]:checked`);const feedback=document.querySelector(`[data-q="${name}"] .feedback`);if(!feedback)return;
@@ -128,7 +134,17 @@ zone.tabIndex=0;zone.addEventListener("dragover",allowDrop);zone.addEventListene
 zone.addEventListener("click",event=>{if(event.target.closest(".card"))return;if(selectedCard)dropCard({preventDefault(){},currentTarget:zone,dataTransfer:null})});
 zone.addEventListener("keydown",event=>{if((event.key==="Enter"||event.key===" ")&&selectedCard){event.preventDefault();dropCard({preventDefault(){},currentTarget:zone,dataTransfer:null})}})
 });
-function voteEvidence(button,evidenceId,choice){button.parentElement.querySelectorAll("button").forEach(b=>b.classList.remove("selected"));button.classList.add("selected");progress["evidence_"+evidenceId]=choice;saveProgress()}
+function voteEvidence(button,evidenceId,choice){
+const correct={spectral:"notScientific",physical:"scientific",grain:"scientific"};
+const feedbackText={
+ spectral:{correct:"A personal report of seeing a spirit is not independently verifiable or readily testable. It can be documented as a historical claim, but it is not strong scientific evidence that a spirit was present.",incorrect:"A personal report can be recorded, but it cannot be independently verified or reliably tested as evidence that a spirit was present. Try ‘Not Scientific.’"},
+ physical:{correct:"Correct. Convulsions and muscle spasms are observable symptoms that can be documented. They are scientific observations, although they do not identify a cause on their own.",incorrect:"These symptoms can be observed and documented, so they count as scientific observations. However, symptoms alone do not prove what caused them."},
+ grain:{correct:"Correct—with an important limitation. Ergot in rye can be tested for, so contaminated grain would be scientific evidence if confirmed. In this historical case, contamination is a possibility, not a proven finding.",incorrect:"Possible ergot in rye is testable, so it could be scientific evidence if confirmed. The key limitation is that contamination in Salem has not been established by direct testing."}
+};
+button.parentElement.querySelectorAll("button").forEach(b=>{b.classList.remove("selected");b.setAttribute("aria-pressed","false")});button.classList.add("selected");button.setAttribute("aria-pressed","true");
+progress["evidence_"+evidenceId]=choice;const ok=choice===correct[evidenceId];const fb=document.getElementById("feedback-"+evidenceId);if(fb){fb.textContent=(ok?"✅ Supported classification. ":"↻ Reconsider this classification. ")+feedbackText[evidenceId][ok?"correct":"incorrect"];fb.className="evidence-feedback "+(ok?"correct":"incorrect")};saveProgress()
+}
+function restoreEvidenceVotes(){["spectral","physical","grain"].forEach(id=>{const choice=progress["evidence_"+id];if(!choice)return;const row=document.getElementById("feedback-"+id);const button=document.querySelector(`button[onclick*="voteEvidence(this,'${id}','${choice}')"]`);if(button)voteEvidence(button,id,choice)})}
 const slides=[
 {title:"Slide 1: Healthy Rye Grain",image:"images/healthy-rye.jpg",alt:"Microscope view of a healthy rye grain",text:"A healthy rye grain is a seed produced by the rye plant. It can be ground into flour and used as food. Look for the smooth outer seed coat and the stored nutrients inside.",credit:"Image source: Wikimedia Commons"},
 {title:"Slide 2: Ergot-Infected Rye",image:"images/ergot-rye.jpg",alt:"Dark ergot sclerotia growing on rye",text:"The dark structures on this rye head are ergots, or fungal sclerotia. They replace part of the grain and can contain ergot alkaloids. Wet conditions can increase the chance of ergot development.",credit:"Image source: Wikimedia Commons"},
@@ -201,6 +217,14 @@ Spore-print color: ${g("sporeColor")}
 Drawing/upload notes: ${g("sporeDrawing")}
 Observed structures: ${g("sporeStructures")}
 Interesting findings: ${g("sporeFindings")}
+Spore pattern/distribution: ${g("sporePattern")}
+Spore comparisons/differences: ${g("sporeComparison")}
+Interpretation/limitations: ${g("sporeInterpretation")}
+
+SPORE GALLERY OBSERVATIONS
+Observation 1: ${g("galleryObservation1")}
+Observation 2: ${g("galleryObservation2")}
+Question/pattern noticed: ${g("galleryQuestion")}
 
 EVIDENCE WALL
 ${evidenceVotes}
@@ -238,114 +262,7 @@ function downloadSubmission(){
 const blob=new Blob([buildSubmissionText()],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="salem-mystery-lab-submission.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
 }
 function clearProgress(){if(confirm("Clear all saved answers from this browser?")){localStorage.removeItem(STORE_KEY);location.reload()}}
-restoreFields();renderSlide();updateRisk();if((progress.eggs||[]).length>=5)document.getElementById("detectiveBadge").classList.add("show");
+restoreFields();restoreEvidenceVotes();renderSlide();updateRisk();if((progress.eggs||[]).length>=5)document.getElementById("detectiveBadge").classList.add("show");
 </script>
-```html
-<!-- Mushroom Spore Print Gallery -->
-<section id="spore-gallery" class="spore-gallery-section">
-    <div class="spore-gallery-header">
-        <span class="spore-gallery-icon">🍄</span>
-        <h2>Fungal Evidence Lab: Mushroom Spore Print Gallery</h2>
-        <p>
-            Step into the role of a fungal investigator! Explore the spore
-            print gallery below and observe the differences in mushroom
-            spore prints. Look closely at the patterns and colors as you
-            investigate the evidence.
-        </p>
-    </div>
-
-    <div class="spore-gallery-embed">
-        <iframe
-            src="https://padlet.com/embed/s024j3mbu2faw3xbzith"
-            title="Mushroom Spore Print Gallery"
-            loading="lazy"
-            allow="camera; microphone; geolocation; display-capture; clipboard-write"
-            style="width:100%; height:608px; display:block; border:0;"
-        ></iframe>
-    </div>
-
-    <div class="spore-gallery-activity">
-        <h3>🔬 Investigator Challenge</h3>
-        <ul>
-            <li>Observe the variation in spore print colors and patterns.</li>
-            <li>Compare the evidence shown by different mushrooms.</li>
-            <li>Record two observations that could help distinguish one
-                mushroom specimen from another.</li>
-            <li>Explain why scientists use observable characteristics
-                when identifying unknown organisms.</li>
-        </ul>
-    </div>
-</section>
-
-<style>
-.spore-gallery-section {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    border: 2px solid #8b5cf6;
-    border-radius: 16px;
-    background: #fffaf2;
-    color: #29223b;
-    box-sizing: border-box;
-}
-
-.spore-gallery-header {
-    text-align: center;
-    margin-bottom: 1.25rem;
-}
-
-.spore-gallery-icon {
-    font-size: 2.5rem;
-}
-
-.spore-gallery-header h2 {
-    color: #6d28d9;
-    margin: 0.5rem 0;
-}
-
-.spore-gallery-header p {
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-.spore-gallery-embed {
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid #ddd6fe;
-    border-radius: 10px;
-    background: #f4f4f4;
-}
-
-.spore-gallery-embed iframe {
-    max-width: 100%;
-}
-
-.spore-gallery-activity {
-    margin-top: 1.25rem;
-    padding: 1rem;
-    background: #f3e8ff;
-    border-radius: 10px;
-    line-height: 1.6;
-}
-
-.spore-gallery-activity h3 {
-    margin-top: 0;
-    color: #6d28d9;
-}
-
-.spore-gallery-activity li {
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 600px) {
-    .spore-gallery-section {
-        padding: 0.75rem;
-    }
-
-    .spore-gallery-embed iframe {
-        height: 608px;
-    }
-}
-</style>
 </body>
 </html>
