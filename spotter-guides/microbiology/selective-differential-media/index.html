@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="A microbiology spotter guide for selective and differential
+        media, including MacConkey agar, mannitol salt agar, EMB agar,
+        and blood agar."
+    >
+
+    <title>Microbiology Spotter Guide - Selective &amp; Differential Media</title>
+
+    <style>
+        :root {
+            --blue: #1f4e79;
+            --light-blue: #d9eaf7;
+            --border: #cccccc;
+            --text: #202830;
+            --green: #2e8b57;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #f2f5f8;
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            z-index: 10;
+            padding: 12px;
+            background: #ffffff;
+            color: var(--blue);
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        a {
+            color: var(--blue);
+            text-underline-offset: 3px;
+        }
+
+        a:focus-visible,
+        input:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid #7541d6;
+            outline-offset: 4px;
+        }
+
+        .guide-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: #586174;
+            font-size: 14px;
+        }
+
+        .guide-navigation a {
+            font-weight: 700;
+        }
+
+        .header {
+            margin-bottom: 18px;
+            padding: 24px 16px;
+            border-radius: 8px;
+            background: var(--blue);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(24px, 4vw, 34px);
+            line-height: 1.2;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 20px;
+        }
+
+        .intro {
+            margin: 0 0 20px;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin: 24px 0 12px;
+            padding: 10px 12px;
+            border-left: 6px solid var(--blue);
+            background: var(--light-blue);
+            color: var(--blue);
+            font-size: 21px;
+        }
+
+        .section-intro {
+            margin: 0 0 14px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            min-width: 0;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        /* Image placeholders remain visible until images load. */
+        .image-slot {
+            position: relative;
+            display: grid;
+            min-height: 180px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            place-items: center;
+            border: 2px dashed #a5afb8;
+            border-radius: 6px;
+            background: #edf1f4;
+        }
+
+        .image-slot img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+            background: #ffffff;
+            object-fit: contain;
+        }
+
+        .image-slot img[hidden] {
+            display: none;
+        }
+
+        .image-slot.has-image {
+            border: 1px solid #d8dee4;
+            background: #ffffff;
+        }
+
+        .image-slot.has-image .placeholder-text {
+            display: none;
+        }
+
+        .placeholder-text {
+            padding: 16px;
+            color: #56616c;
+            font-size: 14px;
+        }
+
+        .placeholder-text span {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .term {
+            margin: 0 0 6px;
+            color: var(--blue);
+            font-size: 16px;
+            line-height: 1.3;
+        }
+
+        .note {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .box {
+            min-width: 0;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #f8f8f8;
+        }
+
+        .box h2 {
+            margin: 0 0 12px;
+            color: var(--blue);
+            font-size: 20px;
+        }
+
+        .box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 9px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--light-blue);
+            color: var(--blue);
+        }
+
+        td {
+            background: #ffffff;
+        }
+
+        .callout {
+            margin-top: 18px;
+            padding: 14px;
+            border-left: 5px solid var(--blue);
+            border-radius: 6px;
+            background: #eef5fb;
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        .report-example {
+            margin: 12px 0;
+            padding: 14px;
+            border: 1px solid #cbdcec;
+            border-radius: 6px;
+            background: #ffffff;
+            color: var(--blue);
+        }
+
+        .warning {
+            margin-top: 22px;
+            border-left: 6px solid #b84624;
+            background: #fff4e5;
+        }
+
+        .warning h2 {
+            color: #9c381b;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        li + li {
+            margin-top: 7px;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .practice-card {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .practice-card h3 {
+            margin: 0 0 8px;
+            color: var(--blue);
+            font-size: 17px;
+        }
+
+        .practice-card p {
+            margin: 0 0 12px;
+        }
+
+        details {
+            padding: 10px 12px;
+            border: 1px solid #cbdcec;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        summary {
+            color: var(--blue);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        details p {
+            margin: 10px 0 0 !important;
+        }
+
+        .checklist {
+            margin-top: 22px;
+            padding: 18px;
+            border-left: 6px solid var(--green);
+            border-radius: 8px;
+            background: #e9f7ef;
+        }
+
+        .checklist h2 {
+            margin: 0 0 12px;
+            color: #226b43;
+            font-size: 21px;
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .checklist input {
+            flex-shrink: 0;
+            width: 19px;
+            height: 19px;
+            margin: 3px 0 0;
+            accent-color: var(--green);
+        }
+
+        .checklist input:checked + span {
+            color: #42624e;
+            text-decoration: line-through;
+        }
+
+        .checklist-note,
+        .footer {
+            color: #586174;
+            font-size: 13px;
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        @media (max-width: 950px) {
+            .image-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 12px;
+            }
+
+            .page {
+                padding: 16px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .two-column,
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-slot {
+                min-height: 210px;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #ffffff;
+                font-size: 11px;
+            }
+
+            .page {
+                max-width: none;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .skip-link,
+            .guide-navigation {
+                display: none;
+            }
+
+            .header {
+                padding: 12px;
+                border: 1px solid #cccccc;
+                background: #ffffff;
+                color: #000000;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .image-slot {
+                min-height: 110px;
+            }
+
+            .term {
+                font-size: 12px;
+            }
+
+            .note,
+            table {
+                font-size: 11px;
+            }
+
+            .two-column,
+            .practice-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .card,
+            .box,
+            .practice-card,
+            .checklist,
+            tr {
+                break-inside: avoid;
+            }
+
+            h2 {
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <main class="page" id="main-content">
+
+        <nav class="guide-navigation" aria-label="Guide navigation">
+            <a href="../../">All Courses</a>
+            <span aria-hidden="true">/</span>
+            <a href="../">Microbiology Guides</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">
+                Selective &amp; Differential Media
+            </span>
+        </nav>
+
+        <header class="header">
+            <h1>🧫 MICROBIOLOGY SPOTTER GUIDE</h1>
+            <p>Learning Plan: Selective &amp; Differential Media</p>
+        </header>
+
+        <p class="intro">
+            Can you identify the medium, distinguish growth from
+            a differential reaction, and explain what the result means?
+        </p>
+
+        <!-- SECTION 1: Core concepts -->
+        <div class="two-column">
+
+            <section class="box" aria-labelledby="selective-heading">
+                <h2 id="selective-heading">
+                    What Makes a Medium Selective?
+                </h2>
+
+                <p>
+                    Selective media contain substances that inhibit
+                    some microorganisms while allowing others to grow.
+                </p>
+
+                <p>
+                    Ask: Is growth present, reduced, or absent
+                    under the assigned test conditions?
+                </p>
+            </section>
+
+            <section class="box" aria-labelledby="differential-heading">
+                <h2 id="differential-heading">
+                    What Makes a Medium Differential?
+                </h2>
+
+                <p>
+                    Differential media reveal visible differences
+                    between organisms that grow, such as a colony
+                    color, a medium color change, or hemolysis.
+                </p>
+
+                <p>
+                    Ask: Among the organisms that grew,
+                    what reaction is visible?
+                </p>
+            </section>
+
+        </div>
+
+        <div class="callout">
+            <p>
+                A medium can be both selective and differential.
+                Read growth first, then interpret the differential
+                reaction. No growth is not the same as a negative
+                fermentation result.
+            </p>
+        </div>
+
+        <!-- SECTION 2: Image cards -->
+        <section aria-labelledby="identify-heading">
+            <h2 class="section-title" id="identify-heading">
+                📸 Can I Identify the Reaction?
+            </h2>
+
+            <p class="section-intro">
+                Use the plate label and assigned medium formulation
+                along with its appearance. Color alone does not
+                reliably identify an unknown medium.
+            </p>
+
+            <div class="image-grid">
+
+                <!-- IMAGE 1 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/macconkey-lactose-positive.jpg"
+                            alt="Pink colonies on MacConkey agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MacConkey: Lactose Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MacConkey: Pink Colonies</h3>
+                    <p class="note">
+                        Growth with pink-to-red colonies supports
+                        lactose fermentation.
+                    </p>
+                </article>
+
+                <!-- IMAGE 2 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/macconkey-lactose-negative.jpg"
+                            alt="Pale or colorless colonies on MacConkey agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MacConkey: Lactose Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MacConkey: Colorless Colonies</h3>
+                    <p class="note">
+                        Growth without pink colonies supports
+                        no lactose fermentation detected at the reading time.
+                    </p>
+                </article>
+
+                <!-- IMAGE 3 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/macconkey-no-growth.jpg"
+                            alt="MacConkey agar without visible growth"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MacConkey: No Growth
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MacConkey: No Growth</h3>
+                    <p class="note">
+                        No visible growth under the test conditions.
+                        Lactose fermentation cannot be interpreted.
+                    </p>
+                </article>
+
+                <!-- IMAGE 4 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/msa-mannitol-positive.jpg"
+                            alt="Growth with yellow surrounding medium on mannitol salt agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MSA: Mannitol Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MSA: Growth and Yellow Medium</h3>
+                    <p class="note">
+                        Growth indicates salt tolerance; yellow
+                        surrounding medium supports acid production
+                        from mannitol fermentation.
+                    </p>
+                </article>
+
+                <!-- IMAGE 5 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/msa-mannitol-negative.jpg"
+                            alt="Growth on mannitol salt agar with surrounding medium remaining pink to red"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MSA: Mannitol Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MSA: Growth Without Yellowing</h3>
+                    <p class="note">
+                        Growth indicates salt tolerance; surrounding
+                        medium remaining pink/red supports no mannitol
+                        fermentation detected at the reading time.
+                    </p>
+                </article>
+
+                <!-- IMAGE 6 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/msa-no-growth.jpg"
+                            alt="Mannitol salt agar without visible growth"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            MSA: No Growth
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">MSA: No Growth</h3>
+                    <p class="note">
+                        No visible growth under the test conditions.
+                        Do not report a mannitol fermentation result.
+                    </p>
+                </article>
+
+                <!-- IMAGE 7 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/emb-metallic-sheen.jpg"
+                            alt="Dark colonies with a green metallic sheen on EMB agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            EMB: Metallic Sheen
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">EMB: Green Metallic Sheen</h3>
+                    <p class="note">
+                        On Levine EMB, dark colonies with a green
+                        metallic sheen support strong lactose
+                        fermentation. This is not a species identification.
+                    </p>
+                </article>
+
+                <!-- IMAGE 8 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/emb-lactose-positive.jpg"
+                            alt="Pink-to-purple colonies on EMB agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            EMB: Colored Colonies
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">EMB: Pink-to-Purple Colonies</h3>
+                    <p class="note">
+                        On Levine EMB, colored colonies support
+                        lactose fermentation. A metallic sheen
+                        is not required for a positive reaction.
+                    </p>
+                </article>
+
+                <!-- IMAGE 9 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/emb-lactose-negative.jpg"
+                            alt="Pale or colorless colonies on EMB agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            EMB: Pale Colonies
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">EMB: Pale or Colorless Colonies</h3>
+                    <p class="note">
+                        On Levine EMB, growth with pale or colorless
+                        colonies supports no lactose fermentation
+                        detected at the reading time.
+                    </p>
+                </article>
+
+                <!-- IMAGE 10 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/blood-agar-alpha.jpg"
+                            alt="Greenish discoloration around colonies on blood agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Blood Agar: Alpha
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Alpha Hemolysis</h3>
+                    <p class="note">
+                        Greenish-to-brownish discoloration around growth;
+                        traditionally described as partial hemolysis.
+                    </p>
+                </article>
+
+                <!-- IMAGE 11 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/blood-agar-beta.jpg"
+                            alt="Clear zones around colonies on blood agar"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Blood Agar: Beta
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Beta Hemolysis</h3>
+                    <p class="note">
+                        Complete red blood cell lysis produces
+                        a clear zone around growth.
+                    </p>
+                </article>
+
+                <!-- IMAGE 12 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/blood-agar-gamma.jpg"
+                            alt="Growth on blood agar without clearing or discoloration"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Blood Agar: Gamma
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Gamma: No Hemolysis</h3>
+                    <p class="note">
+                        Growth without visible clearing or
+                        hemolytic discoloration of the surrounding agar.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: Media comparison -->
+        <section aria-labelledby="comparison-heading">
+            <h2 class="section-title" id="comparison-heading">
+                Can I Compare the Media?
+            </h2>
+
+            <div class="table-wrapper">
+                <table aria-label="Selective and differential media comparison">
+                    <thead>
+                        <tr>
+                            <th scope="col">Medium</th>
+                            <th scope="col">Classification</th>
+                            <th scope="col">Selective Component</th>
+                            <th scope="col">Differential Feature</th>
+                            <th scope="col">What to Observe</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">MacConkey agar</th>
+                            <td>Selective and differential</td>
+                            <td>
+                                Bile salts and crystal violet inhibit
+                                many Gram-positive bacteria.
+                            </td>
+                            <td>
+                                Lactose fermentation;
+                                neutral red is the pH indicator.
+                            </td>
+                            <td>
+                                Growth, then pink/red versus
+                                pale/colorless colonies.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Mannitol salt agar</th>
+                            <td>Selective and differential</td>
+                            <td>
+                                7.5% sodium chloride favors
+                                salt-tolerant organisms.
+                            </td>
+                            <td>
+                                Mannitol fermentation;
+                                phenol red is the pH indicator.
+                            </td>
+                            <td>
+                                Growth, then yellowing of the
+                                surrounding medium.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Levine EMB agar</th>
+                            <td>Selective and differential</td>
+                            <td>
+                                Eosin Y and methylene blue inhibit
+                                many Gram-positive bacteria.
+                            </td>
+                            <td>
+                                Lactose fermentation changes
+                                colony coloration.
+                            </td>
+                            <td>
+                                Dark or pink/purple colonies,
+                                possible metallic sheen, or
+                                pale/colorless colonies.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Standard blood agar</th>
+                            <td>
+                                Enriched and differential;
+                                not ordinarily selective
+                            </td>
+                            <td>
+                                None in a standard formulation
+                                without selective additives.
+                            </td>
+                            <td>
+                                Hemolysis of red blood cells.
+                            </td>
+                            <td>
+                                Greenish discoloration, clearing,
+                                or no hemolytic change.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <p>
+                    Formulation matters. This guide uses standard
+                    MacConkey agar, standard mannitol salt agar,
+                    Levine EMB, and standard blood agar. Other
+                    formulations may contain different carbohydrates
+                    or selective additives.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Interpretation -->
+        <section aria-labelledby="interpretation-heading">
+            <h2 class="section-title" id="interpretation-heading">
+                Can I Interpret a Plate in Order?
+            </h2>
+
+            <div class="box">
+                <h2>Use This Four-Step Check</h2>
+
+                <ol>
+                    <li>
+                        Confirm the medium name from the plate label
+                        or course information.
+                    </li>
+                    <li>
+                        Determine whether visible growth is present.
+                    </li>
+                    <li>
+                        If growth is present, describe the relevant
+                        colony color, medium change, or hemolytic zone.
+                    </li>
+                    <li>
+                        Interpret only the property tested by that
+                        medium. Do not jump directly to species identity.
+                    </li>
+                </ol>
+
+                <p class="report-example">
+                    <strong>MacConkey:</strong>
+                    Growth present with pink colonies; lactose
+                    fermentation detected.
+                </p>
+
+                <p class="report-example">
+                    <strong>MSA:</strong>
+                    Growth present with yellow surrounding medium;
+                    salt tolerance and mannitol fermentation detected.
+                </p>
+
+                <p class="report-example">
+                    <strong>Blood agar:</strong>
+                    Growth present with clear zones around colonies;
+                    beta hemolysis observed.
+                </p>
+
+                <p>
+                    Interpret results using the assigned reading time,
+                    appropriate controls, and your course protocol.
+                    No growth can have causes other than the medium's
+                    selective ingredients.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Self-check practice -->
+        <section aria-labelledby="practice-heading">
+            <h2 class="section-title" id="practice-heading">
+                Quick Interpretation Practice
+            </h2>
+
+            <div class="practice-grid">
+
+                <article class="practice-card">
+                    <h3>Practice 1: MacConkey</h3>
+                    <p>
+                        Colonies are present, but they are pale
+                        rather than pink. What can you report?
+                    </p>
+
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            Growth is present, with no lactose
+                            fermentation detected at the assigned
+                            reading time. This does not identify
+                            the organism to species.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 2: MSA</h3>
+                    <p>
+                        Colonies grow, but the surrounding agar
+                        remains pink/red. What two observations matter?
+                    </p>
+
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            Growth supports salt tolerance under the
+                            test conditions. The absence of yellowing
+                            supports no mannitol fermentation detected
+                            at the assigned reading time.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 3: Blood Agar</h3>
+                    <p>
+                        Colonies have a clear zone around them.
+                        Which hemolytic pattern is present?
+                    </p>
+
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            Beta hemolysis: complete red blood cell
+                            lysis produces visible clearing around growth.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 4: No Growth</h3>
+                    <p>
+                        An MSA plate has no visible colonies.
+                        Should you report mannitol fermentation
+                        as negative?
+                    </p>
+
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            No. Report no visible growth under the
+                            test conditions. Without growth, the
+                            fermentation result is not interpretable.
+                        </p>
+                    </details>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: Common mistakes -->
+        <section class="box warning" aria-labelledby="mistakes-heading">
+            <h2 id="mistakes-heading">
+                ⚠ Common Student Mistakes
+            </h2>
+
+            <ul>
+                <li>
+                    Confusing selective growth with a positive
+                    differential reaction.
+                </li>
+                <li>
+                    Calling an organism a nonfermenter when it
+                    did not grow on the medium.
+                </li>
+                <li>
+                    Assuming all organisms that grow on MSA
+                    ferment mannitol.
+                </li>
+                <li>
+                    Looking only at colony pigment on MSA instead
+                    of the surrounding medium's indicator color.
+                </li>
+                <li>
+                    Assuming a green metallic sheen on EMB
+                    proves a species identity.
+                </li>
+                <li>
+                    Confusing greenish alpha discoloration with
+                    the clear zone of beta hemolysis.
+                </li>
+                <li>
+                    Calling standard blood agar selective simply
+                    because it contains blood.
+                </li>
+                <li>
+                    Identifying an unknown medium from its color
+                    without checking its label or formulation.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 7: Readiness checklist -->
+        <section class="checklist" aria-labelledby="checklist-heading">
+            <h2 id="checklist-heading">
+                ✅ Ready for the Quiz?
+            </h2>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain the difference between selective
+                    and differential media.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain how a medium can be both
+                    selective and differential.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I check for growth before interpreting
+                    a differential reaction.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can distinguish lactose-positive and
+                    lactose-negative appearances on MacConkey agar.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can separate salt tolerance from mannitol
+                    fermentation when reading MSA.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can interpret common appearances on Levine EMB
+                    without claiming a species identification.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can distinguish alpha, beta, and gamma
+                    patterns on blood agar.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I know that no growth does not provide
+                    an interpretable fermentation result.
+                </span>
+            </label>
+
+            <p class="checklist-note">
+                This checklist is for self-review. Responses are
+                not submitted or saved by this page.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Created for Microbiology Instruction | Megan Kundinger
+            </p>
+
+            <p>
+                <a href="../">Return to Microbiology Guides</a>
+                ·
+                <a href="../../">View All Courses</a>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.querySelectorAll(".image-slot img").forEach((image) => {
+            const slot = image.closest(".image-slot");
+
+            const showImage = () => {
+                image.hidden = false;
+                slot.classList.add("has-image");
+            };
+
+            const showPlaceholder = () => {
+                image.hidden = true;
+                slot.classList.remove("has-image");
+            };
+
+            image.addEventListener("load", showImage);
+            image.addEventListener("error", showPlaceholder);
+
+            if (image.complete) {
+                if (image.naturalWidth > 0) {
+                    showImage();
+                } else {
+                    showPlaceholder();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
