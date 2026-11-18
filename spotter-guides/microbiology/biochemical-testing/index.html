@@ -1,1 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="A visual microbiology study guide for interpreting
+        common biochemical tests, comparing results, and reviewing IMViC."
+    >
+
+    <title>Microbiology Spotter Guide - Biochemical Testing</title>
+
+    <style>
+        :root {
+            --blue: #1f4e79;
+            --light-blue: #d9eaf7;
+            --border: #cccccc;
+            --text: #202830;
+            --green: #2e8b57;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #f2f5f8;
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            z-index: 10;
+            padding: 12px;
+            background: #ffffff;
+            color: var(--blue);
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        a {
+            color: var(--blue);
+            text-underline-offset: 3px;
+        }
+
+        a:focus-visible,
+        input:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid #7541d6;
+            outline-offset: 4px;
+        }
+
+        .guide-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: #586174;
+            font-size: 14px;
+        }
+
+        .guide-navigation a {
+            font-weight: 700;
+        }
+
+        .header {
+            margin-bottom: 18px;
+            padding: 24px 16px;
+            border-radius: 8px;
+            background: var(--blue);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(24px, 4vw, 34px);
+            line-height: 1.2;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 20px;
+        }
+
+        .intro {
+            margin: 0 0 20px;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin: 24px 0 12px;
+            padding: 10px 12px;
+            border-left: 6px solid var(--blue);
+            background: var(--light-blue);
+            color: var(--blue);
+            font-size: 21px;
+        }
+
+        .section-intro {
+            margin: 0 0 14px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            min-width: 0;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        /* Missing image files leave a labeled placeholder visible. */
+        .image-slot {
+            position: relative;
+            display: grid;
+            min-height: 185px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            place-items: center;
+            border: 2px dashed #a5afb8;
+            border-radius: 6px;
+            background: #edf1f4;
+        }
+
+        .image-slot img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+            background: #ffffff;
+            object-fit: contain;
+        }
+
+        .image-slot img[hidden] {
+            display: none;
+        }
+
+        .image-slot.has-image {
+            border: 1px solid #d8dee4;
+            background: #ffffff;
+        }
+
+        .image-slot.has-image .placeholder-text {
+            display: none;
+        }
+
+        .placeholder-text {
+            padding: 16px;
+            color: #56616c;
+            font-size: 14px;
+        }
+
+        .placeholder-text span {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .term {
+            margin: 0 0 6px;
+            color: var(--blue);
+            font-size: 16px;
+            line-height: 1.3;
+        }
+
+        .note {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .box {
+            min-width: 0;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #f8f8f8;
+        }
+
+        .box h2 {
+            margin: 0 0 12px;
+            color: var(--blue);
+            font-size: 20px;
+        }
+
+        .box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 9px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--light-blue);
+            color: var(--blue);
+        }
+
+        td {
+            background: #ffffff;
+        }
+
+        .callout {
+            margin-top: 18px;
+            padding: 14px;
+            border-left: 5px solid var(--blue);
+            border-radius: 6px;
+            background: #eef5fb;
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        .report-example {
+            margin: 12px 0;
+            padding: 14px;
+            border: 1px solid #cbdcec;
+            border-radius: 6px;
+            background: #ffffff;
+            color: var(--blue);
+        }
+
+        .warning {
+            margin-top: 22px;
+            border-left: 6px solid #b84624;
+            background: #fff4e5;
+        }
+
+        .warning h2 {
+            color: #9c381b;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        li + li {
+            margin-top: 7px;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .practice-card {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .practice-card h3 {
+            margin: 0 0 8px;
+            color: var(--blue);
+            font-size: 17px;
+        }
+
+        .practice-card p {
+            margin: 0 0 12px;
+        }
+
+        details {
+            padding: 10px 12px;
+            border: 1px solid #cbdcec;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+
+        summary {
+            color: var(--blue);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        details p {
+            margin: 10px 0 0;
+        }
+
+        .checklist {
+            margin-top: 22px;
+            padding: 18px;
+            border-left: 6px solid var(--green);
+            border-radius: 8px;
+            background: #e9f7ef;
+        }
+
+        .checklist h2 {
+            margin: 0 0 12px;
+            color: #226b43;
+            font-size: 21px;
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .checklist input {
+            flex-shrink: 0;
+            width: 19px;
+            height: 19px;
+            margin: 3px 0 0;
+            accent-color: var(--green);
+        }
+
+        .checklist input:checked + span {
+            color: #42624e;
+            text-decoration: line-through;
+        }
+
+        .checklist-note,
+        .footer {
+            color: #586174;
+            font-size: 13px;
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        @media (max-width: 950px) {
+            .image-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 12px;
+            }
+
+            .page {
+                padding: 16px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .two-column,
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-slot {
+                min-height: 210px;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #ffffff;
+                font-size: 11px;
+            }
+
+            .page {
+                max-width: none;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .skip-link,
+            .guide-navigation {
+                display: none;
+            }
+
+            .header {
+                padding: 12px;
+                border: 1px solid #cccccc;
+                background: #ffffff;
+                color: #000000;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .image-slot {
+                min-height: 110px;
+            }
+
+            .term {
+                font-size: 12px;
+            }
+
+            .note,
+            table {
+                font-size: 11px;
+            }
+
+            .two-column,
+            .practice-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .card,
+            .box,
+            .practice-card,
+            .checklist,
+            tr {
+                break-inside: avoid;
+            }
+
+            h2 {
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <main class="page" id="main-content">
+
+        <nav class="guide-navigation" aria-label="Guide navigation">
+            <a href="../../">All Courses</a>
+            <span aria-hidden="true">/</span>
+            <a href="../">Microbiology Guides</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Biochemical Testing</span>
+        </nav>
+
+        <header class="header">
+            <h1>🧪 MICROBIOLOGY SPOTTER GUIDE</h1>
+            <p>Learning Plan: Biochemical Testing</p>
+        </header>
+
+        <p class="intro">
+            Can you recognize the reaction, explain what it detects,
+            and report the result without jumping to a species identity?
+        </p>
+
+        <div class="callout">
+            <p>
+                This is a visual interpretation guide, not a laboratory
+                procedure. Follow your instructor's protocol and the
+                reagent manufacturer's directions for preparation,
+                incubation, reagent addition, timing, and safe handling.
+            </p>
+        </div>
+
+        <!-- SECTION 1: Visual identification -->
+        <section aria-labelledby="identify-heading">
+            <h2 class="section-title" id="identify-heading">
+                📸 Can I Identify the Result?
+            </h2>
+
+            <p class="section-intro">
+                Always confirm the test name, medium, reagents,
+                and reading time. The same color can mean different
+                things in different tests.
+            </p>
+
+            <div class="image-grid">
+
+                <!-- IMAGE 1 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/catalase-positive.jpg"
+                            alt="Immediate bubble formation in a positive catalase test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Catalase Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Catalase Positive</h3>
+                    <p class="note">
+                        Immediate bubbling indicates oxygen release
+                        from hydrogen peroxide breakdown.
+                    </p>
+                </article>
+
+                <!-- IMAGE 2 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/catalase-negative.jpg"
+                            alt="No bubble formation in a negative catalase test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Catalase Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Catalase Negative</h3>
+                    <p class="note">
+                        No bubbling under valid test conditions
+                        indicates no catalase activity detected.
+                    </p>
+                </article>
+
+                <!-- IMAGE 3 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/oxidase-positive.jpg"
+                            alt="Dark blue or purple reaction in a positive oxidase test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Oxidase Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Oxidase Positive</h3>
+                    <p class="note">
+                        Dark blue/purple develops within the
+                        specified reading window.
+                    </p>
+                </article>
+
+                <!-- IMAGE 4 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/oxidase-negative.jpg"
+                            alt="No positive color reaction within the oxidase test reading window"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Oxidase Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Oxidase Negative</h3>
+                    <p class="note">
+                        No qualifying blue/purple reaction within
+                        the specified reading window.
+                    </p>
+                </article>
+
+                <!-- IMAGE 5 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/indole-positive.jpg"
+                            alt="Red reagent layer in a positive indole test using Kovac's reagent"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Indole Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Indole Positive</h3>
+                    <p class="note">
+                        With Kovac's reagent, a red layer at the
+                        surface indicates indole production.
+                    </p>
+                </article>
+
+                <!-- IMAGE 6 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/indole-negative.jpg"
+                            alt="Yellow reagent layer without a red ring in a negative indole test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Indole Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Indole Negative</h3>
+                    <p class="note">
+                        With Kovac's reagent, no red surface layer;
+                        the reagent layer remains yellow.
+                    </p>
+                </article>
+
+                <!-- IMAGE 7 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/methyl-red-positive.jpg"
+                            alt="Red broth after methyl red reagent in a positive MR test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Methyl Red Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Methyl Red Positive</h3>
+                    <p class="note">
+                        Red after methyl red reagent supports
+                        stable mixed-acid fermentation.
+                    </p>
+                </article>
+
+                <!-- IMAGE 8 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/methyl-red-negative.jpg"
+                            alt="Yellow broth after methyl red reagent in a negative MR test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Methyl Red Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Methyl Red Negative</h3>
+                    <p class="note">
+                        Yellow after reagent is negative.
+                        Orange is inconclusive, not a clear negative.
+                    </p>
+                </article>
+
+                <!-- IMAGE 9 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/vp-positive.jpg"
+                            alt="Red reaction after reagents in a positive Voges-Proskauer test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Voges–Proskauer Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">VP Positive</h3>
+                    <p class="note">
+                        A red reaction after the required reagents
+                        and development time indicates acetoin.
+                    </p>
+                </article>
+
+                <!-- IMAGE 10 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/vp-negative.jpg"
+                            alt="Absence of a red reaction in a negative Voges-Proskauer test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Voges–Proskauer Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">VP Negative</h3>
+                    <p class="note">
+                        No red reaction within the valid reading
+                        window. Copper/brown alone is not positive.
+                    </p>
+                </article>
+
+                <!-- IMAGE 11 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/citrate-positive.jpg"
+                            alt="Visible growth with blue medium on a positive Simmons citrate slant"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Simmons Citrate Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Citrate Positive</h3>
+                    <p class="note">
+                        Visible growth, typically with a green-to-blue
+                        color change, supports citrate utilization.
+                    </p>
+                </article>
+
+                <!-- IMAGE 12 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/citrate-negative.jpg"
+                            alt="Green Simmons citrate slant without visible growth"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Simmons Citrate Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Citrate Negative</h3>
+                    <p class="note">
+                        Medium remains green with no visible growth
+                        at the assigned reading time.
+                    </p>
+                </article>
+
+                <!-- IMAGE 13 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/urease-positive.jpg"
+                            alt="Bright pink medium in a positive urease test"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Urease Positive
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Urease Positive</h3>
+                    <p class="note">
+                        Pink/fuchsia in phenol-red urea medium
+                        indicates an alkaline reaction associated
+                        with urea hydrolysis.
+                    </p>
+                </article>
+
+                <!-- IMAGE 14 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/urease-negative.jpg"
+                            alt="Urea medium without a pink positive reaction"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Urease Negative
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Urease Negative</h3>
+                    <p class="note">
+                        No pink reaction; medium retains its
+                        formulation-dependent yellowish or peach color.
+                    </p>
+                </article>
+
+                <!-- IMAGE 15 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/fermentation-acid-gas.jpg"
+                            alt="Yellow phenol red carbohydrate broth with gas in a Durham tube"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Fermentation: Acid and Gas
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Fermentation: Acid + Gas</h3>
+                    <p class="note">
+                        Yellow phenol red broth indicates acid;
+                        a new gas bubble in the Durham tube
+                        indicates gas production.
+                    </p>
+                </article>
+
+                <!-- IMAGE 16 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/fermentation-negative.jpg"
+                            alt="Red phenol red carbohydrate broth with growth and no Durham tube gas"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Fermentation: No Acid Detected
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Fermentation: Negative</h3>
+                    <p class="note">
+                        With growth present, red/non-yellow broth
+                        indicates no acid detected from the
+                        tested carbohydrate.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: Comparison table -->
+        <section aria-labelledby="comparison-heading">
+            <h2 class="section-title" id="comparison-heading">
+                Can I Connect the Result to Its Meaning?
+            </h2>
+
+            <div class="table-wrapper">
+                <table aria-label="Biochemical test interpretation summary">
+                    <thead>
+                        <tr>
+                            <th scope="col">Test</th>
+                            <th scope="col">What It Detects</th>
+                            <th scope="col">Positive Result</th>
+                            <th scope="col">Important Caution</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">Catalase</th>
+                            <td>
+                                Enzymatic breakdown of hydrogen peroxide
+                                into water and oxygen.
+                            </td>
+                            <td>Immediate bubbling.</td>
+                            <td>
+                                Distinguish a true reaction from
+                                introduced air bubbles.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Oxidase</th>
+                            <td>
+                                Cytochrome c oxidase-associated activity.
+                            </td>
+                            <td>
+                                Dark blue/purple within the
+                                specified reading window.
+                            </td>
+                            <td>
+                                Late color development is not
+                                a valid positive result.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Indole</th>
+                            <td>
+                                Indole production from tryptophan.
+                            </td>
+                            <td>
+                                Red surface reagent layer with
+                                Kovac's reagent.
+                            </td>
+                            <td>
+                                Other indole methods can use
+                                different interpretation criteria.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Methyl red</th>
+                            <td>
+                                Stable acidic products of
+                                mixed-acid glucose fermentation.
+                            </td>
+                            <td>Red after methyl red reagent.</td>
+                            <td>
+                                Orange is inconclusive.
+                                Do not force a positive/negative call.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Voges–Proskauer</th>
+                            <td>
+                                Acetoin, an intermediate associated
+                                with the 2,3-butanediol pathway.
+                            </td>
+                            <td>
+                                Red after the required reagents
+                                and development time.
+                            </td>
+                            <td>
+                                Read only after proper development;
+                                brown/copper is not a positive.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Simmons citrate</th>
+                            <td>
+                                Growth using citrate as the
+                                sole carbon source in this medium.
+                            </td>
+                            <td>
+                                Growth, usually with blue coloration.
+                            </td>
+                            <td>
+                                Do not evaluate color alone.
+                                Clear growth can precede blue coloration;
+                                follow the assigned interpretation criteria.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Urease</th>
+                            <td>
+                                Urea hydrolysis that releases ammonia
+                                and raises pH.
+                            </td>
+                            <td>
+                                Pink/fuchsia in phenol-red urea medium.
+                            </td>
+                            <td>
+                                Use formulation-specific controls
+                                and the assigned reading time.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                Phenol red carbohydrate broth
+                            </th>
+                            <td>
+                                Acid production from the named
+                                carbohydrate; gas is recorded separately.
+                            </td>
+                            <td>
+                                Yellow for acid; Durham tube bubble
+                                for gas.
+                            </td>
+                            <td>
+                                Record the carbohydrate tested.
+                                Confirm growth and exclude pre-existing
+                                trapped air when assessing gas.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 3: IMViC and color comparisons -->
+        <div class="two-column">
+
+            <section class="box" aria-labelledby="imvic-heading">
+                <h2 id="imvic-heading">
+                    What Does IMViC Stand For?
+                </h2>
+
+                <div class="table-wrapper">
+                    <table aria-label="IMViC test order">
+                        <thead>
+                            <tr>
+                                <th scope="col">Letter</th>
+                                <th scope="col">Test</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>I</td>
+                                <td>Indole</td>
+                            </tr>
+                            <tr>
+                                <td>M</td>
+                                <td>Methyl red</td>
+                            </tr>
+                            <tr>
+                                <td>V</td>
+                                <td>Voges–Proskauer</td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td>Citrate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Record a pattern in this order. The lowercase
+                    “i” in IMViC is part of the mnemonic, not an
+                    additional test.
+                </p>
+
+                <p class="report-example">
+                    Example practice pattern:
+                    I +, M +, V −, C −.
+                </p>
+
+                <p>
+                    This example illustrates reporting order,
+                    not a definitive species identification.
+                </p>
+            </section>
+
+            <section class="box" aria-labelledby="color-heading">
+                <h2 id="color-heading">
+                    Same Color, Different Meaning
+                </h2>
+
+                <div class="table-wrapper">
+                    <table aria-label="Color interpretations across tests">
+                        <thead>
+                            <tr>
+                                <th scope="col">Observation</th>
+                                <th scope="col">Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Red after methyl red reagent</td>
+                                <td>MR positive</td>
+                            </tr>
+                            <tr>
+                                <td>Red in phenol red sugar broth</td>
+                                <td>No acid detected, if growth is present</td>
+                            </tr>
+                            <tr>
+                                <td>Yellow after methyl red reagent</td>
+                                <td>MR negative</td>
+                            </tr>
+                            <tr>
+                                <td>Yellow in phenol red sugar broth</td>
+                                <td>Acid production detected</td>
+                            </tr>
+                            <tr>
+                                <td>Pink/fuchsia in urea medium</td>
+                                <td>Urease-positive alkaline reaction</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Identify the test before interpreting its color.
+                </p>
+            </section>
+
+        </div>
+
+        <!-- SECTION 4: Reporting -->
+        <section aria-labelledby="report-heading">
+            <h2 class="section-title" id="report-heading">
+                Can I Report an Observation and Interpretation?
+            </h2>
+
+            <div class="box">
+                <h2>Use a Three-Part Statement</h2>
+
+                <ol>
+                    <li>Name the test and relevant formulation.</li>
+                    <li>Describe the visible reaction.</li>
+                    <li>State the interpretation.</li>
+                </ol>
+
+                <p class="report-example">
+                    <strong>Catalase:</strong>
+                    Immediate bubbling observed; catalase positive.
+                </p>
+
+                <p class="report-example">
+                    <strong>Indole with Kovac's reagent:</strong>
+                    Red surface layer observed; indole positive.
+                </p>
+
+                <p class="report-example">
+                    <strong>Phenol red glucose broth:</strong>
+                    Yellow broth without Durham tube gas;
+                    acid detected, gas not detected.
+                </p>
+
+                <p>
+                    Use a combination of valid results, morphology,
+                    and your course identification scheme. A single
+                    biochemical result does not establish species identity.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Practice -->
+        <section aria-labelledby="practice-heading">
+            <h2 class="section-title" id="practice-heading">
+                Quick Interpretation Practice
+            </h2>
+
+            <div class="practice-grid">
+
+                <article class="practice-card">
+                    <h3>Practice 1: Oxidase Timing</h3>
+                    <p>
+                        No reaction occurs during the valid reading
+                        window, but the test becomes purple much later.
+                        Should it be called positive?
+                    </p>
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            No. A qualifying positive reaction must
+                            occur within the method's specified window.
+                            Late color development is not a valid positive.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 2: Fermentation Without Gas</h3>
+                    <p>
+                        Phenol red glucose broth is yellow, but
+                        there is no gas bubble in the Durham tube.
+                        What should you report?
+                    </p>
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            Acid detected from glucose fermentation;
+                            gas not detected. Acid and gas are
+                            separate observations.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 3: Methyl Red</h3>
+                    <p>
+                        The broth is orange after methyl red reagent.
+                        Is this a clear negative result?
+                    </p>
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            No. Orange is inconclusive. Follow your
+                            instructor's protocol for repeat testing
+                            or additional assessment.
+                        </p>
+                    </details>
+                </article>
+
+                <article class="practice-card">
+                    <h3>Practice 4: Simmons Citrate</h3>
+                    <p>
+                        The medium is still green, but definite growth
+                        is visible. Is green color alone enough
+                        to call it negative?
+                    </p>
+                    <details>
+                        <summary>Reveal explanation</summary>
+                        <p>
+                            No. Growth must also be considered.
+                            Definite growth can indicate citrate use
+                            before a strong blue color develops.
+                            Verify the finding using controls and
+                            your course's interpretation criteria.
+                        </p>
+                    </details>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: Common mistakes -->
+        <section class="box warning" aria-labelledby="mistakes-heading">
+            <h2 id="mistakes-heading">
+                ⚠ Common Student Mistakes
+            </h2>
+
+            <ul>
+                <li>
+                    Interpreting a color before confirming
+                    which test was performed.
+                </li>
+                <li>
+                    Reading oxidase after the valid time window.
+                </li>
+                <li>
+                    Confusing methyl red and Voges–Proskauer
+                    reagents or interpretations.
+                </li>
+                <li>
+                    Assuming no Durham tube gas means
+                    no carbohydrate fermentation.
+                </li>
+                <li>
+                    Calling orange methyl red results clearly
+                    positive or negative.
+                </li>
+                <li>
+                    Calling a citrate slant negative from green
+                    color alone without checking for growth.
+                </li>
+                <li>
+                    Forgetting that a red indole reaction is read
+                    in the surface reagent layer with Kovac's method.
+                </li>
+                <li>
+                    Treating an unclear or invalid result as
+                    a reliable negative.
+                </li>
+                <li>
+                    Identifying an organism from one biochemical test
+                    instead of an appropriate overall profile.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 7: Checklist -->
+        <section class="checklist" aria-labelledby="checklist-heading">
+            <h2 id="checklist-heading">
+                ✅ Ready for the Quiz?
+            </h2>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can recognize positive and negative catalase
+                    and oxidase reactions.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can interpret an indole test using Kovac's reagent.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can distinguish methyl red from
+                    Voges–Proskauer results.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain what each IMViC letter represents
+                    and record the results in order.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can evaluate both growth and color
+                    on Simmons citrate agar.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can recognize a positive urease reaction.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can record acid and gas separately
+                    in a carbohydrate fermentation test.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain why timing, controls, and
+                    test formulation affect interpretation.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can report an observation and interpretation
+                    without claiming a species identity from one test.
+                </span>
+            </label>
+
+            <p class="checklist-note">
+                This checklist is for self-review. Responses are
+                not submitted or saved by this page.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Created for Microbiology Instruction | Megan Kundinger
+            </p>
+
+            <p>
+                <a href="../">Return to Microbiology Guides</a>
+                ·
+                <a href="../../">View All Courses</a>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.querySelectorAll(".image-slot img").forEach((image) => {
+            const slot = image.closest(".image-slot");
+
+            const showImage = () => {
+                image.hidden = false;
+                slot.classList.add("has-image");
+            };
+
+            const showPlaceholder = () => {
+                image.hidden = true;
+                slot.classList.remove("has-image");
+            };
+
+            image.addEventListener("load", showImage);
+            image.addEventListener("error", showPlaceholder);
+
+            if (image.complete) {
+                if (image.naturalWidth > 0) {
+                    showImage();
+                } else {
+                    showPlaceholder();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
