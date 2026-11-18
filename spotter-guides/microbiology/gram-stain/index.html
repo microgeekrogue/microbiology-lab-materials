@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="A visual study guide for Gram staining, bacterial
+        cell shapes, cellular arrangements, and reporting observations."
+    >
+
+    <title>Microbiology Spotter Guide - Gram Stain &amp; Morphology</title>
+
+    <style>
+        :root {
+            --blue: #1f4e79;
+            --light-blue: #d9eaf7;
+            --border: #cccccc;
+            --text: #202830;
+            --green: #2e8b57;
+            --purple: #633399;
+            --pink: #a82257;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #f2f5f8;
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            z-index: 10;
+            padding: 12px;
+            background: #ffffff;
+            color: var(--blue);
+        }
+
+        .skip-link:focus {
+            top: 12px;
+        }
+
+        a {
+            color: var(--blue);
+            text-underline-offset: 3px;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #7541d6;
+            outline-offset: 4px;
+        }
+
+        .guide-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: #586174;
+            font-size: 14px;
+        }
+
+        .guide-navigation a {
+            font-weight: 700;
+        }
+
+        .header {
+            margin-bottom: 18px;
+            padding: 24px 16px;
+            border-radius: 8px;
+            background: var(--blue);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(24px, 4vw, 34px);
+            line-height: 1.2;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 20px;
+        }
+
+        .intro {
+            margin: 0 0 20px;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        .section-title {
+            margin: 24px 0 12px;
+            padding: 10px 12px;
+            border-left: 6px solid var(--blue);
+            background: var(--light-blue);
+            color: var(--blue);
+            font-size: 21px;
+        }
+
+        .section-intro {
+            margin: 0 0 14px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            min-width: 0;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        /* Missing images display the labeled placeholder. */
+        .image-slot {
+            position: relative;
+            display: grid;
+            min-height: 180px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            place-items: center;
+            border: 2px dashed #a5afb8;
+            border-radius: 6px;
+            background: #edf1f4;
+        }
+
+        .image-slot img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+            background: #ffffff;
+            object-fit: contain;
+        }
+
+        .image-slot img[hidden] {
+            display: none;
+        }
+
+        .image-slot.has-image {
+            border: 1px solid #d8dee4;
+            background: #ffffff;
+        }
+
+        .image-slot.has-image .placeholder-text {
+            display: none;
+        }
+
+        .placeholder-text {
+            padding: 16px;
+            color: #56616c;
+            font-size: 14px;
+        }
+
+        .placeholder-text span {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .term {
+            margin: 0 0 6px;
+            color: var(--blue);
+            font-size: 16px;
+            line-height: 1.3;
+        }
+
+        .note {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .box {
+            min-width: 0;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #f8f8f8;
+        }
+
+        .box h2 {
+            margin: 0 0 12px;
+            color: var(--blue);
+            font-size: 20px;
+        }
+
+        .box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 9px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--light-blue);
+            color: var(--blue);
+        }
+
+        td {
+            background: #ffffff;
+        }
+
+        .gram-positive {
+            color: var(--purple);
+            font-weight: 700;
+        }
+
+        .gram-negative {
+            color: var(--pink);
+            font-weight: 700;
+        }
+
+        .callout {
+            margin-top: 18px;
+            padding: 14px;
+            border-left: 5px solid var(--blue);
+            border-radius: 6px;
+            background: #eef5fb;
+        }
+
+        .callout p {
+            margin: 0;
+        }
+
+        .report-example {
+            margin: 12px 0;
+            padding: 14px;
+            border: 1px solid #cbdcec;
+            border-radius: 6px;
+            background: #ffffff;
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .warning {
+            margin-top: 22px;
+            border-left: 6px solid #b84624;
+            background: #fff4e5;
+        }
+
+        .warning h2 {
+            color: #9c381b;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 0;
+            padding-left: 22px;
+        }
+
+        li + li {
+            margin-top: 7px;
+        }
+
+        .checklist {
+            margin-top: 22px;
+            padding: 18px;
+            border-left: 6px solid var(--green);
+            border-radius: 8px;
+            background: #e9f7ef;
+        }
+
+        .checklist h2 {
+            margin: 0 0 12px;
+            color: #226b43;
+            font-size: 21px;
+        }
+
+        .checklist label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+
+        .checklist input {
+            flex-shrink: 0;
+            width: 19px;
+            height: 19px;
+            margin: 3px 0 0;
+            accent-color: var(--green);
+        }
+
+        .checklist input:checked + span {
+            color: #42624e;
+            text-decoration: line-through;
+        }
+
+        .checklist-note,
+        .footer {
+            color: #586174;
+            font-size: 13px;
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        @media (max-width: 950px) {
+            .image-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 12px;
+            }
+
+            .page {
+                padding: 16px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .header p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-slot {
+                min-height: 210px;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #ffffff;
+                font-size: 11px;
+            }
+
+            .page {
+                max-width: none;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .skip-link,
+            .guide-navigation {
+                display: none;
+            }
+
+            .header {
+                padding: 12px;
+                border: 1px solid #cccccc;
+                background: #ffffff;
+                color: #000000;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .image-slot {
+                min-height: 110px;
+            }
+
+            .term {
+                font-size: 12px;
+            }
+
+            .note,
+            table {
+                font-size: 11px;
+            }
+
+            .two-column {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .card,
+            .box,
+            .checklist,
+            tr {
+                break-inside: avoid;
+            }
+
+            h2 {
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <main class="page" id="main-content">
+
+        <nav class="guide-navigation" aria-label="Guide navigation">
+            <a href="../../">All Courses</a>
+            <span aria-hidden="true">/</span>
+            <a href="../">Microbiology Guides</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Gram Stain &amp; Morphology</span>
+        </nav>
+
+        <header class="header">
+            <h1>🔬 MICROBIOLOGY SPOTTER GUIDE</h1>
+            <p>Learning Plan: Gram Stain &amp; Morphology</p>
+        </header>
+
+        <p class="intro">
+            Can you describe the Gram reaction, cell shape,
+            and cellular arrangement of a stained specimen?
+        </p>
+
+        <!-- SECTION 1: Gram reaction and morphology -->
+        <section aria-labelledby="identify-heading">
+            <h2 class="section-title" id="identify-heading">
+                📸 Can I Identify It?
+            </h2>
+
+            <p class="section-intro">
+                Describe what you see before attempting to name
+                an organism. Color, shape, and arrangement are
+                separate observations.
+            </p>
+
+            <div class="image-grid">
+
+                <!-- IMAGE 1 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/gram-positive-cocci.jpg"
+                            alt="Gram-positive cocci appearing purple"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Gram-Positive Cocci
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Gram-Positive Cocci</h3>
+                    <p class="note">
+                        Purple-staining, approximately spherical cells.
+                    </p>
+                </article>
+
+                <!-- IMAGE 2 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/gram-negative-cocci.jpg"
+                            alt="Gram-negative cocci appearing pink"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Gram-Negative Cocci
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Gram-Negative Cocci</h3>
+                    <p class="note">
+                        Pink-to-red-staining, approximately spherical cells.
+                    </p>
+                </article>
+
+                <!-- IMAGE 3 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/gram-positive-bacilli.jpg"
+                            alt="Gram-positive bacilli appearing purple"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Gram-Positive Bacilli
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Gram-Positive Bacilli</h3>
+                    <p class="note">
+                        Purple-staining, rod-shaped cells.
+                    </p>
+                </article>
+
+                <!-- IMAGE 4 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/gram-negative-bacilli.jpg"
+                            alt="Gram-negative bacilli appearing pink"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Gram-Negative Bacilli
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Gram-Negative Bacilli</h3>
+                    <p class="note">
+                        Pink-to-red-staining, rod-shaped cells.
+                    </p>
+                </article>
+
+                <!-- IMAGE 5 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/cocci-clusters.jpg"
+                            alt="Cocci arranged in irregular clusters"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Cocci in Clusters
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Cocci in Clusters</h3>
+                    <p class="note">
+                        Spherical cells grouped in irregular,
+                        grape-like clusters.
+                    </p>
+                </article>
+
+                <!-- IMAGE 6 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/cocci-chains.jpg"
+                            alt="Cocci arranged in chains"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Cocci in Chains
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Cocci in Chains</h3>
+                    <p class="note">
+                        Spherical cells connected in chain-like rows.
+                    </p>
+                </article>
+
+                <!-- IMAGE 7 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/diplococci.jpg"
+                            alt="Cocci arranged in pairs"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Diplococci
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Diplococci</h3>
+                    <p class="note">
+                        Spherical cells arranged in pairs.
+                    </p>
+                </article>
+
+                <!-- IMAGE 8 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/cocci-tetrads.jpg"
+                            alt="Cocci arranged in groups of four"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Tetrads
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Tetrads</h3>
+                    <p class="note">
+                        Spherical cells arranged in groups of four.
+                    </p>
+                </article>
+
+                <!-- IMAGE 9 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/single-bacilli.jpg"
+                            alt="Individual rod-shaped bacterial cells"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Single Bacilli
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Single Bacilli</h3>
+                    <p class="note">
+                        Individual rod-shaped cells.
+                    </p>
+                </article>
+
+                <!-- IMAGE 10 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/streptobacilli.jpg"
+                            alt="Rod-shaped bacterial cells arranged in chains"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Streptobacilli
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Streptobacilli</h3>
+                    <p class="note">
+                        Rod-shaped cells arranged in chains.
+                    </p>
+                </article>
+
+                <!-- IMAGE 11 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/coccobacilli.jpg"
+                            alt="Short oval rods called coccobacilli"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Coccobacilli
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Coccobacilli</h3>
+                    <p class="note">
+                        Short, oval rods with a shape between
+                        typical cocci and longer bacilli.
+                    </p>
+                </article>
+
+                <!-- IMAGE 12 -->
+                <article class="card">
+                    <div class="image-slot">
+                        <img
+                            src="images/curved-rods.jpg"
+                            alt="Curved rod-shaped bacterial cells"
+                            loading="lazy"
+                            hidden
+                        >
+                        <div class="placeholder-text">
+                            Curved Rods
+                            <span>Image placeholder</span>
+                        </div>
+                    </div>
+                    <h3 class="term">Curved Rods</h3>
+                    <p class="note">
+                        Rod-shaped cells with a noticeable curve.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: Comparison tables -->
+        <div class="two-column">
+
+            <section class="box" aria-labelledby="reaction-heading">
+                <h2 id="reaction-heading">
+                    Can I Distinguish the Gram Reactions?
+                </h2>
+
+                <div class="table-wrapper">
+                    <table aria-label="Gram reaction comparison">
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Gram-Positive</th>
+                                <th scope="col">Gram-Negative</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Final appearance</th>
+                                <td class="gram-positive">Purple</td>
+                                <td class="gram-negative">Pink/red</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Peptidoglycan</th>
+                                <td>Thick layer</td>
+                                <td>Thin layer</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Outer membrane</th>
+                                <td>Absent in the standard model</td>
+                                <td>Present in the standard model</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    After correct decolorization
+                                </th>
+                                <td>Retains purple stain complex</td>
+                                <td>Loses purple stain complex</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="box" aria-labelledby="description-heading">
+                <h2 id="description-heading">
+                    Shape vs. Arrangement
+                </h2>
+
+                <div class="table-wrapper">
+                    <table aria-label="Shape and arrangement distinctions">
+                        <thead>
+                            <tr>
+                                <th scope="col">Question</th>
+                                <th scope="col">Observation</th>
+                                <th scope="col">Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>What color are the cells?</td>
+                                <td>Gram reaction</td>
+                                <td>Purple or pink/red</td>
+                            </tr>
+                            <tr>
+                                <td>What shape is each cell?</td>
+                                <td>Morphology</td>
+                                <td>Coccus, bacillus, coccobacillus</td>
+                            </tr>
+                            <tr>
+                                <td>How are cells grouped?</td>
+                                <td>Arrangement</td>
+                                <td>Pairs, chains, clusters, tetrads</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout">
+                    <p>
+                        A shape does not determine a Gram reaction.
+                        Cocci and bacilli can each be Gram-positive
+                        or Gram-negative.
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SECTION 3: Reagent review -->
+        <section aria-labelledby="sequence-heading">
+            <h2 class="section-title" id="sequence-heading">
+                🧪 Do I Know the Stain Sequence?
+            </h2>
+
+            <p class="section-intro">
+                This table reviews reagent order and expected colors.
+                Follow your instructor's protocol for smear preparation,
+                fixation, rinsing, timing, and safe handling.
+            </p>
+
+            <div class="table-wrapper">
+                <table aria-label="Gram stain reagent sequence and colors">
+                    <thead>
+                        <tr>
+                            <th scope="col">Step</th>
+                            <th scope="col">Reagent</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Gram-Positive Cells</th>
+                            <th scope="col">Gram-Negative Cells</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Crystal violet</td>
+                            <td>Primary stain</td>
+                            <td class="gram-positive">Purple</td>
+                            <td class="gram-positive">Purple</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Gram's iodine</td>
+                            <td>
+                                Mordant; forms a complex with crystal violet
+                            </td>
+                            <td class="gram-positive">Purple</td>
+                            <td class="gram-positive">Purple</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Decolorizer</td>
+                            <td>
+                                Differential removal of the purple stain complex
+                            </td>
+                            <td class="gram-positive">Purple</td>
+                            <td>Colorless</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Safranin</td>
+                            <td>Counterstain</td>
+                            <td class="gram-positive">Purple</td>
+                            <td class="gram-negative">Pink/red</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <p>
+                    Both groups initially stain purple. The key
+                    differentiation occurs during decolorization;
+                    safranin then makes the decolorized cells visible.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Reporting observations -->
+        <section aria-labelledby="report-heading">
+            <h2 class="section-title" id="report-heading">
+                Can I Describe What I See?
+            </h2>
+
+            <div class="box">
+                <h2>Use Three Parts in Your Description</h2>
+
+                <ol>
+                    <li>Gram reaction</li>
+                    <li>Cell shape</li>
+                    <li>Cellular arrangement, when clearly visible</li>
+                </ol>
+
+                <p class="report-example">
+                    Gram-positive cocci arranged in clusters.
+                </p>
+
+                <p class="report-example">
+                    Gram-negative bacilli occurring mostly singly.
+                </p>
+
+                <p class="report-example">
+                    Gram-positive cocci arranged in chains.
+                </p>
+
+                <p>
+                    These are descriptions, not species identifications.
+                    Gram reaction and morphology alone do not establish
+                    a species identity.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Common mistakes -->
+        <section class="box warning" aria-labelledby="mistakes-heading">
+            <h2 id="mistakes-heading">
+                ⚠ Common Student Mistakes
+            </h2>
+
+            <ul>
+                <li>
+                    Calling cells Gram-positive or Gram-negative
+                    based on shape rather than their final stain color.
+                </li>
+                <li>
+                    Confusing cell shape with cellular arrangement.
+                </li>
+                <li>
+                    Assuming all cocci are Gram-positive or
+                    all rods are Gram-negative.
+                </li>
+                <li>
+                    Identifying a species from stain color and
+                    morphology alone.
+                </li>
+                <li>
+                    Interpreting a thick or uneven smear without
+                    considering its effect on stain quality.
+                </li>
+                <li>
+                    Forgetting that decolorization affects the final
+                    result and must follow the course protocol.
+                </li>
+                <li>
+                    Reporting an arrangement from one crowded area
+                    instead of examining several clear fields.
+                </li>
+            </ul>
+        </section>
+
+        <!-- SECTION 6: Readiness checklist -->
+        <section class="checklist" aria-labelledby="checklist-heading">
+            <h2 id="checklist-heading">
+                ✅ Ready for the Quiz?
+            </h2>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can distinguish Gram-positive and
+                    Gram-negative staining results.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can identify cocci, bacilli, and coccobacilli.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can distinguish pairs, chains, clusters,
+                    and tetrads.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain the difference between shape
+                    and arrangement.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can list the four Gram stain reagents
+                    in the correct order.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can explain the roles of the primary stain,
+                    mordant, decolorizer, and counterstain.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can predict the expected cell colors
+                    after each reagent.
+                </span>
+            </label>
+
+            <label>
+                <input type="checkbox">
+                <span>
+                    I can report Gram reaction, shape, and arrangement
+                    without claiming a species identification.
+                </span>
+            </label>
+
+            <p class="checklist-note">
+                This checklist is for self-review. Responses are
+                not submitted or saved by this page.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Created for Microbiology Instruction | Megan Kundinger
+            </p>
+
+            <p>
+                <a href="../">Return to Microbiology Guides</a>
+                ·
+                <a href="../../">View All Courses</a>
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        document.querySelectorAll(".image-slot img").forEach((image) => {
+            const slot = image.closest(".image-slot");
+
+            const showImage = () => {
+                image.hidden = false;
+                slot.classList.add("has-image");
+            };
+
+            const showPlaceholder = () => {
+                image.hidden = true;
+                slot.classList.remove("has-image");
+            };
+
+            image.addEventListener("load", showImage);
+            image.addEventListener("error", showPlaceholder);
+
+            if (image.complete) {
+                if (image.naturalWidth > 0) {
+                    showImage();
+                } else {
+                    showPlaceholder();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
