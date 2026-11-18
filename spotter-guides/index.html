@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta
+        name="description"
+        content="Explore course-specific spotter guides for microbiology,
+        general chemistry, biochemistry, and human biology."
+    >
+
     <title>Spotter Guide Hub | Megan Kundinger</title>
 
     <link rel="stylesheet" href="styles.css">
@@ -14,36 +20,50 @@
         Skip to main content
     </a>
 
+    <!-- Decorative background icons -->
     <div class="microbe microbe-one" aria-hidden="true">🦠</div>
     <div class="microbe microbe-two" aria-hidden="true">🔬</div>
-    <div class="microbe microbe-three" aria-hidden="true">🧫</div>
+    <div class="microbe microbe-three" aria-hidden="true">🧪</div>
 
+    <!-- Page header -->
     <header class="site-header">
         <h1>📸 Spotter Guide Hub</h1>
+
         <p class="subtitle">
-            Choose your course, explore a guide, and prepare for your
-            next lab quiz or practical.
+            Choose your course, explore a visual study guide,
+            and prepare for your next quiz or lab practical.
         </p>
     </header>
 
     <main class="container" id="main-content">
 
+        <!-- Breadcrumb navigation -->
         <nav class="breadcrumbs" aria-label="Breadcrumb">
             <ol>
-                <li><a href="../">Lab Home</a></li>
-                <li aria-current="page">Spotter Guides</li>
+                <li>
+                    <a href="../">Lab Home</a>
+                </li>
+                <li aria-current="page">
+                    Spotter Guides
+                </li>
             </ol>
         </nav>
 
+        <!-- Introduction -->
         <section class="intro-panel" aria-labelledby="welcome-heading">
-            <h2 id="welcome-heading">Look. Identify. Explain.</h2>
+            <h2 id="welcome-heading">
+                Look. Identify. Explain.
+            </h2>
+
             <p>
-                Use these visual study guides to practice identifying
-                structures, reviewing their functions, comparing similar
-                items, and checking your readiness before a quiz.
+                Select your course below to explore its spotter guides.
+                Use each guide to practice identifying structures,
+                equipment, and visual features; reviewing key concepts;
+                and explaining what you recognize in your own words.
             </p>
         </section>
 
+        <!-- Course selection -->
         <section aria-labelledby="courses-heading">
             <h2 class="section-heading" id="courses-heading">
                 Select Your Course
@@ -51,25 +71,28 @@
 
             <div class="card-grid">
 
-                <!-- COURSE 1: Active Microbiology course -->
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🦠</div>
+                <!-- MICROBIOLOGY -->
+                <article
+                    class="resource-card"
+                    aria-labelledby="microbiology-heading"
+                >
+                    <div class="card-art" aria-hidden="true">
+                        🦠
+                    </div>
 
                     <div class="card-content">
-                        <span class="badge">Course Guides</span>
+                        <span class="badge">
+                            Course Guides
+                        </span>
 
-                        <h3>Microbiology</h3>
+                        <h3 id="microbiology-heading">
+                            Microbiology
+                        </h3>
 
                         <p>
-                            Explore visual review guides for your
-                            microbiology laboratory.
+                            Explore the Microbiology collection
+                            and select a visual study guide.
                         </p>
-
-                        <ul class="topic-list">
-                            <li>Microscopy</li>
-                            <li>Staining and morphology</li>
-                            <li>Culture media and biochemical testing</li>
-                        </ul>
 
                         <a class="button" href="microbiology/">
                             View Microbiology Guides
@@ -77,62 +100,114 @@
                     </div>
                 </article>
 
-                <!--
-                    COURSE 2 PLACEHOLDER
-                    Replace the title and description with your course.
-                    Replace the unavailable span with a link when ready.
-                -->
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">📚</div>
+                <!-- GENERAL CHEMISTRY -->
+                <article
+                    class="resource-card"
+                    aria-labelledby="general-chemistry-heading"
+                >
+                    <div class="card-art" aria-hidden="true">
+                        ⚗️
+                    </div>
 
                     <div class="card-content">
-                        <span class="badge planned">Future Course</span>
+                        <span class="badge">
+                            Course Guides
+                        </span>
 
-                        <h3>Course Name Here</h3>
+                        <h3 id="general-chemistry-heading">
+                            General Chemistry
+                        </h3>
 
                         <p>
-                            Add a description of your next course and
-                            the visual study guides students will find here.
+                            Explore the General Chemistry collection
+                            and select a visual study guide.
                         </p>
 
-                        <span class="unavailable">
-                            Guides Coming Soon
-                        </span>
+                        <a class="button" href="general-chemistry/">
+                            View General Chemistry Guides
+                        </a>
                     </div>
                 </article>
 
-                <!-- COURSE 3 PLACEHOLDER -->
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🧪</div>
+                <!-- BIOCHEMISTRY -->
+                <article
+                    class="resource-card"
+                    aria-labelledby="biochemistry-heading"
+                >
+                    <div class="card-art" aria-hidden="true">
+                        🧬
+                    </div>
 
                     <div class="card-content">
-                        <span class="badge planned">Future Course</span>
+                        <span class="badge">
+                            Course Guides
+                        </span>
 
-                        <h3>Another Course Here</h3>
+                        <h3 id="biochemistry-heading">
+                            Biochemistry
+                        </h3>
 
                         <p>
-                            Use this space for an additional course,
-                            laboratory section, or collection of guides.
+                            Explore the Biochemistry collection
+                            and select a visual study guide.
                         </p>
 
-                        <span class="unavailable">
-                            Guides Coming Soon
+                        <a class="button" href="biochemistry/">
+                            View Biochemistry Guides
+                        </a>
+                    </div>
+                </article>
+
+                <!-- HUMAN BIOLOGY -->
+                <article
+                    class="resource-card"
+                    aria-labelledby="human-biology-heading"
+                >
+                    <div class="card-art" aria-hidden="true">
+                        🫀
+                    </div>
+
+                    <div class="card-content">
+                        <span class="badge">
+                            Course Guides
                         </span>
+
+                        <h3 id="human-biology-heading">
+                            Human Biology
+                        </h3>
+
+                        <p>
+                            Explore the Human Biology collection
+                            and select a visual study guide.
+                        </p>
+
+                        <a class="button" href="human-biology/">
+                            View Human Biology Guides
+                        </a>
                     </div>
                 </article>
 
             </div>
         </section>
 
+        <!-- Return navigation -->
         <nav class="bottom-nav" aria-label="Return navigation">
-            <a href="../">← Return to Microbiology Lab Hub</a>
+            <a href="../">
+                ← Return to Lab Home
+            </a>
         </nav>
 
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
-        <p>Created for Instruction | Megan Kundinger</p>
-        <p>Explore. Practice. Build confidence.</p>
+        <p>
+            Created for Science Instruction | Megan Kundinger
+        </p>
+
+        <p>
+            Explore. Practice. Build confidence.
+        </p>
     </footer>
 </body>
 </html>
