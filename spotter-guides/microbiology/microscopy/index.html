@@ -36,7 +36,38 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
+/* Navigation between the guide, course menu, and course hub */
+.guide-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #586174;
+    font-size: 14px;
+}
 
+.guide-navigation a {
+    color: #1f4e79;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.guide-navigation a:hover {
+    color: #7541d6;
+}
+
+.guide-navigation a:focus-visible {
+    outline: 3px solid #7541d6;
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+.guide-navigation [aria-current="page"] {
+    color: #202830;
+    font-weight: 700;
+}
         .header {
             margin-bottom: 18px;
             padding: 24px 16px;
