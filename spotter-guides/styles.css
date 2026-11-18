@@ -1,1 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600;700&display=swap');
 
+:root {
+    --crystal-violet: #7541d6;
+    --methylene-blue: #245ac3;
+    --gram-green: #087d59;
+
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --card-background: rgba(255, 255, 255, 0.98);
+
+    --text: #293244;
+    --muted: #586174;
+    --border: #dce2ee;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: "Quicksand", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--methylene-blue);
+}
+
+a:focus-visible {
+    outline: 3px solid #b45309;
+    outline-offset: 5px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 10;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #243a75;
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+.microbe {
+    position: fixed;
+    z-index: 0;
+    opacity: 0.12;
+    pointer-events: none;
+    animation: float 20s infinite ease-in-out;
+}
+
+.microbe-one {
+    top: 12%;
+    left: 4%;
+    font-size: 3rem;
+}
+
+.microbe-two {
+    top: 62%;
+    right: 5%;
+    font-size: 2.5rem;
+}
+
+.microbe-three {
+    bottom: 15%;
+    left: 18%;
+    font-size: 3rem;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+.site-header,
+.container,
+.site-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.site-header {
+    padding: 2.5rem 1rem;
+    border-bottom: 5px solid var(--crystal-violet);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.site-header h1 {
+    margin: 0;
+    color: var(--crystal-violet);
+    font-family: "Caveat", cursive;
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 1.15;
+}
+
+.subtitle {
+    max-width: 720px;
+    margin: 0.8rem auto 0;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.container {
+    width: min(1100px, calc(100% - 32px));
+    margin: 2rem auto;
+}
+
+.breadcrumbs {
+    margin-bottom: 1.25rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumbs li + li::before {
+    content: "/";
+    margin-right: 0.5rem;
+}
+
+.breadcrumbs a {
+    color: #ffffff;
+    text-underline-offset: 4px;
+}
+
+.intro-panel {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-left: 6px solid #b7a1ff;
+    border-radius: 16px;
+    background: var(--card-background);
+    box-shadow: var(--shadow);
+}
+
+.intro-panel h2 {
+    margin: 0 0 0.5rem;
+    color: var(--crystal-violet);
+    font-size: 1.35rem;
+}
+
+.intro-panel p {
+    margin: 0;
+}
+
+.section-heading {
+    margin: 2rem 0 1rem;
+    color: #ffffff;
+    font-family: "Caveat", cursive;
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.resource-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    background: var(--card-background);
+    box-shadow: var(--shadow);
+}
+
+.card-art {
+    display: grid;
+    min-height: 130px;
+    place-items: center;
+    background: linear-gradient(135deg, #ede9fe, #dbeafe);
+    font-size: 3.5rem;
+}
+
+.card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+}
+
+.badge {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: #e5f5ee;
+    color: #086544;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.badge.planned {
+    background: #eef0f5;
+    color: #535b6a;
+}
+
+.resource-card h3 {
+    margin: 0 0 0.65rem;
+    color: var(--crystal-violet);
+    font-size: 1.35rem;
+}
+
+.resource-card p {
+    margin: 0 0 1rem;
+    color: var(--muted);
+}
+
+.topic-list {
+    margin: 0 0 1.5rem;
+    padding-left: 1.2rem;
+    color: var(--muted);
+}
+
+.topic-list li + li {
+    margin-top: 0.3rem;
+}
+
+.button {
+    display: inline-block;
+    margin-top: auto;
+    padding: 0.8rem 1.1rem;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        var(--crystal-violet),
+        var(--methylene-blue)
+    );
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 14px rgba(45, 55, 110, 0.22);
+}
+
+.unavailable {
+    display: inline-block;
+    margin-top: auto;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid #d8dde8;
+    border-radius: 12px;
+    background: #eef0f5;
+    color: #596171;
+    font-weight: 700;
+}
+
+.bottom-nav {
+    margin-top: 2rem;
+}
+
+.bottom-nav a {
+    color: #ffffff;
+    font-weight: 700;
+    text-underline-offset: 4px;
+}
+
+.site-footer {
+    margin-top: 3rem;
+    padding: 1.75rem 1rem;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0.25rem 0;
+}
+
+@media (max-width: 600px) {
+    .site-header {
+        padding: 2rem 1rem;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-panel,
+    .card-content {
+        padding: 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .microbe {
+        animation: none;
+    }
+
+    .button {
+        transition: none;
+    }
+
+    .button:hover {
+        transform: none;
+    }
+}
+
+@media print {
+    body {
+        background: #ffffff;
+    }
+
+    .microbe,
+    .skip-link {
+        display: none;
+    }
+
+    .site-header,
+    .resource-card,
+    .intro-panel {
+        box-shadow: none;
+    }
+
+    .breadcrumbs,
+    .breadcrumbs a,
+    .section-heading,
+    .bottom-nav a {
+        color: #222222;
+    }
+
+    .resource-card {
+        border: 1px solid #cccccc;
+        break-inside: avoid;
+    }
+}
