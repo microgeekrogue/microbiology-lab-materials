@@ -1,1 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta
+    name="description"
+    content="A visual biochemistry spotter guide for identifying carbohydrates, lipids, proteins, and nucleic acids."
+  >
+
+  <title>Biochemistry Spotter Guide | Megan Kundinger</title>
+
+  <style>
+    /* =====================================================
+       BIOCHEMISTRY SPOTTER GUIDE
+       Learning Plan: Biomolecule Identification
+       Created for Megan Kundinger
+    ===================================================== */
+
+    :root {
+      color-scheme: light;
+      --navy: #18344c;
+      --teal: #136d73;
+      --teal-light: #edf7f6;
+      --blue-light: #eef4fa;
+      --paper: #ffffff;
+      --page: #edf2f5;
+      --ink: #263746;
+      --muted: #526575;
+      --line: #d6e2e9;
+      --gold: #956016;
+      --gold-light: #fff7e8;
+      --radius: 16px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--page);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.25;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--teal);
+      text-underline-offset: 3px;
+    }
+
+    ul,
+    ol {
+      padding-left: 24px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    li::marker {
+      color: var(--teal);
+    }
+
+    .spotter-guide {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(18px, 4vw, 44px);
+      background: #f5f8fa;
+    }
+
+    .guide-section {
+      min-width: 0;
+      margin-top: 36px;
+    }
+
+    /* Skip link */
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      z-index: 10;
+      padding: 12px 18px;
+      border-radius: 8px;
+      color: #ffffff;
+      background: var(--navy);
+    }
+
+    .skip-link:focus {
+      top: 12px;
+    }
+
+    /* Header */
+
+    .header {
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 48px);
+      border-radius: 20px;
+      color: #ffffff;
+      background: linear-gradient(120deg, #18344c, #136d73);
+      box-shadow: 0 10px 24px rgb(24 52 76 / 12%);
+    }
+
+    .eyebrow {
+      margin-bottom: 16px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .header h1 {
+      max-width: 850px;
+      margin-bottom: 16px;
+      font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+      letter-spacing: -0.035em;
+    }
+
+    .header-subtitle {
+      margin-bottom: 22px;
+      font-size: 1.05rem;
+    }
+
+    .header-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-tags span {
+      padding: 5px 12px;
+      border: 1px solid rgb(255 255 255 / 45%);
+      border-radius: 999px;
+      font-size: 0.78rem;
+    }
+
+    .intro {
+      max-width: 900px;
+      margin: 26px 0 22px;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    /* Introductory callout */
+
+    .callout {
+      padding: 22px 24px;
+      border: 1px solid #b7d8d5;
+      border-left: 6px solid var(--teal);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      background: var(--teal-light);
+    }
+
+    .callout-label {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Section headings */
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      padding-bottom: 13px;
+      border-bottom: 3px solid var(--teal);
+      color: var(--navy);
+      font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+      letter-spacing: -0.02em;
+    }
+
+    .section-number {
+      display: inline-grid;
+      flex-shrink: 0;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+      color: #ffffff;
+      background: var(--teal);
+      font-size: 0.85rem;
+      letter-spacing: 0;
+    }
+
+    .section-intro {
+      max-width: 900px;
+      margin-bottom: 22px;
+      color: var(--muted);
+    }
+
+    /* Spotter cards */
+
+    .image-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      --card-accent: var(--teal);
+
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--card-accent);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 4px 12px rgb(24 52 76 / 5%);
+    }
+
+    .carbohydrate {
+      --card-accent: #136d73;
+    }
+
+    .lipid {
+      --card-accent: #956016;
+    }
+
+    .protein {
+      --card-accent: #72508d;
+    }
+
+    .nucleic-acid {
+      --card-accent: #315f96;
+    }
+
+    .card-label {
+      margin: 0;
+      padding: 13px 18px 10px;
+      color: var(--card-accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .image-slot {
+      display: grid;
+      place-items: center;
+      min-height: 195px;
+      margin: 0 14px;
+      padding: 16px;
+      overflow: hidden;
+      border: 1px dashed #bacbd5;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f6f9fb, #edf3f6);
+    }
+
+    .image-slot img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+    }
+
+    .placeholder-text {
+      color: var(--navy);
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .placeholder-text span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    .term {
+      margin: 19px 18px 10px;
+      color: var(--navy);
+      font-size: 1.12rem;
+    }
+
+    .note {
+      margin: 0;
+      padding: 0 18px 22px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .clue-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--card-accent);
+      font-size: 0.69rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    /* Comparison table */
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--paper);
+    }
+
+    table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+
+    th,
+    td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      color: #ffffff;
+      background: var(--navy);
+      font-size: 0.82rem;
+      letter-spacing: 0.025em;
+    }
+
+    tbody th {
+      width: 18%;
+      color: var(--teal);
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f3f7fa;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* Supporting panels */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .box {
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .box h2,
+    .box h3 {
+      margin-bottom: 15px;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+
+    .clues-box {
+      border-top: 5px solid var(--teal);
+      background: var(--teal-light);
+    }
+
+    .health-box {
+      border-top: 5px solid #315f96;
+      background: var(--blue-light);
+    }
+
+    /* Spotter challenge */
+
+    .challenge-box {
+      border: 2px solid #b7d8d5;
+    }
+
+    .report-example {
+      margin: 23px 0 0;
+      padding: 20px;
+      border-left: 4px solid var(--teal);
+      border-radius: 0 10px 10px 0;
+      color: var(--navy);
+      background: var(--teal-light);
+    }
+
+    .report-example h4 {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .report-example p {
+      font-style: italic;
+    }
+
+    /* Practice cards */
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .practice-card {
+      display: flex;
+      flex-direction: column;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .practice-card h3 {
+      margin-bottom: 12px;
+      color: var(--teal);
+      font-size: 1.05rem;
+    }
+
+    .practice-card details {
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .practice-card summary {
+      padding: 11px 14px;
+      border: 1px solid #b7d8d5;
+      border-radius: 8px;
+      color: var(--teal);
+      background: var(--teal-light);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .practice-card details[open] summary {
+      margin-bottom: 13px;
+    }
+
+    .practice-card details p {
+      padding: 0 4px;
+    }
+
+    /* Common mistakes */
+
+    .warning {
+      margin-top: 34px;
+      border-color: #e3cca3;
+      border-left: 6px solid var(--gold);
+      background: var(--gold-light);
+    }
+
+    .warning h2,
+    .warning li::marker {
+      color: #79501a;
+    }
+
+    /* Self-review checklist */
+
+    .checklist {
+      margin-top: 34px;
+      padding: clamp(22px, 4vw, 32px);
+      border: 2px solid #b7d8d5;
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .checklist h2 {
+      margin-bottom: 12px;
+      color: var(--navy);
+      font-size: 1.4rem;
+    }
+
+    .checklist-intro {
+      color: var(--muted);
+    }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .checklist input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin: 3px 0 0;
+      accent-color: var(--teal);
+    }
+
+    .checklist input:checked + span {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .checklist-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+
+    .footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.82rem;
+    }
+
+    /* Keyboard focus */
+
+    a:focus-visible,
+    summary:focus-visible,
+    input:focus-visible,
+    .table-wrapper:focus-visible {
+      outline: 3px solid #315f96;
+      outline-offset: 4px;
+    }
+
+    /* Small screens */
+
+    @media (max-width: 640px) {
+      .two-column,
+      .practice-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+      }
+
+      .box {
+        padding: 21px;
+      }
+
+      .section-title {
+        align-items: flex-start;
+      }
+    }
+
+    /* Print */
+
+    @media print {
+      body {
+        color: #000000;
+        background: #ffffff;
+      }
+
+      .skip-link {
+        display: none;
+      }
+
+      .spotter-guide {
+        max-width: none;
+        padding: 0;
+        background: #ffffff;
+        font-size: 10pt;
+      }
+
+      .header {
+        padding: 20px;
+        border: 2px solid #18344c;
+        color: #18344c;
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .header-tags span {
+        border-color: #18344c;
+      }
+
+      .image-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card,
+      .practice-card,
+      .box,
+      .checklist,
+      tr {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+
+      .section-title {
+        break-after: avoid;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 0;
+      }
+
+      thead th {
+        color: #18344c;
+        background: #ffffff;
+      }
+
+      .section-number {
+        border: 1px solid #136d73;
+        color: #136d73;
+        background: #ffffff;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">
+    Skip to guide
+  </a>
+
+  <main class="spotter-guide" id="main-content">
+
+    <!-- HEADER -->
+
+    <header class="header">
+      <p class="eyebrow">
+        Visual Identification • Structure • Function
+      </p>
+
+      <h1>Biochemistry Spotter Guide</h1>
+
+      <p class="header-subtitle">
+        Learning Plan: Biomolecule Identification
+      </p>
+
+      <div class="header-tags" aria-label="Guide topics">
+        <span>Carbohydrates</span>
+        <span>Lipids</span>
+        <span>Proteins</span>
+        <span>Nucleic Acids</span>
+      </div>
+    </header>
+
+    <p class="intro">
+      Can you recognize the major biomolecule classes, identify
+      their structural clues, and connect them to biological
+      functions and real-world examples?
+    </p>
+
+    <aside class="callout" aria-labelledby="mindset-heading">
+      <h2 class="callout-label" id="mindset-heading">
+        The Spotter Mindset
+      </h2>
+
+      <p>
+        Biochemists identify molecules by their structures,
+        functional groups, and biological roles. Focus on what
+        you can observe rather than memorizing examples.
+      </p>
+    </aside>
+
+    <!-- SECTION 1: VISUAL IDENTIFICATION -->
+
+    <section
+      class="guide-section"
+      aria-labelledby="identify-heading"
+    >
+      <h2 class="section-title" id="identify-heading">
+        <span class="section-number" aria-hidden="true">01</span>
+        Can I Identify the Biomolecule?
+      </h2>
+
+      <p class="section-intro">
+        Look for structural clues, molecular building blocks,
+        and common characteristics associated with each
+        biomolecule class.
+      </p>
+
+      <!--
+        ADDING YOUR IMAGES
+
+        The image areas below currently contain placeholders.
+
+        When an image is ready, replace the entire
+        placeholder-text div inside its image-slot with:
+
+        <img
+          src="images/carbohydrate.png"
+          alt="Ring-shaped carbohydrate structure with multiple hydroxyl groups."
+          loading="lazy"
+        >
+
+        Update the filename and alt text for each image.
+      -->
+
+      <div class="image-grid">
+
+        <!-- CARD 1 -->
+
+        <article class="card carbohydrate">
+          <p class="card-label">Spotter 01 • Structure</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Carbohydrate
+              <span>Structure image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Carbohydrate</h3>
+
+          <p class="note">
+            <span class="clue-label">Look for</span>
+            Ring structures and numerous hydroxyl
+            (&ndash;OH) groups.
+          </p>
+        </article>
+
+        <!-- CARD 2 -->
+
+        <article class="card lipid">
+          <p class="card-label">Spotter 02 • Structure</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Lipid
+              <span>Structure image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Lipid</h3>
+
+          <p class="note">
+            <span class="clue-label">Look for</span>
+            Long carbon-hydrogen chains with relatively
+            little oxygen.
+          </p>
+        </article>
+
+        <!-- CARD 3 -->
+
+        <article class="card protein">
+          <p class="card-label">Spotter 03 • Structure</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Protein
+              <span>Structure image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Protein</h3>
+
+          <p class="note">
+            <span class="clue-label">Look for</span>
+            Amino acid building blocks joined by
+            peptide bonds.
+          </p>
+        </article>
+
+        <!-- CARD 4 -->
+
+        <article class="card nucleic-acid">
+          <p class="card-label">Spotter 04 • Structure</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Nucleic Acid
+              <span>Structure image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Nucleic Acid</h3>
+
+          <p class="note">
+            <span class="clue-label">Look for</span>
+            Phosphate groups, sugars, and
+            nitrogen-containing bases.
+          </p>
+        </article>
+
+        <!-- CARD 5 -->
+
+        <article class="card carbohydrate">
+          <p class="card-label">Spotter 05 • Food Example</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Bread
+              <span>Food image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Carbohydrate-Rich Food</h3>
+
+          <p class="note">
+            <span class="clue-label">Connect the example</span>
+            Can you identify which biomolecule class
+            provides most of the energy?
+          </p>
+        </article>
+
+        <!-- CARD 6 -->
+
+        <article class="card lipid">
+          <p class="card-label">Spotter 06 • Food Example</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Butter
+              <span>Food image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Lipid-Rich Food</h3>
+
+          <p class="note">
+            <span class="clue-label">Connect the example</span>
+            High-fat foods are commonly associated
+            with lipid molecules.
+          </p>
+        </article>
+
+        <!-- CARD 7 -->
+
+        <article class="card protein">
+          <p class="card-label">Spotter 07 • Food Example</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              Chicken Breast
+              <span>Food image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">Protein-Rich Food</h3>
+
+          <p class="note">
+            <span class="clue-label">Connect the example</span>
+            Protein-rich foods provide amino acids
+            used by the body.
+          </p>
+        </article>
+
+        <!-- CARD 8 -->
+
+        <article class="card nucleic-acid">
+          <p class="card-label">Spotter 08 • Molecular Example</p>
+
+          <div class="image-slot">
+            <div class="placeholder-text">
+              DNA
+              <span>Double helix image placeholder</span>
+            </div>
+          </div>
+
+          <h3 class="term">DNA</h3>
+
+          <p class="note">
+            <span class="clue-label">Connect the example</span>
+            A common example of a nucleic acid.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: COMPARISON TABLE -->
+
+    <section
+      class="guide-section"
+      aria-labelledby="comparison-heading"
+    >
+      <h2 class="section-title" id="comparison-heading">
+        <span class="section-number" aria-hidden="true">02</span>
+        Can I Connect Structure to Function?
+      </h2>
+
+      <p class="section-intro">
+        Compare the structural clues, major functions,
+        and examples for each biomolecule class.
+      </p>
+
+      <div
+        class="table-wrapper"
+        role="region"
+        aria-labelledby="comparison-heading"
+        tabindex="0"
+      >
+        <table aria-label="Biomolecule classification table">
+          <thead>
+            <tr>
+              <th scope="col">Biomolecule</th>
+              <th scope="col">Key Structural Clues</th>
+              <th scope="col">Major Function</th>
+              <th scope="col">Examples</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Carbohydrates</th>
+              <td>Many hydroxyl groups and ring structures</td>
+              <td>Short-term energy supply</td>
+              <td>Glucose, starch, bread</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Lipids</th>
+              <td>Long hydrocarbon chains</td>
+              <td>Energy storage and membranes</td>
+              <td>Butter, oils, triglycerides</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Proteins</th>
+              <td>Amino acids joined by peptide bonds</td>
+              <td>Structure and enzymes</td>
+              <td>Hemoglobin, collagen, enzymes</td>
+            </tr>
+
+            <tr>
+              <th scope="row">Nucleic Acids</th>
+              <td>Phosphates, sugars, nitrogenous bases</td>
+              <td>Genetic information</td>
+              <td>DNA and RNA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SUPPORTING PANELS -->
+
+    <div class="two-column">
+
+      <section
+        class="box clues-box"
+        aria-labelledby="clues-heading"
+      >
+        <h2 id="clues-heading">Structural Clues</h2>
+
+        <ul>
+          <li>
+            Many repeating &ndash;OH groups often
+            indicate carbohydrates.
+          </li>
+          <li>
+            Long carbon chains usually suggest lipids.
+          </li>
+          <li>
+            Amino acid building blocks and peptide bonds
+            point toward proteins.
+          </li>
+          <li>
+            Phosphate groups, sugars, and bases together
+            suggest nucleic acids.
+          </li>
+        </ul>
+      </section>
+
+      <section
+        class="box health-box"
+        aria-labelledby="health-heading"
+      >
+        <h2 id="health-heading">
+          Why Health Professionals Care
+        </h2>
+
+        <ul>
+          <li>Glucose supplies energy to cells.</li>
+          <li>Lipids form cell membranes.</li>
+          <li>
+            Proteins function as enzymes and tissue builders.
+          </li>
+          <li>DNA stores genetic information.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- SECTION 3: SPOTTER CHALLENGE -->
+
+    <section
+      class="guide-section"
+      aria-labelledby="spotter-heading"
+    >
+      <h2 class="section-title" id="spotter-heading">
+        <span class="section-number" aria-hidden="true">03</span>
+        Biomolecule Spotter Challenge
+      </h2>
+
+      <p class="section-intro">
+        Practice explaining your identification using
+        evidence from the molecule.
+      </p>
+
+      <div class="box challenge-box">
+        <h3>Use Visual Evidence</h3>
+
+        <ol>
+          <li>Identify the biomolecule category.</li>
+          <li>List two structural clues.</li>
+          <li>Explain one biological function.</li>
+          <li>Name a real-world example.</li>
+          <li>
+            Explain why another biomolecule category
+            is less appropriate.
+          </li>
+        </ol>
+
+        <div class="report-example">
+          <h4>Example Identification</h4>
+
+          <p>
+            “This molecule is classified as a carbohydrate
+            because it contains a ring structure and several
+            hydroxyl groups. A carbohydrate provides energy
+            for cells. A lipid would be less likely because
+            long hydrocarbon chains are absent.”
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: QUICK PRACTICE -->
+
+    <section
+      class="guide-section"
+      aria-labelledby="practice-heading"
+    >
+      <h2 class="section-title" id="practice-heading">
+        <span class="section-number" aria-hidden="true">04</span>
+        Quick Identification Practice
+      </h2>
+
+      <p class="section-intro">
+        Make your identification before revealing
+        each answer.
+      </p>
+
+      <div class="practice-grid">
+
+        <article class="practice-card">
+          <h3>Practice 1</h3>
+
+          <p>
+            A molecule contains many hydroxyl groups
+            and forms a six-membered ring.
+          </p>
+
+          <details>
+            <summary>Reveal answer</summary>
+            <p>Most likely a carbohydrate.</p>
+          </details>
+        </article>
+
+        <article class="practice-card">
+          <h3>Practice 2</h3>
+
+          <p>
+            A molecule contains long hydrocarbon chains
+            and very little oxygen.
+          </p>
+
+          <details>
+            <summary>Reveal answer</summary>
+            <p>Most likely a lipid.</p>
+          </details>
+        </article>
+
+        <article class="practice-card">
+          <h3>Practice 3</h3>
+
+          <p>
+            A molecule is built from amino acids
+            joined by peptide bonds.
+          </p>
+
+          <details>
+            <summary>Reveal answer</summary>
+            <p>Most likely a protein.</p>
+          </details>
+        </article>
+
+        <article class="practice-card">
+          <h3>Practice 4</h3>
+
+          <p>
+            A molecule contains phosphate groups,
+            sugars, and nitrogenous bases.
+          </p>
+
+          <details>
+            <summary>Reveal answer</summary>
+            <p>Most likely a nucleic acid.</p>
+          </details>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- COMMON MISTAKES -->
+
+    <section
+      class="box warning"
+      aria-labelledby="mistakes-heading"
+    >
+      <h2 id="mistakes-heading">
+        Common Student Mistakes
+      </h2>
+
+      <ul>
+        <li>
+          Assuming every ring structure is a carbohydrate.
+        </li>
+        <li>
+          Confusing lipids with hydrocarbons because both
+          contain many carbon-hydrogen bonds.
+        </li>
+        <li>
+          Ignoring functional groups when classifying molecules.
+        </li>
+        <li>
+          Memorizing examples instead of evaluating structure.
+        </li>
+        <li>
+          Identifying a biomolecule solely from a food source.
+        </li>
+        <li>
+          Forgetting that function often supports identification.
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION 5: SELF-REVIEW -->
+
+    <section
+      class="checklist"
+      aria-labelledby="checklist-heading"
+    >
+      <h2 id="checklist-heading">Ready for the Quiz?</h2>
+
+      <p class="checklist-intro">
+        Check each skill you feel ready to demonstrate.
+      </p>
+
+      <label>
+        <input type="checkbox" name="review-carbohydrates">
+        <span>
+          I can identify carbohydrates from structural clues.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="review-lipids">
+        <span>
+          I can identify lipids from hydrocarbon chains.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="review-proteins">
+        <span>
+          I can recognize proteins and amino acid features.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="review-nucleic-acids">
+        <span>
+          I can identify nucleic acids from phosphate
+          groups and bases.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="review-function">
+        <span>
+          I can connect biomolecule structure to function.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="review-evidence">
+        <span>
+          I can justify my identification using visual evidence.
+        </span>
+      </label>
+
+      <p class="checklist-note">
+        This checklist is for self-review and is not scored.
+        Responses are not saved by this page.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Biochemistry Spotter Guide
+        <br>
+        Learning Plan: Biomolecule Identification
+        <br>
+        Created for Megan Kundinger
+      </p>
+    </footer>
+
+  </main>
+</body>
+</html>
