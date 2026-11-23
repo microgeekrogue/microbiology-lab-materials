@@ -2,22 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
-        content="Biochemistry spotter guides for visual review of biomolecules, functional groups, proteins, enzymes, membranes, and metabolism."
+        content="Visual biochemistry study guides for biomolecules, functional groups, carbohydrates, lipids, proteins, enzymes, nucleotides, and laboratory testing."
     >
 
     <title>Biochemistry Spotter Guides | Megan Kundinger</title>
 
-    <!-- Uses the same shared stylesheet as your microbiology page. -->
+    <!-- Shared stylesheet used by your spotter guide collection. -->
     <link rel="stylesheet" href="../styles.css">
 
     <style>
         /*
-         * Small additions for guide status and consistent card layout.
-         * The main design comes from your shared styles.css file.
+         * Additional styles for the biochemistry landing page.
+         * Main site styling comes from ../styles.css.
          */
 
         .resource-card .card-content {
@@ -26,8 +30,7 @@
             flex: 1;
         }
 
-        .resource-card .card-content > .button,
-        .resource-card .card-content > .coming-soon {
+        .resource-card .card-content > .button {
             margin-top: auto;
             align-self: flex-start;
         }
@@ -48,40 +51,7 @@
             margin: 0;
         }
 
-        .status {
-            display: inline-block;
-            padding: 0.25rem 0.65rem;
-            border: 1px solid;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .status-ready {
-            color: #155b49;
-            background: #eaf7f0;
-            border-color: #b9ddcb;
-        }
-
-        .status-planned {
-            color: #6f501c;
-            background: #fff7e8;
-            border-color: #e6d2aa;
-        }
-
-        .coming-soon {
-            display: inline-block;
-            padding: 0.75rem 1rem;
-            border: 1px dashed #a8b6c3;
-            border-radius: 8px;
-            color: #485c6e;
-            background: #f0f4f7;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .planning-note {
+        .intro-note {
             margin-top: 1rem;
             font-size: 0.95rem;
         }
@@ -97,6 +67,11 @@
         .study-path li + li {
             margin-top: 0.65rem;
         }
+
+        .button:focus-visible {
+            outline: 3px solid #315f96;
+            outline-offset: 4px;
+        }
     </style>
 </head>
 
@@ -105,13 +80,21 @@
         Skip to main content
     </a>
 
-    <!--
-        Reuses the decorative classes from your microbiology page
-        so the shared stylesheet can position these elements.
-    -->
-    <div class="microbe microbe-one" aria-hidden="true">🧬</div>
-    <div class="microbe microbe-two" aria-hidden="true">⚗️</div>
-    <div class="microbe microbe-three" aria-hidden="true">🧪</div>
+    <!-- Decorative elements using your existing stylesheet classes. -->
+
+    <div class="microbe microbe-one" aria-hidden="true">
+        🧬
+    </div>
+
+    <div class="microbe microbe-two" aria-hidden="true">
+        ⚗️
+    </div>
+
+    <div class="microbe microbe-three" aria-hidden="true">
+        🧪
+    </div>
+
+    <!-- PAGE HEADER -->
 
     <header class="site-header">
         <h1>🧬 Biochemistry Spotter Guides</h1>
@@ -131,9 +114,11 @@
                 <li>
                     <a href="../../">Lab Home</a>
                 </li>
+
                 <li>
                     <a href="../">Spotter Guides</a>
                 </li>
+
                 <li aria-current="page">
                     Biochemistry
                 </li>
@@ -142,7 +127,10 @@
 
         <!-- INTRODUCTION -->
 
-        <section class="intro-panel" aria-labelledby="how-heading">
+        <section
+            class="intro-panel"
+            aria-labelledby="how-heading"
+        >
             <h2 id="how-heading">
                 How to Use Your Spotter Guides
             </h2>
@@ -155,10 +143,9 @@
                 what you still need to review.
             </p>
 
-            <p class="planning-note">
-                Start with Biomolecule Identification.
-                Additional guide ideas are marked “Coming Soon”
-                and will become available as they are added.
+            <p class="intro-note">
+                Begin with Biomolecule Identification for an overview,
+                or choose a focused topic to practice a specific skill.
             </p>
         </section>
 
@@ -172,29 +159,26 @@
             <div class="card-grid">
 
                 <!--
-                    GUIDE 01: BIOMOLECULE IDENTIFICATION
-
-                    Save the completed guide from the previous message at:
-                    biochemistry/biomolecule-identification/index.html
+                    GUIDE 01
+                    Folder: biomolecule-identification
                 -->
 
                 <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🧬</div>
+                    <div class="card-art" aria-hidden="true">
+                        🧬
+                    </div>
 
                     <div class="card-content">
                         <div class="guide-meta">
                             <span class="badge">Guide 01</span>
-                            <span class="status status-ready">
-                                Start Here
-                            </span>
                         </div>
 
                         <h3>Biomolecule Identification</h3>
 
                         <p>
-                            Practice recognizing the four major
-                            biomolecule classes using structural clues,
-                            biological functions, and familiar examples.
+                            Practice identifying major biomolecule
+                            classes using structural clues, functions,
+                            and familiar examples.
                         </p>
 
                         <ul class="topic-list">
@@ -209,7 +193,7 @@
                                 Connect structure to function
                             </li>
                             <li>
-                                Justify an identification using
+                                Explain an identification using
                                 visual evidence
                             </li>
                         </ul>
@@ -224,82 +208,74 @@
                 </article>
 
                 <!--
-                    GUIDE 02: FUNCTIONAL GROUPS
-
-                    Suggested future folder:
-                    functional-groups/
+                    GUIDE 02
+                    Folder: functional groups
                 -->
 
                 <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">⚗️</div>
+                    <div class="card-art" aria-hidden="true">
+                        ⚗️
+                    </div>
 
                     <div class="card-content">
                         <div class="guide-meta">
                             <span class="badge">Guide 02</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
                         </div>
 
-                        <h3>Functional Groups &amp; Molecular Clues</h3>
+                        <h3>Functional Groups</h3>
 
                         <p>
-                            A proposed close-up guide for finding and
-                            labeling functional groups within larger
-                            molecular structures.
+                            Practice finding and labeling functional
+                            groups within molecular structures.
                         </p>
 
                         <ul class="topic-list">
                             <li>
-                                Spot hydroxyl, carbonyl, and
-                                carboxyl groups
+                                Locate hydroxyl, carbonyl,
+                                and carboxyl groups
                             </li>
                             <li>
-                                Locate amino, phosphate, and
-                                sulfhydryl groups
+                                Identify amino, phosphate,
+                                and sulfhydryl groups
                             </li>
                             <li>
                                 Compare similar-looking structures
                             </li>
                             <li>
-                                Annotate molecular diagrams
+                                Practice labeling molecular diagrams
                             </li>
                         </ul>
 
-                       <a
+                        <a
                             class="button"
-                            href="functional groups/"
+                            href="functional%20groups/"
                         >
-                            Open functional groups
+                            Open Functional Groups Guide
                         </a>
                     </div>
                 </article>
 
                 <!--
-                    GUIDE 03: CARBOHYDRATES
-
-                    Suggested future folder:
-                    carbohydrates/
+                    GUIDE 03
+                    Folder: carbohydrates and sugars
                 -->
 
                 <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🍞</div>
+                    <div class="card-art" aria-hidden="true">
+                        🍞
+                    </div>
 
                     <div class="card-content">
                         <div class="guide-meta">
                             <span class="badge">Guide 03</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
                         </div>
 
-                        <h3>Carbohydrates &amp; Sugar Structures</h3>
+                        <h3>Carbohydrates and Sugars</h3>
 
                         <p>
-                            A proposed visual guide for comparing
-                            carbohydrate structures and practicing
-                            recognition of individual sugar units
-                            and larger chains.
+                            Compare carbohydrate diagrams and
+                            practice recognizing sugar units,
+                            linkages, and larger structures.
                         </p>
 
                         <ul class="topic-list">
@@ -314,303 +290,11 @@
                                 Locate glycosidic linkages
                             </li>
                             <li>
-                                Compare glucose, starch, glycogen,
+                                Review glucose, starch, glycogen,
                                 and cellulose diagrams
                             </li>
                         </ul>
 
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-                <!--
-                    GUIDE 04: LIPIDS AND MEMBRANES
-
-                    Suggested future folder:
-                    lipids-membranes/
-                -->
-
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🫒</div>
-
-                    <div class="card-content">
-                        <div class="guide-meta">
-                            <span class="badge">Guide 04</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
-                        </div>
-
-                        <h3>Lipids &amp; Cell Membranes</h3>
-
-                        <p>
-                            A proposed guide for comparing lipid
-                            structures and interpreting labeled
-                            membrane diagrams.
-                        </p>
-
-                        <ul class="topic-list">
-                            <li>
-                                Compare saturated and unsaturated
-                                fatty acid diagrams
-                            </li>
-                            <li>
-                                Identify triglyceride and
-                                phospholipid structures
-                            </li>
-                            <li>
-                                Label hydrophilic and hydrophobic
-                                regions
-                            </li>
-                            <li>
-                                Practice labeling a phospholipid bilayer
-                            </li>
-                        </ul>
-
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-                <!--
-                    GUIDE 05: AMINO ACIDS AND PROTEINS
-
-                    Suggested future folder:
-                    amino-acids-proteins/
-                -->
-
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🧩</div>
-
-                    <div class="card-content">
-                        <div class="guide-meta">
-                            <span class="badge">Guide 05</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
-                        </div>
-
-                        <h3>Amino Acids &amp; Protein Structure</h3>
-
-                        <p>
-                            A proposed spotter guide for amino acid
-                            diagrams, peptide bonds, and visual
-                            representations of protein structure.
-                        </p>
-
-                        <ul class="topic-list">
-                            <li>
-                                Label amino acid components
-                            </li>
-                            <li>
-                                Locate R groups and peptide bonds
-                            </li>
-                            <li>
-                                Compare the four levels of
-                                protein structure
-                            </li>
-                            <li>
-                                Interpret folding and denaturation
-                                diagrams
-                            </li>
-                        </ul>
-
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-                <!--
-                    GUIDE 06: ENZYMES
-
-                    Suggested future folder:
-                    enzymes/
-                -->
-
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🔑</div>
-
-                    <div class="card-content">
-                        <div class="guide-meta">
-                            <span class="badge">Guide 06</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
-                        </div>
-
-                        <h3>Enzymes &amp; Reaction Diagrams</h3>
-
-                        <p>
-                            A proposed visual review of enzyme models,
-                            reaction-energy diagrams, and graphs
-                            used to describe enzyme activity.
-                        </p>
-
-                        <ul class="topic-list">
-                            <li>
-                                Identify enzymes, substrates,
-                                and active sites
-                            </li>
-                            <li>
-                                Label enzyme-substrate diagrams
-                            </li>
-                            <li>
-                                Compare inhibitor illustrations
-                            </li>
-                            <li>
-                                Practice interpreting temperature,
-                                pH, and activity graphs
-                            </li>
-                        </ul>
-
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-                <!--
-                    GUIDE 07: NUCLEIC ACIDS
-
-                    Suggested future folder:
-                    nucleic-acids/
-                -->
-
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🪜</div>
-
-                    <div class="card-content">
-                        <div class="guide-meta">
-                            <span class="badge">Guide 07</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
-                        </div>
-
-                        <h3>Nucleotides, DNA &amp; RNA</h3>
-
-                        <p>
-                            A proposed guide for identifying nucleotide
-                            components and comparing DNA and RNA
-                            representations.
-                        </p>
-
-                        <ul class="topic-list">
-                            <li>
-                                Label phosphate, sugar, and base
-                            </li>
-                            <li>
-                                Compare DNA and RNA diagrams
-                            </li>
-                            <li>
-                                Practice base-pair identification
-                            </li>
-                            <li>
-                                Trace a sugar-phosphate backbone
-                            </li>
-                        </ul>
-
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-                <!--
-                    GUIDE 08: BIOMOLECULE TESTING
-
-                    Suggested future folder:
-                    biomolecule-testing/
-                -->
-
-                <article class="resource-card">
-                    <div class="card-art" aria-hidden="true">🧪</div>
-
-                    <div class="card-content">
-                        <div class="guide-meta">
-                            <span class="badge">Guide 08</span>
-                            <span class="status status-planned">
-                                Planned Guide
-                            </span>
-                        </div>
-
-                        <h3>Biomolecule Testing &amp; Lab Results</h3>
-
-                        <p>
-                            A proposed laboratory spotter guide using
-                            labeled test-tube images, controls, and
-                            sample result tables.
-                        </p>
-
-                        <ul class="topic-list">
-                            <li>
-                                Compare Benedict’s, iodine,
-                                Biuret, and Sudan test examples
-                            </li>
-                            <li>
-                                Practice identifying positive
-                                and negative results
-                            </li>
-                            <li>
-                                Compare unknown samples with controls
-                            </li>
-                            <li>
-                                Write evidence-based result statements
-                            </li>
-                        </ul>
-
-                        <span class="coming-soon">Coming Soon</span>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- SUGGESTED REVIEW SEQUENCE -->
-
-        <section
-            class="intro-panel study-path"
-            aria-labelledby="study-path-heading"
-        >
-            <h2 id="study-path-heading">
-                Suggested Review Path
-            </h2>
-
-            <p>
-                Use this sequence to organize your review as
-                additional guides become available.
-            </p>
-
-            <ol>
-                <li>
-                    Begin with Biomolecule Identification
-                    for an overview of the four major classes.
-                </li>
-                <li>
-                    Review Functional Groups &amp; Molecular Clues
-                    to practice examining smaller structural details.
-                </li>
-                <li>
-                    Choose a focused guide on carbohydrates,
-                    lipids, proteins, or nucleic acids.
-                </li>
-                <li>
-                    Continue with Enzymes &amp; Reaction Diagrams
-                    and Biomolecule Testing &amp; Lab Results.
-                </li>
-            </ol>
-        </section>
-
-        <!-- RETURN NAVIGATION -->
-
-        <nav class="bottom-nav" aria-label="Return navigation">
-            <a href="../">← Back to All Courses</a>
-        </nav>
-
-    </main>
-
-    <footer class="site-footer">
-        <p>
-            Created for Biochemistry Instruction | Megan Kundinger
-        </p>
-
-        <p>
-            Look closely. Find the pattern. Explain the evidence. 🧬
-        </p>
-    </footer>
-</body>
-</html>
+                        <a
+                            class="button"
+                            href="carbohydrates%20and%20suga
